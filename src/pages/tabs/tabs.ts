@@ -5,14 +5,7 @@ import { ContactPage } from '../contact/contact';
 import { HomePage } from '../home/home';
 
 @Component({
-  //templateUrl: 'tabs.html'
-  template: `
-  <ion-tabs>
-  <ion-tab [root]="tab1" tabTitle="Minha Lista" tabIcon="home"></ion-tab>
-  <ion-tab [root]="tab2" tabTitle="Promoções" tabIcon="information-circle"></ion-tab>
-  <ion-tab [root]="tab3" tabTitle="" tabIcon="contacts"></ion-tab>
-  </ion-tabs>
-  `
+  templateUrl: 'tabs.html' 
 })
 
 
