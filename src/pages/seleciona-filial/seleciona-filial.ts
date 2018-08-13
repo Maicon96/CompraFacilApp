@@ -22,7 +22,7 @@ private testRadioResult;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) { }
 
-  showRadio() {
+  abrirRadio() {
     let alert = this.alertCtrl.create();
     alert.setTitle('Filial do Supermercado');
 
