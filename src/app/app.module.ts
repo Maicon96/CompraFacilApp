@@ -1,3 +1,6 @@
+import { PromocoesPageModule } from './../pages/promocoes/promocoes.module';
+import { SelecionaFilialMenuPageModule } from './../pages/seleciona-filial-menu/seleciona-filial-menu.module';
+import { PerfilPageModule } from './../pages/perfil/perfil.module';
 import { SelecionaFilialPageModule } from './../pages/seleciona-filial/seleciona-filial.module';
 
 import { IntroducaoPageModule } from './../pages/introducao/introducao.module';
@@ -24,7 +27,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     IntroducaoPageModule,
-    SelecionaFilialPageModule    
+    SelecionaFilialPageModule,
+    PerfilPageModule,
+    SelecionaFilialMenuPageModule,
+    PromocoesPageModule    
   ],
   bootstrap: [IonicApp],
   entryComponents: [

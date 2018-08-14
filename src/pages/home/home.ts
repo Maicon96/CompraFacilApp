@@ -1,3 +1,4 @@
+import { PerfilPage } from './../perfil/perfil';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
@@ -7,7 +8,7 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
-  
+  rootPage = PerfilPage;
   constructor(public navCtrl: NavController) {
 
   }

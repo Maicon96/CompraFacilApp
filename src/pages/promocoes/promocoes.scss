@@ -1,3 +1,20 @@
-page-promocoes {
+page-promocoes {   
+    h2.promocao_title {
+        color: red;
+        font-weight: bold;
+        text-align: center
+    }
+    h2.preco_title {
+        font-weight: bold;
+        text-align: center
+    }
 
+    .promo_image img {
+        width: 240px;
+    }
+    .img {
+        text-align: center
+    }
+    
+    
 }

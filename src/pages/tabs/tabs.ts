@@ -1,7 +1,7 @@
-import { SelecionaFilialPage } from './../seleciona-filial/seleciona-filial';
+import { SelecionaFilialMenuPage } from './../seleciona-filial-menu/seleciona-filial-menu';
 import { Component } from '@angular/core';
 
-import { AboutPage } from '../about/about';
+import { PromocoesPage } from '../promocoes/promocoes';
 import { HomePage } from '../home/home';
 
 @Component({
@@ -17,8 +17,8 @@ export class TabsPage {
 
   constructor() {
     this.tab1 = HomePage;
-    this.tab2 = AboutPage;
-    this.tab3 = SelecionaFilialPage;
+    this.tab2 = PromocoesPage;
+    this.tab3 = SelecionaFilialMenuPage;
     
   }
 
