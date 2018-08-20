@@ -1,3 +1,5 @@
+import { ProdutosPageModule } from './../pages/produtos/produtos.module';
+import { MinhaListaPageModule } from './../pages/minha-lista/minha-lista.module';
 import { PromocoesPageModule } from './../pages/promocoes/promocoes.module';
 import { SelecionaFilialMenuPageModule } from './../pages/seleciona-filial-menu/seleciona-filial-menu.module';
 import { PerfilPageModule } from './../pages/perfil/perfil.module';
@@ -30,7 +32,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SelecionaFilialPageModule,
     PerfilPageModule,
     SelecionaFilialMenuPageModule,
-    PromocoesPageModule    
+    PromocoesPageModule,
+    MinhaListaPageModule,
+    ProdutosPageModule    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
