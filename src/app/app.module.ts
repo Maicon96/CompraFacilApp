@@ -1,3 +1,4 @@
+import { NovaListaPageModule } from './../pages/nova-lista/nova-lista.module';
 import { ProdutosPageModule } from './../pages/produtos/produtos.module';
 import { MinhaListaPageModule } from './../pages/minha-lista/minha-lista.module';
 import { PromocoesPageModule } from './../pages/promocoes/promocoes.module';
@@ -34,7 +35,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SelecionaFilialMenuPageModule,
     PromocoesPageModule,
     MinhaListaPageModule,
-    ProdutosPageModule    
+    ProdutosPageModule,
+    NovaListaPageModule    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
