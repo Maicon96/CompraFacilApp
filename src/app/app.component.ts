@@ -1,7 +1,8 @@
-import { SelecionaFilialPage } from './../pages/seleciona-filial/seleciona-filial';
+import { DatabaseProvider } from './../providers/database/database';
+import { ConfiguracaoProvider } from './../providers/configuracao/configuracao';
 import { IntroducaoPage } from './../pages/introducao/introducao';
 import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Platform, Config, Tabs } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -9,21 +10,54 @@ import { timer } from 'rxjs/observable/timer';
 import { TabsPage } from '../pages/tabs/tabs';
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+  providers: [
+    ConfiguracaoProvider
+  ]
 })
 export class MyApp {
   //rootPage:any = IntroducaoPage;
-  rootPage:any = TabsPage;
+  //rootPage:any = TabsPage;
+  rootPage:any = null;
 
-  showSplash = true;
+  showSplash = true; 
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
+    configuracaoProvider: ConfiguracaoProvider, dbProvider: DatabaseProvider) {
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
+
+      let config = configuracaoProvider.getConfigData();   
+
+      //if (config == null) {
+      //  this.rootPage = IntroducaoPage;
+      //  configuracaoProvider.setConfigData(false);
+      //} else {
+      //  this.rootPage = TabsPage;
+      //}
+
       statusBar.styleDefault();
-      splashScreen.hide();
-      timer(3000).subscribe(() => this.showSplash = false)
+      //splashScreen.hide();
+      //timer(3000).subscribe(() => this.showSplash = false)
+      //this.abrirTabsPage(splashScreen);
+
+      dbProvider.createBanco()
+        .then(() => {
+          this.abrirTabsPage(splashScreen);
+          console.log("sucesso ao criar banco");
+       })
+        .catch(() => {
+          this.abrirTabsPage(splashScreen);
+          console.log("erro ao criar banco");
+        })
     });
   }
+
+  private abrirTabsPage(splashScreen: SplashScreen) {
+    //splashScreen.hide();
+    this.rootPage = TabsPage;    
+    timer(3000).subscribe(() => this.showSplash = false)
+  }
+
+  //preciso criar o banco antes de definir o root page
+
 }

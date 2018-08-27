@@ -7,7 +7,7 @@ import { PerfilPageModule } from './../pages/perfil/perfil.module';
 import { SelecionaFilialPageModule } from './../pages/seleciona-filial/seleciona-filial.module';
 
 import { IntroducaoPageModule } from './../pages/introducao/introducao.module';
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule, ErrorHandler, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
@@ -18,6 +18,11 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { ConfiguracaoProvider } from '../providers/configuracao/configuracao';
+
+import { SQLite } from '@ionic-native/sqlite';
+import { DatabaseProvider } from '../providers/database/database';
+import { SelecionaFilialProvider } from '../providers/seleciona-filial/seleciona-filial';
 
 @NgModule({
   declarations: [
@@ -48,7 +53,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: LOCALE_ID, useValue: 'pt-BR'},//defino isso para os formatos dos valores serem brasileiros como os numericos por exe
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    ConfiguracaoProvider,
+    SQLite,
+    DatabaseProvider,
+    SelecionaFilialProvider
   ]
 })
 export class AppModule {}

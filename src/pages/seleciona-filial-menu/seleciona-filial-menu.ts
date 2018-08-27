@@ -1,14 +1,10 @@
+import { SelecionaFilialProvider } from './../../providers/seleciona-filial/seleciona-filial';
+import { SQLiteObject } from '@ionic-native/sqlite';
+import { DatabaseProvider } from './../../providers/database/database';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { TabsPage } from './../tabs/tabs';
-
-/**
- * Generated class for the SelecionaFilialMenuPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -20,10 +16,11 @@ export class SelecionaFilialMenuPage {
   private testRadioOpen;
   private testRadioResult;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) { }
- 
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,
+    private dbProvider: DatabaseProvider, public filialProvider: SelecionaFilialProvider) { }
+
   ionViewWillEnter() {
-  
+
     let alert = this.alertCtrl.create();
     alert.setTitle('Filial do Supermercado');
 
@@ -44,27 +41,30 @@ export class SelecionaFilialMenuPage {
     this.addInputRadio(alert, 'Pinhal - RS', 'pinhal', false);
     this.addInputRadio(alert, 'Santa Helena - SC', 'santaHelena', false);
     this.addInputRadio(alert, 'São João do Oeste - SC', 'saoJoao', false);
-    this.addInputRadio(alert, 'Tunápolis - SC', 'tunapolis', false); 
+    this.addInputRadio(alert, 'Tunápolis - SC', 'tunapolis', false);
 
     alert.addButton('Cancelar');
     alert.addButton({
       text: 'OK',
       handler: data => {
-        //this.navCtrl.push(TabsPage);
-
-        //this.testRadioOpen = false;
-        //this.testRadioResult = data;
+        console.log("chegou aqui");
+        
+        this.filialProvider.insert(1, 'Palmitos')        
+        .then(() => console.log('sucesso ao inserir'))
+        .catch((e) => console.error("erro ao inserir: " + e));
       }
     });
     alert.present();
-  }  
+  }
 
-  addInputRadio(alert, label: string, value: string, checked: boolean) { 
+  addInputRadio(alert, label: string, value: string, checked: boolean) {
     alert.addInput({
       type: 'radio',
       label: label,
       value: value,
       checked: checked
     });
-  }
+  }  
+
 }
+
