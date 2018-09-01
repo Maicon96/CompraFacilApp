@@ -1,3 +1,4 @@
+import { ListaPageModule } from './../pages/lista/lista.module';
 import { NovaListaPageModule } from './../pages/nova-lista/nova-lista.module';
 import { ProdutosPageModule } from './../pages/produtos/produtos.module';
 import { MinhaListaPageModule } from './../pages/minha-lista/minha-lista.module';
@@ -41,7 +42,8 @@ import { SelecionaFilialProvider } from '../providers/seleciona-filial/seleciona
     PromocoesPageModule,
     MinhaListaPageModule,
     ProdutosPageModule,
-    NovaListaPageModule    
+    NovaListaPageModule,
+    ListaPageModule    
   ],
   bootstrap: [IonicApp],
   entryComponents: [

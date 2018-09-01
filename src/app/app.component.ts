@@ -55,7 +55,8 @@ export class MyApp {
   private abrirTabsPage(splashScreen: SplashScreen) {
     //splashScreen.hide();
     this.rootPage = TabsPage;    
-    timer(3000).subscribe(() => this.showSplash = false)
+    //timer(3000).subscribe(() => this.showSplash = false)
+    timer(3000).subscribe()
   }
 
   //preciso criar o banco antes de definir o root page
