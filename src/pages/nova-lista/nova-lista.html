@@ -8,17 +8,19 @@
 
 
 <ion-content padding>
-
-  <ion-card>
-    <ion-item>
-      <ion-label stacked>Nome da Lista</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label stacked>Valor total que deseja gastar</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-    <button ion-button color="primary" clear item-rigth on-click="chamaLista()">Criar</button>
-  </ion-card>
+  <form [formGroup]="cadastroLista" (ngSubmit)="salvarLista()">
+    <ion-card>
+      <ion-item>
+        <ion-label floating>Nome da Lista</ion-label>
+        <ion-input type="text" name="nome" formControlName="nome"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Valor total que deseja gastar</ion-label>
+        <ion-input type="number" name="valor_gastar" ></ion-input>
+      </ion-item>
+      <p></p>
+      <button [disabled]="cadastroLista.invalid" ion-button full block color="primary" >Criar</button>
+    </ion-card>
+  </form>
 
 </ion-content>

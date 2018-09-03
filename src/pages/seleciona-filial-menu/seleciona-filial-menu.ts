@@ -17,7 +17,7 @@ export class SelecionaFilialMenuPage {
   private testRadioResult;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,
-    private dbProvider: DatabaseProvider, public filialProvider: SelecionaFilialProvider) { }
+    public filialProvider: SelecionaFilialProvider) { }
 
   ionViewWillEnter() {
 

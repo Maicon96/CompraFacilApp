@@ -73,6 +73,26 @@ export class SelecionaFilialProvider {
       .catch((e) => console.error(e));
   }
 
+  public getLasted() {
+    return this.dbProvider.getBanco()
+      .then((db: SQLiteObject) => {
+        let sql = 'select * from filiais order by id desc limit 1';
+        
+        return db.executeSql(sql, [])
+          .then((data: any) => {
+            if (data.rows.length > 0) {
+              let item = data.rows.item(0);
+              return item.codigo;              
+            } else {
+              return null;
+            }
+
+          })
+          .catch((e) => console.error("erro ao buscar ultima filial " + e));
+      })
+      .catch((e) => console.error("erro ao buscar ultima filial " + e));
+  }
+
 }
 
 export class FilialSupermercado {

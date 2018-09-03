@@ -9,22 +9,25 @@
 
 <ion-content padding>
 
-  <ion-list>
-    <button ion-item>
-      Lista 1
-    </button>
-    <button ion-item>
-      Lista 2
-    </button>
-    <button ion-item>
-      Lista 3
-    </button>
-    <p>
-      <ion-fab right bottom>
-        <button ion-fab on-click="chamaNovaLista()">
-          <ion-icon name="add"></ion-icon>
+  <ion-list>    
+    <ion-item-sliding *ngFor="let lista of listas">
+      <ion-item-options side="right">
+        <button ion-button color="danger" (click)="excluirListaCompra(lista.id)">
+          <ion-icon name="md-trash"></ion-icon>
+          Excluir
         </button>
-      </ion-fab>
+      </ion-item-options>
+      <button ion-item (click)="editarListaCompra(lista.id, lista.descricao)">
+        <h1>{{ lista.descricao }}</h1>
+        <h2>{{ lista.data_criacao }}</h2>
+      </button>
+    </ion-item-sliding>
   </ion-list>
+
+  <ion-fab right bottom>
+    <button ion-fab on-click="chamaNovaLista()">
+      <ion-icon name="add"></ion-icon>      
+    </button>
+  </ion-fab>
 
 </ion-content>

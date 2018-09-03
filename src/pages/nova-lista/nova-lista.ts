@@ -1,6 +1,9 @@
+import { SelecionaFilialProvider } from './../../providers/seleciona-filial/seleciona-filial';
+import { ListaProvider } from './../../providers/lista/lista';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ListaPage } from './../lista/lista';
+import { Validators, FormBuilder } from '@angular/forms';
 
 
 @IonicPage()
@@ -10,15 +13,31 @@ import { ListaPage } from './../lista/lista';
 })
 export class NovaListaPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  cadastroLista: any = {};
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder,
+    public listaProvider: ListaProvider, public filialProvider: SelecionaFilialProvider) {
+
+    this.cadastroLista = this.formBuilder.group({
+      nome: ['', Validators.required]
+    });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad NovaListaPage');
-  }
+  public salvarLista() {
 
-  public chamaLista() {
-    this.navCtrl.push(ListaPage);
+    var dataAtual = new Date();
+
+    this.filialProvider.getLasted()
+      .then((data) => {
+        this.listaProvider.insert(data, this.cadastroLista.value.nome, 0, 0, dataAtual.toLocaleDateString())
+          .then(() => {            
+            this.navCtrl.push(ListaPage);
+            console.log('sucesso ao inserir');
+          })
+          .catch((e) => console.error("erro ao inserir: " + e));
+      })
+      .catch((e) => console.error("erro ao buscar ultima filial: " + e));
+
   }
 
 }

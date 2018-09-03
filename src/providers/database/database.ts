@@ -12,7 +12,7 @@ export class DatabaseProvider {
     return this.getBanco()
       .then((db: SQLiteObject) => {
         this.createTabelas(db)
-        this.inserirItensDefault(db)
+        //this.inserirItensDefault(db)
       })
       .catch(e => console.error(e));
   }
@@ -26,13 +26,15 @@ export class DatabaseProvider {
 
   private createTabelas(db: SQLiteObject) {
     db.sqlBatch([
-      ['CREATE TABLE IF NOT EXISTS filiais (id integer primary key AUTOINCREMENT NOT NULL, codigo integer NOTT NULL, descricao TEXT)']
+      ['CREATE TABLE IF NOT EXISTS filiais (id integer primary key AUTOINCREMENT NOT NULL, codigo integer NOTT NULL, descricao TEXT)'],
+      ['CREATE TABLE IF NOT EXISTS listas (id integer primary key AUTOINCREMENT NOT NULL, id_filial integer NOT NULL, descricao TEXT NOT NULL, valor_total NUMERIC(10,2), valor_gastar NUMERIC(10,2), data_criacao varchar(255) )'],
+      ['CREATE TABLE IF NOT EXISTS produtos (id integer primary key AUTOINCREMENT NOT NULL, id_lista integer NOT NULL, descricao TEXT NOT NULL, preco numeric(10,2) NOT NULL, quantidade integer NOT NULL)']
     ])
-      .then(() => console.log('Sucesso ao criar as tabelas'))
-      .catch(e => console.error('Erro ao criar as tabelas do banco', e));
+      .then(() => console.log('Sucesso ao criar tabelas do banco'))
+      .catch(e => console.error('Erro ao criar tabelas do banco', e));
   }
 
-  private inserirItensDefault(db: SQLiteObject) {
+  /*private inserirItensDefault(db: SQLiteObject) {
     db.executeSql('select COUNT(id) as qtd from categories')
       .then((data: any) => {
         //se não existe registro
@@ -48,7 +50,7 @@ export class DatabaseProvider {
         }
       })
       .catch(e => console.error('Erro ao consultar a qtd de categorias', e));      
-  }
+  }*/
 
 
 

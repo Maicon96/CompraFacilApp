@@ -1,10 +1,10 @@
 <ion-header>
 
   <ion-navbar color="primary">
-      <ion-title>Lista</ion-title>
+    <ion-title>{{ titulo }}</ion-title>
   </ion-navbar>
 
-</ion-header> 
+</ion-header>
 
 <ion-content padding>
 
@@ -16,38 +16,61 @@
       Valor a Gastar:
     </ion-card-content>
   </ion-card>
-  <ion-item>
-    <ion-thumbnail item-start>
-      <img src="assets/imgs/ofertas/coca.jpg" alt="">
-    </ion-thumbnail>
-    <h2>COCA COLA 2LT</h2>
-    <p>R$ 5,98</p>
-  </ion-item>
-  <ion-item>
-    <ion-thumbnail item-start>
-      <img src="assets/imgs/ofertas/doritos.jpg" alt="">
-    </ion-thumbnail>
-    <h2>DORITOS</h2>
-    <p>R$ 4,50</p>
-  </ion-item>
+
+  <!--<ion-list>
+    <ion-item-sliding *ngFor="let produto of produtos">
+      <ion-thumbnail item-start>
+          <img src="assets/imgs/no-image.png" alt="">
+        </ion-thumbnail>
+      <ion-item-options side="right">
+        <button ion-button color="danger" (click)="excluirProduto(produto.id)">
+          <ion-icon name="md-trash"></ion-icon>
+          Excluir
+        </button>
+      </ion-item-options>
+      <button ion-item>
+        <h1>{{ produto.descricao }}</h1>
+        <h2>{{ produto.preco }}</h2>
+      </button>
+    </ion-item-sliding>
+  </ion-list>-->
+
+  <ion-list>
+    <ion-item-sliding>
+
+      <ion-item-options side="right">
+
+        <button ion-button color="danger">
+          <ion-icon name="md-trash"></ion-icon>
+          Excluir
+        </button>
+      </ion-item-options>
+      <button ion-item>
+        <ion-thumbnail item-start>
+          <img src="assets/imgs/no-image.png" alt="">
+        </ion-thumbnail>
+        <h1>Coca cola 2 lt</h1>
+        <h2> 5,98 </h2>
+      </button>
+    </ion-item-sliding>
+  </ion-list>
 
   <ion-fab right bottom>
-    <button ion-fab color="primary">      
-      <ion-icon name="md-barcode"></ion-icon>      
-    </button>    
+    <button ion-fab color="primary">
+      <ion-icon name="md-barcode"></ion-icon>
+    </button>
   </ion-fab>
 
   <ion-fab center bottom>
-    <button ion-fab color="primary">      
+    <button ion-fab color="primary">
       <ion-icon name="md-search"></ion-icon>
-    </button>    
-  </ion-fab> 
+    </button>
+  </ion-fab>
 
   <ion-fab left bottom>
-    <button ion-fab color="primary">      
+    <button ion-fab color="primary">
       <ion-icon name="add"></ion-icon>
-    </button>    
+    </button>
   </ion-fab>
-  
 
 </ion-content>

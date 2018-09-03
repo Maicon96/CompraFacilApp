@@ -24,6 +24,8 @@ import { ConfiguracaoProvider } from '../providers/configuracao/configuracao';
 import { SQLite } from '@ionic-native/sqlite';
 import { DatabaseProvider } from '../providers/database/database';
 import { SelecionaFilialProvider } from '../providers/seleciona-filial/seleciona-filial';
+import { ListaProvider } from '../providers/lista/lista';
+import { ProdutoProvider } from '../providers/produto/produto';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,9 @@ import { SelecionaFilialProvider } from '../providers/seleciona-filial/seleciona
     ConfiguracaoProvider,
     SQLite,
     DatabaseProvider,
-    SelecionaFilialProvider
+    SelecionaFilialProvider,
+    ListaProvider,
+    ProdutoProvider
   ]
 })
 export class AppModule {}
