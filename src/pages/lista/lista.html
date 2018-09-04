@@ -17,7 +17,7 @@
     </ion-card-content>
   </ion-card>
 
-  <!--<ion-list>
+  <ion-list>
     <ion-item-sliding *ngFor="let produto of produtos">
       <ion-thumbnail item-start>
           <img src="assets/imgs/no-image.png" alt="">
@@ -30,27 +30,8 @@
       </ion-item-options>
       <button ion-item>
         <h1>{{ produto.descricao }}</h1>
-        <h2>{{ produto.preco }}</h2>
-      </button>
-    </ion-item-sliding>
-  </ion-list>-->
-
-  <ion-list>
-    <ion-item-sliding>
-
-      <ion-item-options side="right">
-
-        <button ion-button color="danger">
-          <ion-icon name="md-trash"></ion-icon>
-          Excluir
-        </button>
-      </ion-item-options>
-      <button ion-item>
-        <ion-thumbnail item-start>
-          <img src="assets/imgs/no-image.png" alt="">
-        </ion-thumbnail>
-        <h1>Coca cola 2 lt</h1>
-        <h2> 5,98 </h2>
+        <h2>Total R$: {{ produto.preco }}</h2>
+        <h2>Quantidade: {{ produto.quantidade }}</h2>
       </button>
     </ion-item-sliding>
   </ion-list>
@@ -68,7 +49,7 @@
   </ion-fab>
 
   <ion-fab left bottom>
-    <button ion-fab color="primary">
+    <button ion-fab color="primary" (click)="abrirModalProduto()">
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>

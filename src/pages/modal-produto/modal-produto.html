@@ -1,0 +1,35 @@
+<ion-header>
+
+  <ion-toolbar color="primary">
+    <ion-title>Inserir Item Manulamente</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="fecharModalProduto()">
+        <ion-icon name="md-close"></ion-icon>
+      </button>>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form [formGroup]="cadastroItemManual" (ngSubmit)="salvarItem()">
+    <ion-card>
+      <ion-item>
+        <ion-label floating>Descrição do Produto</ion-label>
+        <ion-input type="text" name="descricao" formControlName="descricao"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Preço R$:</ion-label>
+        <ion-input type="number" name="preco" formControlName="preco"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Quantidade</ion-label>
+        <ion-input type="number" name="quantidade" formControlName="quantidade"></ion-input>
+      </ion-item>
+      <p></p>
+      <button [disabled]="cadastroItemManual.invalid" ion-button full block color="primary">Adicionar</button>
+    </ion-card>
+  </form>
+
+</ion-content>

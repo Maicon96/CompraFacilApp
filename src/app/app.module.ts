@@ -1,3 +1,4 @@
+import { ModalProdutoPageModule } from './../pages/modal-produto/modal-produto.module';
 import { ListaPageModule } from './../pages/lista/lista.module';
 import { NovaListaPageModule } from './../pages/nova-lista/nova-lista.module';
 import { ProdutosPageModule } from './../pages/produtos/produtos.module';
@@ -45,7 +46,8 @@ import { ProdutoProvider } from '../providers/produto/produto';
     MinhaListaPageModule,
     ProdutosPageModule,
     NovaListaPageModule,
-    ListaPageModule    
+    ListaPageModule,
+    ModalProdutoPageModule    
   ],
   bootstrap: [IonicApp],
   entryComponents: [

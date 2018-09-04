@@ -32,12 +32,12 @@ export class ListaProvider {
       .catch((e) => console.error("erro ao remover lista  " + e));
   }
 
-  public getAll() {
+  public getAll(idFilial: number) {
     return this.dbProvider.getBanco()
       .then((db: SQLiteObject) => {
-        let sql = 'select * from listas order by descricao asc'
-
-        return db.executeSql(sql, [])
+        let sql = 'select * from listas where id_filial = ? order by descricao asc'
+        let data = [idFilial];
+        return db.executeSql(sql, data)
           .then((data: any) => {
             if (data.rows.length > 0) {
               let listas = new Array<Lista>();

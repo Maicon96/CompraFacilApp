@@ -46,10 +46,7 @@ export class SelecionaFilialMenuPage {
     alert.addButton('Cancelar');
     alert.addButton({
       text: 'OK',
-      handler: data => {
-        console.log("chegou aqui");
-        console.log("aqui : " + data);
-        console.log("aqui : " + data.palmitos);        
+      handler: data => {     
 
         this.filialProvider.insert(data, 'Palmitos')        
         .then(() => console.log('sucesso ao inserir'))
@@ -58,9 +55,7 @@ export class SelecionaFilialMenuPage {
         this.filialProvider.getAll()        
         .then((result: any[]) => {
           console.log("listar");
-          var filiais: any[] = result;
-          console.log("filiais resultado: " + filiais);    
-          console.log("filiais 0: " + filiais[0]);          
+          var filiais: any[] = result;         
         })
         .catch((e) => console.error("erro ao buscar filiais: " + e));
       }

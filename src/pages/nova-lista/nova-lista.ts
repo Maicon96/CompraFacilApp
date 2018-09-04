@@ -23,7 +23,7 @@ export class NovaListaPage {
     });
   }
 
-  public salvarLista() {
+  salvarLista() {
 
     var dataAtual = new Date();
 
