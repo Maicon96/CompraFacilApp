@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="primary">
+
+    <ion-title>Buscar Produto</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="fecharModalProduto()">
+        <ion-icon name="md-close"></ion-icon>
+      </button>>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-toolbar>
+    <ion-searchbar placeholder="Digite o nome do produto..." 
+    [(ngModel)]="queryText" 
+    (ionInput)="filtrarProduto($event)" 
+    clearInput>
+
+    </ion-searchbar>
+  </ion-toolbar>
+
+
+  <ion-list>
+    <ion-item no-lines *ngFor="let produto of produtos">
+      <h2>{{ produto.descricao }}</h2>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

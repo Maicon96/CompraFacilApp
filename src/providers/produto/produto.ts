@@ -20,6 +20,18 @@ export class ProdutoProvider {
       .catch((e) => console.error("erro ao inserir produto " + e));
   }
 
+  public update(idProduto:number, idLista: number, descricao: string, preco: number, quantidade: number) {   
+    return this.dbProvider.getBanco()
+      .then((db: SQLiteObject) => {
+        let sql = 'update produtos set id_lista = ?, descricao = ?, preco = ?, quantidade = ? ' +
+         'where id = ?';
+        let data = [idLista, descricao, preco, quantidade, idProduto];
+
+        return db.executeSql(sql, data);
+      })
+      .catch((e) => console.error("erro ao atualizar produto " + e));
+  }
+
   public remove(id: number) {
     return this.dbProvider.getBanco()
       .then((db: SQLiteObject) => {

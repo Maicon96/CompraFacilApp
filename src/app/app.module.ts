@@ -1,3 +1,5 @@
+import { ModalBuscarProdutoPageModule } from './../pages/modal-buscar-produto/modal-buscar-produto.module';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { ModalProdutoPageModule } from './../pages/modal-produto/modal-produto.module';
 import { ListaPageModule } from './../pages/lista/lista.module';
 import { NovaListaPageModule } from './../pages/nova-lista/nova-lista.module';
@@ -47,7 +49,8 @@ import { ProdutoProvider } from '../providers/produto/produto';
     ProdutosPageModule,
     NovaListaPageModule,
     ListaPageModule,
-    ModalProdutoPageModule    
+    ModalProdutoPageModule,
+    ModalBuscarProdutoPageModule    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -66,7 +69,8 @@ import { ProdutoProvider } from '../providers/produto/produto';
     DatabaseProvider,
     SelecionaFilialProvider,
     ListaProvider,
-    ProdutoProvider
+    ProdutoProvider,
+    BarcodeScanner
   ]
 })
 export class AppModule {}

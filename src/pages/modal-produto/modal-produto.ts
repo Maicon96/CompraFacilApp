@@ -11,12 +11,33 @@ import { Validators, FormBuilder } from '@angular/forms';
 })
 export class ModalProdutoPage {
 
-  idLista: number;
   cadastroItemManual: any = {};
+  idLista: number;
+  idProduto: number;
+  descricao: number;
+  preco: number;
+  quantidade: number;  
+  update: boolean = false;
+  descricaoBotao: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
     public formBuilder: FormBuilder, public produtoProvider: ProdutoProvider) {
     this.idLista = this.navParams.get("idLista");
+    this.idProduto = this.navParams.get("idProduto");
+    this.descricao = this.navParams.get("descricao");
+    this.preco = this.navParams.get("preco");
+    this.quantidade = this.navParams.get("quantidade");
+    this.update = this.navParams.get("update");
+
+    console.log("maicon - lista " + this.idLista);
+    
+    if (this.update) {
+      this.descricaoBotao = "Atualizar";      
+    } else {
+      this.descricaoBotao = "Adicionar";
+    }
+
+    this.cadastroItemManual.descricao = this.descricao;
 
     this.cadastroItemManual = this.formBuilder.group({
       descricao: ['', Validators.required],
@@ -30,14 +51,24 @@ export class ModalProdutoPage {
   }
 
   salvarItem() {
-    this.produtoProvider.insert(this.idLista, this.cadastroItemManual.value.descricao, 
-      this.cadastroItemManual.value.preco, this.cadastroItemManual.value.quantidade)
-      .then(() => {            
-        //this.navCtrl.push(ListaPage);
-        console.log('sucesso ao inserir item');
-        this.fecharModalProduto();
-      })
-      .catch((e) => console.error("erro ao inserir item: " + e));   
+    if (this.update) {
+      this.produtoProvider.update(this.idProduto, this.idLista, this.cadastroItemManual.value.descricao, 
+        this.cadastroItemManual.value.preco, this.cadastroItemManual.value.quantidade)
+        .then(() => {                      
+          console.log('sucesso ao atualizar item');
+          this.fecharModalProduto();
+        })
+        .catch((e) => console.error("erro ao atualizare item: " + e));   
+    } else {
+      this.produtoProvider.insert(this.idLista, this.cadastroItemManual.value.descricao, 
+        this.cadastroItemManual.value.preco, this.cadastroItemManual.value.quantidade)
+        .then(() => {                      
+          console.log('sucesso ao inserir item');
+          this.fecharModalProduto();
+        })
+        .catch((e) => console.error("erro ao inserir item: " + e));   
+    }
+    
   }
 
 }

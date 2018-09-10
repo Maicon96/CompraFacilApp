@@ -33,8 +33,8 @@ export class MinhaListaPage {
       })    
   }
 
-  public editarListaCompra(id: number, descricao: string) {
-    this.navCtrl.push(ListaPage, { idLista: id, titulo: descricao });
+  public editarListaCompra(id: number, descricao: string, valor_gastar: number) {
+    this.navCtrl.push(ListaPage, { idLista: id, titulo: descricao, valor_gastar: valor_gastar});
   }
 
   public excluirListaCompra(id: number) {
