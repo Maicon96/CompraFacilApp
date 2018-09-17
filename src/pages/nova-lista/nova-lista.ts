@@ -14,30 +14,87 @@ import { Validators, FormBuilder } from '@angular/forms';
 export class NovaListaPage {
 
   cadastroLista: any = {};
+  idLista: number;
+  idFilial: number;
+  nome: string;
+  valor_total: number;
+  valor_gastar: number;
+  data_criacao: string;
+  update: boolean = false;
+  descricaoBotao: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder,
     public listaProvider: ListaProvider, public filialProvider: SelecionaFilialProvider) {
+    this.idLista = this.navParams.get("idLista");
+    this.idFilial = this.navParams.get("idFilial");
+    this.nome = this.navParams.get("nome");
+    this.valor_total = this.navParams.get("valor_total");
+    this.valor_gastar = this.navParams.get("valor_gastar");
+    this.data_criacao = this.navParams.get("data_criacao");
+    this.update = this.navParams.get("update");
+       
+    if (this.update) {
+      this.descricaoBotao = "Atualizar";      
+    } else {
+      this.descricaoBotao = "Criar";
+    }
+
+    this.cadastroLista.nome = this.nome;
+    this.cadastroLista.valor_gastar = this.valor_gastar;
 
     this.cadastroLista = this.formBuilder.group({
-      nome: ['', Validators.required]
+      nome: ['', Validators.required],
+      valor_gastar: ['', Validators.required]
     });
   }
 
   salvarLista() {
+    if (this.update) {      
+      console.log("maicon - lista: " + this.idLista);
+      console.log("maicon - filial: " + this.idFilial);
+      console.log("maicon - nome: " + this.cadastroLista.value.nome);
+      console.log("maicon - valor_total: " + this.valor_total);
+      console.log("maicon - valor_gastar: " + this.cadastroLista.value.valor_gastar);
+      console.log("maicon - data_criacao: " + this.data_criacao);    
 
-    var dataAtual = new Date();
+          this.listaProvider.update(this.idLista, this.idFilial, this.cadastroLista.value.nome, 
+            this.valor_total, this.cadastroLista.value.valor_gastar, this.data_criacao)
+            .then((data) => {
+              this.listaProvider.getLasted()
+                .then((idLista) => {                
+                  this.navCtrl.push(ListaPage, { idLista: idLista,
+                    titulo: this.cadastroLista.value.nome,
+                    valor_gastar: this.cadastroLista.value.valor_gastar
+                  });
+                  console.log('sucesso ao inserir');
+                })
+                .catch((e) => console.error("erro ao buscar ultima lista: " + e));
+            })
+            .catch((e) => console.error("erro ao inserir: " + e));        
+        
+    } else {
+      var dataAtual = new Date();
 
-    this.filialProvider.getLasted()
-      .then((data) => {
-        this.listaProvider.insert(data, this.cadastroLista.value.nome, 0, 0, dataAtual.toLocaleDateString())
-          .then(() => {            
-            this.navCtrl.push(ListaPage);
-            console.log('sucesso ao inserir');
-          })
-          .catch((e) => console.error("erro ao inserir: " + e));
-      })
-      .catch((e) => console.error("erro ao buscar ultima filial: " + e));
-
+      this.filialProvider.getLasted()
+        .then((idFilial) => {
+          this.listaProvider.insert(idFilial, this.cadastroLista.value.nome, 0,
+            this.cadastroLista.value.valor_gastar, dataAtual.toLocaleDateString())
+            .then((data) => {
+              this.listaProvider.getLasted()
+                .then((idLista) => {                
+                  this.navCtrl.push(ListaPage, { idLista: idLista,
+                    titulo: this.cadastroLista.value.nome,
+                    valor_gastar: this.cadastroLista.value.valor_gastar
+                  });
+                  console.log('sucesso ao inserir');
+                })
+                .catch((e) => console.error("erro ao buscar ultima lista: " + e));
+            })
+            .catch((e) => console.error("erro ao inserir: " + e));
+        })
+        .catch((e) => console.error("erro ao buscar ultima filial: " + e));  
+    }
+    
   }
 
 }

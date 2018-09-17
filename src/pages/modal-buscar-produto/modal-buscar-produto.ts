@@ -49,7 +49,7 @@ export class ModalBuscarProdutoPage {
     }
   }
 
-
+/*
   public buscarProdutos() {
 
     this.produtoProvider.buscarProdutos(this.montarFiltro()).subscribe(
@@ -60,7 +60,7 @@ export class ModalBuscarProdutoPage {
       }, error => {
         console.log(error);
       })
-  }
+  }*/
 
   public montarFiltro() {
     let produto;

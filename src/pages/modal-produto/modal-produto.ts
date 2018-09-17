@@ -1,3 +1,4 @@
+import { ListaPage } from './../lista/lista';
 import { ProdutoProvider } from './../../providers/produto/produto';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
@@ -58,7 +59,7 @@ export class ModalProdutoPage {
           console.log('sucesso ao atualizar item');
           this.fecharModalProduto();
         })
-        .catch((e) => console.error("erro ao atualizare item: " + e));   
+        .catch((e) => console.error("erro ao atualizar item: " + e));   
     } else {
       this.produtoProvider.insert(this.idLista, this.cadastroItemManual.value.descricao, 
         this.cadastroItemManual.value.preco, this.cadastroItemManual.value.quantidade)

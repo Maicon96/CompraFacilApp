@@ -12,14 +12,14 @@
     <ion-card>
       <ion-item>
         <ion-label floating>Nome da Lista</ion-label>
-        <ion-input type="text" name="nome" formControlName="nome"></ion-input>
+        <ion-input type="text" name="nome" [(ngModel)]="nome" formControlName="nome"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Valor total que deseja gastar</ion-label>
-        <ion-input type="number" name="valor_gastar" ></ion-input>
+        <ion-input type="number" name="valor_gastar" [(ngModel)]="valor_gastar" formControlName="valor_gastar"></ion-input>
       </ion-item>
       <p></p>
-      <button [disabled]="cadastroLista.invalid" ion-button full block color="primary" >Criar</button>
+      <button [disabled]="cadastroLista.invalid" ion-button full block color="primary" >{{ descricaoBotao }}</button>
     </ion-card>
   </form>
 

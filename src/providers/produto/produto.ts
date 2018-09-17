@@ -7,14 +7,15 @@ import { DatabaseProvider } from './../../providers/database/database';
 @Injectable()
 export class ProdutoProvider {
 
-  public baseUrl = "https://api.themoviedb.org/3";
+ // public baseUrl = "https://api.themoviedb.org/3";
 
 
-  constructor(private dbProvider: DatabaseProvider, public http: HttpClient) { }
+  constructor(private dbProvider: DatabaseProvider) { }
 
 
   //funçoes de comunicaçao com API
 
+  /*
   public buscarProdutos(request: any) {
 
     return this.http.post(this.baseUrl + 'produtos',
@@ -22,7 +23,7 @@ export class ProdutoProvider {
       { headers: { 'Content-Type': 'application/json' } })
 
   }
-
+  
   public buscarProdutosPopulares(request: any) {
 
     return this.http.post(this.baseUrl + 'produtos',
@@ -30,6 +31,7 @@ export class ProdutoProvider {
       { headers: { 'Content-Type': 'application/json' } })
 
   }
+*/
 
   //funçoes do banco de dados
   public insert(idLista: number, descricao: string, preco: number, quantidade: number) {

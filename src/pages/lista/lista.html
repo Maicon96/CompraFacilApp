@@ -10,30 +10,65 @@
 
   <ion-card>
     <ion-card-content>
+      <ion-list>
+        
+        <h1 class="cardValores">    
+          <ion-icon name="cart" item-start></ion-icon>      
+          <strong> - R$ {{ valor_total.toFixed(2) }} </strong>
+        </h1>
+        <h1 class="cardValores">    
+            <ion-icon name="md-calculator" item-start></ion-icon>      
+          <strong> - R$ {{ valor_gastar }}</strong>
+        </h1>
+
+      </ion-list>
+
+      <!--    
       <div>
         <h2 class="cardValores">
-          <strong>Total R$: {{ valor_total }} </strong>
+          <strong>Total R$: {{ valor_total.toFixed(2) }} </strong>
         </h2>
         <h2 class="cardValores">
           <strong>Valor a Gastar: {{ valor_gastar }}</strong>
         </h2>
-      </div>
+      </div>-->
     </ion-card-content>
   </ion-card>
 
+
   <ion-list>
     <ion-item-sliding *ngFor="let produto of produtos">
+      <ion-item>
+        <ion-thumbnail item-start>
+          <!--  <img src="assets/imgs/no-image.png">-->
+          <img src="assets/imgs/ofertas/coca.jpg" alt="">
+        </ion-thumbnail>
+        <!--<ion-avatar item-start>
+          <img src="assets/imgs/no-image.png">
+        </ion-avatar>-->
+        <div>
+          <h2>
+            <strong>{{ produto.descricao }}</strong>
+          </h2>
+        </div>
+        <div>
+          <h2>Preço R$: {{produto.preco.toFixed(2)}} - Qtd: {{ produto.quantidade.toFixed(2)}}</h2>
+          <h2>Total R$: {{(produto.preco * produto.quantidade).toFixed(2)}}</h2>
+        </div>
+      </ion-item>
+
       <ion-item-options side="right">
+        <button ion-button color="secondary" (click)="editarProduto(produto.id, produto.descricao, produto.preco, produto.quantidade)">
+          <ion-icon name="md-create"></ion-icon>
+          Editar
+        </button>
         <button ion-button color="danger" (click)="excluirProduto(produto.id)">
           <ion-icon name="md-trash"></ion-icon>
           Excluir
         </button>
       </ion-item-options>
 
-      <ion-thumbnail item-start>
-        <img src="assets/imgs/ofertas/coca.jpg" alt="">
-      </ion-thumbnail>
-
+      <!--
       <button ion-item (click)="editarProduto(produto.id, produto.descricao, produto.preco, produto.quantidade)">
         <div>
           <h2>
@@ -41,31 +76,39 @@
           </h2>
         </div>
         <div>
-          <h2>R$: {{ produto.preco }} QTD: {{ produto.quantidade }}</h2>
+          <h2>Preço R$: {{produto.preco.toFixed(2)}} - Qtd: {{ produto.quantidade.toFixed(2)}}</h2>
+          <h2>Total R$: {{(produto.preco * produto.quantidade).toFixed(2)}}</h2>
         </div>
       </button>
+
+      <ion-item-options side="right">
+        <button ion-button color="danger" (click)="excluirProduto(produto.id)">
+          <ion-icon name="md-trash"></ion-icon>
+          Excluir
+        </button>
+      </ion-item-options>
+      -->
 
     </ion-item-sliding>
   </ion-list>
 
-  <div>
-    <ion-fab right bottom>
-      <button ion-fab color="primary" (click)="lerBarcode()">
-        <ion-icon name="md-barcode"></ion-icon>
-      </button>
-    </ion-fab>
 
-    <ion-fab center bottom>
-      <button ion-fab color="primary" (click)="abrirModalBuscarProduto()">
-        <ion-icon name="md-search"></ion-icon>
-      </button>
-    </ion-fab>
+  <ion-fab right bottom>
+    <button ion-fab color="primary" (click)="lerBarcode()">
+      <ion-icon name="md-barcode"></ion-icon>
+    </button>
+  </ion-fab>
 
-    <ion-fab left bottom>
-      <button ion-fab color="primary" (click)="abrirModalProduto()">
-        <ion-icon name="add"></ion-icon>
-      </button>
-    </ion-fab>
-  </div>
+  <ion-fab center bottom>
+    <button ion-fab color="primary" (click)="abrirModalBuscarProduto()">
+      <ion-icon name="md-search"></ion-icon>
+    </button>
+  </ion-fab>
+
+  <ion-fab left bottom>
+    <button ion-fab color="primary" (click)="abrirModalProduto()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
 
 </ion-content>

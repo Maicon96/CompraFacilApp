@@ -40,6 +40,14 @@ export class MyApp {
       //timer(3000).subscribe(() => this.showSplash = false)
       //this.abrirTabsPage(splashScreen);
 
+      /*dbProvider.deletarTabelas()
+        .then(() => {          
+          console.log("sucesso ao deletar tabelas");
+        })
+        .catch(() => {          
+          console.log("erro ao deletar tabelas");
+        })*/
+
       dbProvider.createBanco()
         .then(() => {
           this.abrirTabsPage(splashScreen);

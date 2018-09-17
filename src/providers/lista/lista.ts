@@ -11,7 +11,7 @@ export class ListaProvider {
     data_criacao: string) {
     return this.dbProvider.getBanco()
       .then((db: SQLiteObject) => {
-        let sql = 'insert into listas (id_filial, descricao, valor_total, valor_gastar, data_cricao)' +
+        let sql = 'insert into listas (id_filial, descricao, valor_total, valor_gastar, data_criacao)' +
          ' values (?,?,?,?,?)';
         let data = [idFilial, descricao, valor_total, valor_gastar, 
           data_criacao];
@@ -19,6 +19,19 @@ export class ListaProvider {
         return db.executeSql(sql, data);
       })
       .catch((e) => console.error("erro ao inserir lista  " + e));
+  }
+
+  public update(idLista: number, idFilial: number, descricao: string, valor_total: number, valor_gastar: number, 
+    data_criacao: string) {
+    return this.dbProvider.getBanco()
+      .then((db: SQLiteObject) => {
+        let sql = 'update listas set id_filial = ?, descricao = ?, valor_total = ?, valor_gastar = ?,'
+        ' data_criacao = ? where id = ?';
+        let data = [idFilial, descricao, valor_total, valor_gastar, data_criacao, idLista];
+
+        return db.executeSql(sql, data);
+      })
+      .catch((e) => console.error("erro ao atualizar lista " + e));
   }
 
   public remove(id: number) {
@@ -62,6 +75,26 @@ export class ListaProvider {
           .catch((e) => console.error("erro ao buscar filiais: " + e));
       })
       .catch((e) => console.error(e));
+  }
+
+  public getLasted() {
+    return this.dbProvider.getBanco()
+      .then((db: SQLiteObject) => {
+        let sql = 'select * from listas order by id desc limit 1';
+        
+        return db.executeSql(sql, [])
+          .then((data: any) => {
+            if (data.rows.length > 0) {
+              let item = data.rows.item(0);
+              return item.id;              
+            } else {
+              return null;
+            }
+
+          })
+          .catch((e) => console.error("erro ao buscar ultima lista " + e));
+      })
+      .catch((e) => console.error("erro ao buscar ultima lista " + e));
   }
 
 }

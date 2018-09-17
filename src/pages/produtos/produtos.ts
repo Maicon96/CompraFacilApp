@@ -17,6 +17,7 @@ export class ProdutosPage {
     console.log('ionViewDidLoad ProdutosPage');
   }
 
+  /*
   public buscarProdutosPopulares() {
 
     this.produtoProvider.buscarProdutosPopulares(this.montarFiltro()).subscribe(
@@ -27,7 +28,7 @@ export class ProdutosPage {
       }, error => {
         console.log(error);
       })
-  }
+  }*/
 
   public montarFiltro() {
     let produto;

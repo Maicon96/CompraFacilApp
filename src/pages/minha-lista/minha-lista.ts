@@ -23,23 +23,34 @@ export class MinhaListaPage {
   }
 
   public listarCompras() {
-    this.filialProvider.getLasted()      
+    this.filialProvider.getLasted()
       .then((result: any) => {
         this.listaProvider.getAll(result)
-          .then((resultLista: any[]) => {            
+          .then((resultLista: any[]) => {
             this.listas = resultLista;
           })
           .catch((e) => console.error("erro ao buscar listas: " + e));
-      })    
+      })
   }
 
   public editarListaCompra(id: number, descricao: string, valor_gastar: number) {
-    this.navCtrl.push(ListaPage, { idLista: id, titulo: descricao, valor_gastar: valor_gastar});
+    this.navCtrl.push(ListaPage, { idLista: id, titulo: descricao, valor_gastar: valor_gastar });
   }
 
   public excluirListaCompra(id: number) {
     this.listaProvider.remove(id);
     this.listarCompras();
+  }
+
+  public editarDadosLista(id: number, idFilial: number, nome: string, valor_total: number,
+    valor_gastar: number, data_criacao: string) {
+
+      console.log("maicon - minha - " + idFilial);
+
+    this.navCtrl.push(NovaListaPage, {
+      idLista: id, idFilial: idFilial, nome: nome, valor_total: valor_total, 
+      valor_gastar: valor_gastar, data_criacao: data_criacao, update: true
+    });
   }
 
   public chamaNovaLista() {

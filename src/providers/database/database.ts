@@ -8,6 +8,14 @@ export class DatabaseProvider {
 
   }
 
+  public deletarTabelas() {
+    return this.getBanco()
+      .then((db: SQLiteObject) => {
+        this.dropTabelas(db)        
+      })
+      .catch(e => console.error(e));
+  }
+
   public createBanco() {
     return this.getBanco()
       .then((db: SQLiteObject) => {
@@ -22,6 +30,17 @@ export class DatabaseProvider {
       name: 'compraFacil.db',
       location: 'default'
     });
+  }
+
+  //DROP TABLE addresses;
+
+  dropTabelas(db: SQLiteObject) {
+    db.sqlBatch([
+      ['DROP TABLE IF EXISTS compraFacil.produtos'],
+      ['DROP TABLE IF EXISTS compraFacil.listas']
+    ])
+      .then(() => console.log('Sucesso ao dropar do banco'))
+      .catch(e => console.error('Erro ao dropar do banco', e));
   }
 
   private createTabelas(db: SQLiteObject) {

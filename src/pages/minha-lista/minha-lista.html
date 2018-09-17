@@ -9,9 +9,14 @@
 
 <ion-content padding>
 
-  <ion-list>    
+  <ion-list>
     <ion-item-sliding *ngFor="let lista of listas">
       <ion-item-options side="right">
+        <button ion-button color="secondary" (click)="editarDadosLista(lista.id, lista.id_filial, 
+        lista.descricao, lista.valor_total, lista.valor_gastar, lista.data_criacao)">
+          <ion-icon name="md-create"></ion-icon>
+          Editar
+        </button>
         <button ion-button color="danger" (click)="excluirListaCompra(lista.id)">
           <ion-icon name="md-trash"></ion-icon>
           Excluir
@@ -26,7 +31,7 @@
 
   <ion-fab right bottom>
     <button ion-fab on-click="chamaNovaLista()">
-      <ion-icon name="add"></ion-icon>      
+      <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>
 

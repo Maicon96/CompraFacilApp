@@ -18,7 +18,7 @@ export class PromocoesPage {
     console.log('ionViewDidLoad PromocoesPage');
   }
 
-
+/*
   public buscarProdutosPopulares() {
 
     this.produtoProvider.buscarProdutosPopulares(this.montarFiltro()).subscribe(
@@ -29,7 +29,7 @@ export class PromocoesPage {
       }, error => {
         console.log(error);
       })
-  }
+  }*/
 
   public montarFiltro() {
     let produto;
