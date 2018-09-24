@@ -3,6 +3,12 @@
   "app_id": "",
   "type": "ionic-angular",
   "integrations": {
-    "cordova": {}
-  }
+    "cordova": {}    
+  },
+  "proxies": [  
+    {
+      "path": "/cooperapi", 
+      "proxyUrl": "http://www.coopera1.com.br" 
+    }
+  ]
 }

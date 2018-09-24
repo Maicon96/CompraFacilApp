@@ -1,37 +1,50 @@
+import { Platform } from 'ionic-angular';
 import { Injectable } from '@angular/core';
 import { SQLiteObject } from '@ionic-native/sqlite';
 import { HttpClient } from '@angular/common/http';
 import { DatabaseProvider } from './../../providers/database/database';
+import { RequestOptions, Request, RequestMethod, Headers } from '@angular/http';
 
 
 @Injectable()
 export class ProdutoProvider {
 
- // public baseUrl = "https://api.themoviedb.org/3";
+  public basePath = "/cooperapi";
+  public baseUrl = "http://www.coopera1.com.br:48080/g3ws-comprafacil/pdv/consulta/load";
 
 
-  constructor(private dbProvider: DatabaseProvider) { }
+  constructor(private dbProvider: DatabaseProvider, public http: HttpClient, 
+    private plataform: Platform) { 
+      if (this.plataform.is("cordova")) {
+        this.basePath = "http://www.coopera1.com.br";
+      }
+    }
 
 
-  //funçoes de comunicaçao com API
-
-  /*
+  //funçoes de comunicaçao com API  
   public buscarProdutos(request: any) {
 
-    return this.http.post(this.baseUrl + 'produtos',
+    return this.http.post(this.baseUrl + '/produtos',
       request,
       { headers: { 'Content-Type': 'application/json' } })
 
   }
-  
+
   public buscarProdutosPopulares(request: any) {
 
-    return this.http.post(this.baseUrl + 'produtos',
-      request,
-      { headers: { 'Content-Type': 'application/json' } })
+    const headers = new Headers({      
+      'Accept': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    });
+
+    const options = new RequestOptions({  headers : headers });
+    
+    return this.http.post(this.baseUrl + '/produtos/populares',  options, request)
+    //.map(res => { res.json() })
+    //.subscribe( data => console.log(data));
 
   }
-*/
+
 
   //funçoes do banco de dados
   public insert(idLista: number, descricao: string, preco: number, quantidade: number) {

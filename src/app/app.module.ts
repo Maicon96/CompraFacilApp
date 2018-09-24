@@ -29,6 +29,8 @@ import { DatabaseProvider } from '../providers/database/database';
 import { SelecionaFilialProvider } from '../providers/seleciona-filial/seleciona-filial';
 import { ListaProvider } from '../providers/lista/lista';
 import { ProdutoProvider } from '../providers/produto/produto';
+import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,7 @@ import { ProdutoProvider } from '../providers/produto/produto';
     HomePage,
     TabsPage
   ],
-  imports: [
+  imports: [  
     BrowserModule,
     IonicModule.forRoot(MyApp),
     IntroducaoPageModule,
@@ -50,7 +52,9 @@ import { ProdutoProvider } from '../providers/produto/produto';
     NovaListaPageModule,
     ListaPageModule,
     ModalProdutoPageModule,
-    ModalBuscarProdutoPageModule    
+    ModalBuscarProdutoPageModule,
+    HttpModule,
+    HttpClientModule    
   ],
   bootstrap: [IonicApp],
   entryComponents: [

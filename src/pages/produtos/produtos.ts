@@ -1,3 +1,4 @@
+import { SelecionaFilialProvider } from './../../providers/seleciona-filial/seleciona-filial';
 import { ProdutoProvider } from './../../providers/produto/produto';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -8,32 +9,43 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'produtos.html',
 })
 export class ProdutosPage {
+  
+  produtoDigitado: string;
+  idEmpresa: number;
+  idFilial: number;
+  barras: string;
+  codigo: number;
+  digito: string;
+  descricao: string;
+  descricaoReduzida: string;
+  preco: Number;
+  imagem: any;
+
+  produtos = new Array<any>();
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public produtoProvider: ProdutoProvider) {
+    public produtoProvider: ProdutoProvider, public filialProvider: SelecionaFilialProvider) {
   }
+  
+  public buscarProdutos() {
+    //debugger;
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProdutosPage');
+    if (this.produtoDigitado != '' && this.produtoDigitado != null) {
+      this.produtoProvider.buscarProdutos(this.montarJsonEnvio()).subscribe(
+        data => {
+          const res = (data as any);
+          //this.produtosApi = res.results;
+          console.log(res);
+        }, error => {
+          console.log(error);
+        })
+    }    
   }
-
-  /*
-  public buscarProdutosPopulares() {
-
-    this.produtoProvider.buscarProdutosPopulares(this.montarFiltro()).subscribe(
-      data => {
-        const res = (data as any);
-        //this.produtosApi = res.results;
-        console.log(res);
-      }, error => {
-        console.log(error);
-      })
-  }*/
-
-  public montarFiltro() {
-    let produto;
-
-    return produto = {
+  
+  public montarJsonEnvio() {
+    
+    return {
       limit: "5",
       start: 0,
       page: "1",
@@ -52,14 +64,14 @@ export class ProdutosPage {
           field: "idEmpresa"
         },
         {
-          value: "",//pegar valor
+          value: this.filialProvider.getLasted(),
           type: "int",
           comparison: "eq",
           connector: "AND",
           field: "idFilial"
         },
         {
-          //value: this.descricao,//pegar valor
+          value: this.produtoDigitado,
           type: "string",
           comparison: "cn",
           connector: "AND",
