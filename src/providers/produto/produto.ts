@@ -21,12 +21,21 @@ export class ProdutoProvider {
     }
 
 
-  //funçoes de comunicaçao com API  
+  //funçoes de comunicaçao com API   
+
   public buscarProdutos(request: any) {
 
-    return this.http.post(this.baseUrl + '/produtos',
-      request,
-      { headers: { 'Content-Type': 'application/json' } })
+    const headers = new Headers({      
+      'Accept': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    });
+    console.log(request);
+
+    const options = new RequestOptions({  headers : headers });
+    
+    return this.http.post(this.baseUrl + '/produtos',  request)
+    //.map(res => { res.json() })
+    //.subscribe( data => console.log(data));
 
   }
 
@@ -36,10 +45,11 @@ export class ProdutoProvider {
       'Accept': 'application/json',
       'Access-Control-Allow-Origin': '*'
     });
+    console.log(request);
 
     const options = new RequestOptions({  headers : headers });
     
-    return this.http.post(this.baseUrl + '/produtos/populares',  options, request)
+    return this.http.post(this.baseUrl + '/produtos/populares',  request)
     //.map(res => { res.json() })
     //.subscribe( data => console.log(data));
 

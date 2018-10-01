@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 let config_key_name = "config";
+let filial_key_name = "idFilial";
 
 @Injectable()
 export class ConfiguracaoProvider {
@@ -14,12 +15,10 @@ export class ConfiguracaoProvider {
 
   }
 
-  //recupera os dados do localstorage
   getConfigData(): any {
     return localStorage.getItem(config_key_name);
   }
 
-  //grava os dados no localstorage
   setConfigData(mostrarIndrotucao?: boolean) {
     let config = {
       mostrarIndrotucao: false
@@ -30,6 +29,14 @@ export class ConfiguracaoProvider {
     }
 
     localStorage.setItem(config_key_name, JSON.stringify(config));
+  }
+
+  getConfigFilial(): any {
+    return localStorage.getItem(filial_key_name);
+  }
+
+  setConfigFilial(filial: number) {
+    localStorage.setItem(filial_key_name, JSON.stringify(filial));
   }
 
 }

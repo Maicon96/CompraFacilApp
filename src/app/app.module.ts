@@ -31,6 +31,7 @@ import { ListaProvider } from '../providers/lista/lista';
 import { ProdutoProvider } from '../providers/produto/produto';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+import { Network } from '@ionic-native/network';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { HttpClientModule } from '@angular/common/http';
     SelecionaFilialProvider,
     ListaProvider,
     ProdutoProvider,
-    BarcodeScanner
+    BarcodeScanner,
+    Network
   ]
 })
 export class AppModule {}

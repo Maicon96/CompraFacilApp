@@ -1,3 +1,15 @@
 page-home {
 
+    .custom {
+        background-color: white !important; /* This sets the background color*/
+       }
+       
+       
+      /*Set the background to transparent for ion-item*/
+      .custom .item {
+        background-color: transparent;
+        border:none;   /*Removes all borders*/
+        
+        color: #008AFF;    /*Text color for each item*/
+      } 
 }

@@ -1,10 +1,8 @@
 import { SelecionaFilialProvider } from './../../providers/seleciona-filial/seleciona-filial';
-import { SQLiteObject } from '@ionic-native/sqlite';
-import { DatabaseProvider } from './../../providers/database/database';
+import { ConfiguracaoProvider } from './../../providers/configuracao/configuracao';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
-import { TabsPage } from './../tabs/tabs';
 
 @IonicPage()
 @Component({
@@ -18,7 +16,7 @@ export class SelecionaFilialMenuPage {
   filial: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,
-    public filialProvider: SelecionaFilialProvider) { }
+    public filialProvider: SelecionaFilialProvider, public configuracaoProvider: ConfiguracaoProvider) { }
 
   ionViewWillEnter() {
     
@@ -49,16 +47,14 @@ export class SelecionaFilialMenuPage {
       text: 'OK',
       handler: data => {     
 
-        this.filialProvider.insert(data, 'Palmitos')        
+        this.configuracaoProvider.setConfigFilial(data);
+
+        this.filialProvider.insert(data, 'Palmitos')         
         .then(() => console.log('sucesso ao inserir'))
         .catch((e) => console.error("erro ao inserir: " + e));
 
-        this.filialProvider.getAll()        
-        .then((result: any[]) => {
-          console.log("listar");
-          var filiais: any[] = result;         
-        })
-        .catch((e) => console.error("erro ao buscar filiais: " + e));
+        console.log('config filial - ' + this.configuracaoProvider.getConfigFilial())
+
       }
     });
     alert.present();    

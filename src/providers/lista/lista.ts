@@ -11,7 +11,7 @@ export class ListaProvider {
     data_criacao: string) {
     return this.dbProvider.getBanco()
       .then((db: SQLiteObject) => {
-        let sql = 'insert into listas (id_filial, descricao, valor_total, valor_gastar, data_criacao)' +
+        let sql = 'insert into listas (id_filial, descricao, valor_total, valor_gastar, data_cricao)' +
          ' values (?,?,?,?,?)';
         let data = [idFilial, descricao, valor_total, valor_gastar, 
           data_criacao];
@@ -26,7 +26,16 @@ export class ListaProvider {
     return this.dbProvider.getBanco()
       .then((db: SQLiteObject) => {
         let sql = 'update listas set id_filial = ?, descricao = ?, valor_total = ?, valor_gastar = ?,'
-        ' data_criacao = ? where id = ?';
+        ' data_cricao = ? where id = ?';
+
+        console.log("lista - idFilial " + idFilial);
+        console.log("lista - descricao " + descricao);
+        console.log("lista - valor_total " + valor_total);
+        console.log("lista - valor_gastar " + valor_gastar);
+        console.log("lista - data_criacao " + data_criacao);
+        console.log("lista - idLista " + idLista);
+        console.log("lista - " + sql);
+
         let data = [idFilial, descricao, valor_total, valor_gastar, data_criacao, idLista];
 
         return db.executeSql(sql, data);
@@ -62,8 +71,11 @@ export class ListaProvider {
                 lista.descricao = data.rows.item(i).descricao;
                 lista.valor_total = data.rows.item(i).valor_total;
                 lista.valor_gastar = data.rows.item(i).valor_gastar;
-                lista.data_criacao = data.rows.item(i).data_criacao;
+                lista.data_criacao = data.rows.item(i).data_cricao;
                 
+                console.log("maicon descricao - " + lista.descricao);
+                console.log("maicon data_criacao - " + lista.data_criacao);
+
                 listas.push(lista);
               }
 

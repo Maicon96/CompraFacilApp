@@ -6,24 +6,26 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-menu [content]="content">
+<ion-menu [content]="content" color="primary">
   <ion-header>
     <ion-toolbar>
       <ion-title>Menu</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-content>
-    <ion-list>     
-      <button ion-item on-click="chamaMinhasListas()">
-        Minhas Listas
-      </button>
-      <button ion-item on-click="chamaProdutos()">
-        Produtos
-      </button>
-      <button ion-item on-click="chamaSobre()">
-        Sobre
-      </button>
-    </ion-list>
+  <ion-content class="custom">
+    <div style="color : #3DBCC0; width:100%; height : 100%">
+      <ion-list>
+        <button ion-item on-click="chamaMinhasListas()">
+            <ion-icon name="md-cart" item-left></ion-icon>Minhas Listas
+        </button>
+        <button ion-item on-click="chamaProdutos()">
+          <ion-icon name="md-basket" item-left></ion-icon>Produtos
+        </button>
+        <button ion-item on-click="chamaSobre()">
+          <ion-icon name="ios-phone-portrait" item-left></ion-icon>Sobre
+        </button>
+      </ion-list>
+    </div>
   </ion-content>
 </ion-menu>
 

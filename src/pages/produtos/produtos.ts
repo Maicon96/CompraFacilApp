@@ -1,7 +1,9 @@
 import { SelecionaFilialProvider } from './../../providers/seleciona-filial/seleciona-filial';
 import { ProdutoProvider } from './../../providers/produto/produto';
+import { ConfiguracaoProvider } from './../../providers/configuracao/configuracao';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController, AlertController } from 'ionic-angular';
+import { Network } from '@ionic-native/network';
 
 @IonicPage()
 @Component({
@@ -9,7 +11,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'produtos.html',
 })
 export class ProdutosPage {
-  
+
   produtoDigitado: string;
   idEmpresa: number;
   idFilial: number;
@@ -19,32 +21,80 @@ export class ProdutosPage {
   descricao: string;
   descricaoReduzida: string;
   preco: Number;
-  imagem: any;
-
+  imagem: any;  
   produtos = new Array<any>();
+  loading: any;
+  conexao = true;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public produtoProvider: ProdutoProvider, public filialProvider: SelecionaFilialProvider) {
+    public produtoProvider: ProdutoProvider, public filialProvider: SelecionaFilialProvider,
+    public configuracaoProvider: ConfiguracaoProvider, public loadingCtr: LoadingController, 
+    public toastCtrl: ToastController, private network: Network, public alertCtrl: AlertController) {
   }
-  
+
+  ionViewDidLoad() {    
+    this.verificaConexao();
+
+    if (this.conexao) {
+      this.buscarProdutos();
+    } else {      
+      const alert = this.alertCtrl.create({
+        title: 'Erro ao buscar Promoções!',
+        subTitle: 'Você não possui conexão Wi-Fi!',
+        buttons: ['OK']
+      });
+      alert.present();
+    }    
+  }
+
+  verificaConexao() {
+    if (this.network.type === 'none') {
+      this.conexao = false;
+    }
+  }
+
   public buscarProdutos() {
     //debugger;
 
+    this.showLoader();
+    const json = this.montarJsonEnvio();
+    console.log("maicon - json : " + JSON.stringify(json));    
+
     if (this.produtoDigitado != '' && this.produtoDigitado != null) {
-      this.produtoProvider.buscarProdutos(this.montarJsonEnvio()).subscribe(
+      this.produtoProvider.buscarProdutos(json).subscribe(
         data => {
-          const res = (data as any);
-          //this.produtosApi = res.results;
-          console.log(res);
+          const response = (data as any);
+          this.produtos = response.registros;
+          this.loading.dismiss();
+          console.log(this.produtos);
         }, error => {
-          console.log(error);
+          this.loading.dismiss();
+
+          const toast = this.toastCtrl.create({
+            message: 'Opsss, ocorreu um erro ao buscar os produtos...',
+            position: 'middle',
+            showCloseButton: true,
+            closeButtonText: 'OK'
+          });
+          toast.present();
+
+          console.log("maicon - erro" + error);
+
         })
-    }    
+    }
   }
-  
+
+  showLoader() {
+    this.loading = this.loadingCtr.create({
+      content: 'Buscando Produtos...'
+    })
+
+    this.loading.present();
+  }
+
   public montarJsonEnvio() {
-    
+
     return {
       limit: "5",
       start: 0,
@@ -64,7 +114,7 @@ export class ProdutosPage {
           field: "idEmpresa"
         },
         {
-          value: this.filialProvider.getLasted(),
+          value: this.configuracaoProvider.getConfigFilial(),
           type: "int",
           comparison: "eq",
           connector: "AND",

@@ -12,19 +12,20 @@
   <ion-list>
     <ion-item-sliding *ngFor="let lista of listas">
       <ion-item-options side="right">
-        <button ion-button color="secondary" (click)="editarDadosLista(lista.id, lista.id_filial, 
+        <button ion-button color="edit" (click)="editarDadosLista(lista.id, lista.id_filial, 
         lista.descricao, lista.valor_total, lista.valor_gastar, lista.data_criacao)">
           <ion-icon name="md-create"></ion-icon>
           Editar
         </button>
-        <button ion-button color="danger" (click)="excluirListaCompra(lista.id)">
+        <button ion-button color="delete" (click)="excluirListaCompra(lista.id)">
           <ion-icon name="md-trash"></ion-icon>
           Excluir
         </button>
       </ion-item-options>
       <button ion-item (click)="editarListaCompra(lista.id, lista.descricao, lista.valor_gastar)" item-start>
         <h1>{{ lista.descricao }}</h1>
-        <h2>{{ lista.data_criacao }}</h2>
+        <h2>{{ lista.data_cricao }}</h2>
+        <h2>{{ lista.id_filial }}</h2>
       </button>
     </ion-item-sliding>
   </ion-list>

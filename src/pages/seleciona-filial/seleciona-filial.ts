@@ -1,3 +1,5 @@
+import { SelecionaFilialProvider } from './../../providers/seleciona-filial/seleciona-filial';
+import { ConfiguracaoProvider } from './../../providers/configuracao/configuracao';
 import { TabsPage } from './../tabs/tabs';
 import { Component } from '@angular/core';
 import { AlertController } from 'ionic-angular';
@@ -14,7 +16,8 @@ export class SelecionaFilialPage {
 private testRadioOpen;
 private testRadioResult;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) { }
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,
+    public filialProvider: SelecionaFilialProvider, public configuracaoProvider: ConfiguracaoProvider) { }
 
   abrirRadio() {
     let alert = this.alertCtrl.create();
@@ -47,6 +50,12 @@ private testRadioResult;
 
         this.testRadioOpen = false;
         this.testRadioResult = data;
+
+        this.configuracaoProvider.setConfigFilial(data);
+
+        this.filialProvider.insert(data, 'Palmitos')         
+        .then(() => console.log('sucesso ao inserir'))
+        .catch((e) => console.error("erro ao inserir: " + e));
       }
     });
     alert.present();
