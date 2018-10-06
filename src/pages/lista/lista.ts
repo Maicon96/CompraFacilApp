@@ -3,7 +3,10 @@ import { ConfiguracaoProvider } from './../../providers/configuracao/configuraca
 import { ModalProdutoPage } from './../modal-produto/modal-produto';
 import { ModalBuscarProdutoPage } from './../modal-buscar-produto/modal-buscar-produto';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, ToastController, LoadingController, AlertController } from 'ionic-angular';
+import {
+  IonicPage, NavController, NavParams, ModalController, ToastController, LoadingController, AlertController,
+  ItemSliding, Item
+} from 'ionic-angular';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Network } from '@ionic-native/network';
 
@@ -15,6 +18,7 @@ import { Network } from '@ionic-native/network';
 export class ListaPage {
 
   produtos: any[] = [];
+  produtoAux = new Array<any>();
   idLista: number;
   titulo: string;
   valor_total: number = 0;
@@ -27,8 +31,8 @@ export class ListaPage {
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController,
     public navParams: NavParams, private produtoProvider: ProdutoProvider,
-    public configuracaoProvider: ConfiguracaoProvider, private modalCtrl: ModalController, 
-    private barcodeScanner: BarcodeScanner, private toast: ToastController, 
+    public configuracaoProvider: ConfiguracaoProvider, private modalCtrl: ModalController,
+    private barcodeScanner: BarcodeScanner, private toast: ToastController,
     public loadingCtr: LoadingController, private network: Network) {
     this.idLista = this.navParams.get("idLista");
     this.titulo = this.navParams.get("titulo");
@@ -97,35 +101,40 @@ export class ListaPage {
 
   lerBarcode() {
     this.verificaConexao();
-    
+
     if (this.conexao) {
       this.barcodeScanner.scan().then(barcodeData => {
         this.barras = JSON.stringify(barcodeData);
         this.showLoader();
         const json = this.montarJsonEnvioBarras();
-        
+
         console.log('maicon - barcode = ' + this.barras);
-        console.log("maicon - json : " + JSON.stringify(json));    
-        
+        console.log("maicon - json : " + JSON.stringify(json));
+
         this.produtoProvider.buscarProdutos(json).subscribe(
           data => {
             const response = (data as any);
-            this.produtos = response.registros;
+            console.log(response);
+
+            this.produtoAux = response.registros;
+            
             this.loading.dismiss();
+
+            this.showConfirm();
+
             console.log(this.produtos);
           }, error => {
             this.loading.dismiss();
-  
-            const toast = this.toast.create({
-              message: 'Opsss, ocorreu um erro ao buscar o produto...',
-              position: 'middle',
-              showCloseButton: true,
-              closeButtonText: 'OK'
+
+            const alert = this.alertCtrl.create({
+              title: 'Atenção!',
+              subTitle: 'Ocorreu um erro ao buscar o produto, tente novamente.',
+              buttons: ['OK']
             });
-            toast.present();
-  
+            alert.present();
+
             console.log("maicon - erro" + error);
-  
+
           })
       }).catch(e => {
         console.log('maicon - Error', e);
@@ -138,13 +147,48 @@ export class ListaPage {
       });
       alert.present();
     }
-    
+
   }
 
   verificaConexao() {
     if (this.network.type === 'none') {
       this.conexao = false;
     }
+  }
+
+  showConfirm() {
+    let descricaoProduto = this.produtoAux[0].descricaoReduzida;
+    let preco = this.produtoAux[0].preco;
+
+    console.log("maicon - " + descricaoProduto);
+    console.log("maicon - " + preco);
+
+    const confirm = this.alertCtrl.create({
+      title: 'Atenção!',
+      message: 'Deseja adicionar na lista o produto: ' + descricaoProduto + ' - preço: ' + preco,
+      buttons: [
+        {
+          text: 'Não',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Sim',
+          handler: () => {
+
+            this.produtoProvider.insert(this.idLista, 
+              descricaoProduto, preco, 1)
+              .then(() => {                      
+                console.log('maicon - sucesso ao inserir item ' + descricaoProduto);                
+                this.listarProdutos(this.idLista);
+              })
+              .catch((e) => console.error("maicon - erro ao inserir item: " + e));               
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
   showLoader() {
@@ -166,10 +210,17 @@ export class ListaPage {
     alert.present();
   }
 
+  public openSliding(itemSlide: ItemSliding, item: Item) {
+    itemSlide.setElementClass("active-sliding", true);
+    itemSlide.setElementClass("active-slide", true);
+    itemSlide.setElementClass("active-options-right", true);
+    item.setElementStyle("transform", "translate3d(-140px, 0px, 0px)");
+  }
+
   public montarJsonEnvioBarras() {
 
     return {
-      limit: "5",
+      limit: "1",
       start: 0,
       page: "1",
       sort: [
@@ -187,7 +238,7 @@ export class ListaPage {
           field: "idEmpresa"
         },
         {
-          value: this.configuracaoProvider.getConfigFilial(),          
+          value: this.configuracaoProvider.getConfigFilial(),
           type: "int",
           comparison: "eq",
           connector: "AND",
@@ -199,8 +250,8 @@ export class ListaPage {
           comparison: 'eq',
           connector: 'AND',
           field: 'barras'
-        } 
-    
+        }
+
       ]
     }
   }

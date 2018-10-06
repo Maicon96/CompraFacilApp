@@ -1,4 +1,5 @@
 import { ProdutoProvider } from './../../providers/produto/produto';
+import { ConfiguracaoProvider } from './../../providers/configuracao/configuracao';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController, AlertController, Platform } from 'ionic-angular';
 import { Network } from '@ionic-native/network';
@@ -11,17 +12,20 @@ import { Network } from '@ionic-native/network';
 })
 export class PromocoesPage {
 
-  produtos = new Array<any>();
+  public produtos = new Array<any>();
+  desc: any;
+  preco: any;
   loading: any;
   conexao = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public loadingCtr: LoadingController, public produtoProvider: ProdutoProvider,
+    public configuracaoProvider: ConfiguracaoProvider,
     public toastCtrl: ToastController, private network: Network, private platform: Platform,
     public alertCtrl: AlertController) {
   }
 
-  
+
   ionViewDidLoad() {
     this.verificaConexao();
 
@@ -30,7 +34,7 @@ export class PromocoesPage {
     } else {
       const alert = this.alertCtrl.create({
         title: 'Não foi possível buscar as promoções!',
-        subTitle: 'Você não possui conexão Wi-Fi',
+        subTitle: 'Você não possui Internet',
         buttons: ['OK']
       });
       alert.present();
@@ -68,19 +72,21 @@ export class PromocoesPage {
     this.produtoProvider.buscarProdutosPopulares(json).subscribe(
       data => {
         const res = (data as any);
+        console.log(res);
         this.produtos = res.registros;
-        this.loading.dismiss();
         console.log(this.produtos);
+
+        this.loading.dismiss();
+
       }, error => {
         this.loading.dismiss();
 
-        const toast = this.toastCtrl.create({
-          message: 'Opsss, ocorreu um erro ao buscar os produtos...',
-          position: 'middle',
-          showCloseButton: true,
-          closeButtonText: 'OK'
+        const alert = this.alertCtrl.create({
+          title: 'Atenção!',
+          subTitle: 'Ocorreu um erro ao buscar as promoções, tente novamente.',
+          buttons: ['OK']
         });
-        toast.present();
+        alert.present();
 
         console.log("maicon - erro" + error);
       })
@@ -98,6 +104,7 @@ export class PromocoesPage {
     return {
       "limit": 20,
       "idEmpresa": 1,
+      //"idFilial": this.configuracaoProvider.getConfigFilial(),
       "idFilial": 1,
       "promocao": "2"
     }

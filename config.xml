@@ -93,4 +93,5 @@
     <engine name="android" spec="7.0.0" />
     <plugin name="cordova-plugin-network-information" spec="^2.0.1" />
     <allow-navigation href="http://192.168.10.102:8100" />
+    <allow-navigation href="http://192.168.0.154:8100" />
 </widget>

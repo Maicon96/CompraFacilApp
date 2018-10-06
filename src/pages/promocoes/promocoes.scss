@@ -1,12 +1,16 @@
 page-promocoes {   
     h2.promocao_title {
-        color: red;
+        color: #002340;
         font-weight: bold;
-        text-align: center
+        text-align: center;
+        font-family: cursive;
     }
-    h2.preco_title {
+    h1.preco_title {        
+        color: #FF2A00;
         font-weight: bold;
-        text-align: center
+        text-align: center;
+        font-style: italic;
+        font-family: cursive;
     }
 
     .promo_image img {
@@ -15,6 +19,34 @@ page-promocoes {
     .img {
         text-align: center
     }
-    
+
+    .cardProd {
+        background-color: #008AFF;        
+    }
+
+    /*
+    div.container {
+        height: 100%;
+        background: -webkit-linear-gradient(top, #088fad 20%, #00d5ff 100%);
+    }*/
+
+    div.descricao {
+        width: 38%;
+        display: inline-block;
+        font-size: 3vw;
+        text-align: center;
+        padding: 5vw 0vw 5vw 0vw;
+        min-width:40vw;
+    }
+
+    div.preco {
+        width: 38%;
+        display: inline-block;
+        margin-right: 0vw;
+        font-size: 3vw;
+        text-align: center;
+        padding: 5vw 0vw 5vw 0vw;
+        min-width:40vw;
+    }
     
 }

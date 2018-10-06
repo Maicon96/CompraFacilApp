@@ -2,7 +2,7 @@ import { SelecionaFilialProvider } from './../../providers/seleciona-filial/sele
 import { ListaProvider } from './../../providers/lista/lista';
 import { ConfiguracaoProvider } from './../../providers/configuracao/configuracao';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController } from 'ionic-angular';
 import { NovaListaPage } from './../nova-lista/nova-lista';
 import { ListaPage } from './../lista/lista';
 
