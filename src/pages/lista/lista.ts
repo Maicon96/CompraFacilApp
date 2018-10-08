@@ -104,11 +104,14 @@ export class ListaPage {
 
     if (this.conexao) {
       this.barcodeScanner.scan().then(barcodeData => {
-        this.barras = JSON.stringify(barcodeData);
+
+        console.log('maicon - barcode = ' + barcodeData.text);
+
+        this.barras = barcodeData.text;
         this.showLoader();
         const json = this.montarJsonEnvioBarras();
 
-        console.log('maicon - barcode = ' + this.barras);
+        //console.log('maicon - barcode = ' + this.barras);
         console.log("maicon - json : " + JSON.stringify(json));
 
         this.produtoProvider.buscarProdutos(json).subscribe(
@@ -238,7 +241,8 @@ export class ListaPage {
           field: "idEmpresa"
         },
         {
-          value: this.configuracaoProvider.getConfigFilial(),
+          //value: this.configuracaoProvider.getConfigFilial(),
+          value: 1,
           type: "int",
           comparison: "eq",
           connector: "AND",

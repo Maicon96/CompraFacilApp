@@ -12,7 +12,7 @@
 
 <ion-content padding>
 
-  <div class="bar">    
+  <div class="bar">
     <h3 class="cardValores">
       <ion-icon name="cart" item-start></ion-icon>
       <strong> - R$ {{ valor_total.toFixed(2) }} </strong>
@@ -35,7 +35,7 @@
 
   <ion-list>
     <ion-item-sliding #slidingItem *ngFor="let produto of produtos">
-      <ion-item #item (click)="openSliding(slidingItem, item)">
+      <ion-item class="listaProdutos" #item (click)="openSliding(slidingItem, item)">
         <ion-thumbnail item-start>
           <!--  <img src="assets/imgs/no-image.png">-->
           <img src="assets/imgs/ofertas/coca.jpg" alt="">

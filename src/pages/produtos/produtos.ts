@@ -25,6 +25,7 @@ export class ProdutosPage {
   produtos = new Array<any>();
   loading: any;
   conexao = true;
+  isSearchBarOpened = false;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -143,7 +144,8 @@ export class ProdutosPage {
           "field": "idEmpresa"
         },
         {
-          "value": this.configuracaoProvider.getConfigFilial(),
+          //"value": this.configuracaoProvider.getConfigFilial(),
+          "value": 1,
           "type": "int",
           "comparison": "eq",
           "connector": "AND",

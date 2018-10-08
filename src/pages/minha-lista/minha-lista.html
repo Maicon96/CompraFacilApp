@@ -10,8 +10,8 @@
 <ion-content padding>
 
   <ion-list>
-    <ion-item-sliding *ngFor="let lista of listas">
-      <ion-item-options  side="right">
+    <ion-item-sliding class="listas" *ngFor="let lista of listas">
+      <ion-item-options side="right">
         <button ion-button color="edit" (click)="editarDadosLista(lista.id, lista.id_filial, 
         lista.descricao, lista.valor_total, lista.valor_gastar, lista.data_criacao)">
           <ion-icon name="md-create"></ion-icon>

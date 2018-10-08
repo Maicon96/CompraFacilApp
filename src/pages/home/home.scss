@@ -8,8 +8,19 @@ page-home {
       /*Set the background to transparent for ion-item*/
       .custom .item {
         background-color: transparent;
-        border:none;   /*Removes all borders*/
-        
+        border:none;   /*Removes all borders*/        
         color: #008AFF;    /*Text color for each item*/
       } 
+
+
+      .menu img {
+        width: 70px;
+      }
+
+      .menu h2 {
+        color: white;        
+        display: flex!important;
+        align-content: center!important;
+        align-items: center!important;
+      }
 }

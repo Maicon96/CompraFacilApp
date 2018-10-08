@@ -7,16 +7,19 @@
 </ion-header>
 
 <ion-menu [content]="content">
-  <ion-header>
+  <ion-header class="headerMenu">
     <ion-toolbar color="primary">
-      <ion-title>Menu</ion-title>
+      <div class="menu">
+        <h2><img src="assets/imgs/icon.png" alt=""> Compra Fácil</h2>
+        <!--<ion-title>Compra Fácil</ion-title>-->
+      </div>
     </ion-toolbar>
   </ion-header>
   <ion-content class="custom">
     <div style="color : #3DBCC0; width:100%; height : 100%">
       <ion-list>
         <button ion-item on-click="chamaMinhasListas()">
-            <ion-icon name="md-cart" item-left></ion-icon>Minhas Listas
+          <ion-icon name="md-cart" item-left></ion-icon>Minhas Listas
         </button>
         <button ion-item on-click="chamaProdutos()">
           <ion-icon name="md-basket" item-left></ion-icon>Produtos
