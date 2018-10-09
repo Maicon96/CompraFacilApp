@@ -5,32 +5,16 @@
 </ion-header>
 
 <ion-content padding>
-  <!--<ion-searchbar *ngIf="isSearchBarOpened"></ion-searchbar>-->
-
-  <ion-item>
-    <ion-label stacked>Buscar Produtos</ion-label>
-    <ion-input type="text" [(ngModel)]="produtoDigitado"></ion-input>
-  </ion-item>
-  <p>
-    <!--
-    <ion-toolbar color='primary'>
-      <ion-buttons start>
-        <button ion-button icon-only>
-          <ion-icon name="close"></ion-icon>
-        </button>
-      </ion-buttons>
-      <ion-searchbar (input)="onSearchInput()"></ion-searchbar>
+    
+    <ion-toolbar color='light'>
+      <ion-searchbar [(ngModel)]="produtoDigitado"></ion-searchbar>
       <ion-buttons end>
-        <button ion-button icon-only (click)='onDismiss()'>
-          <ion-icon name="add"></ion-icon>
+        <button ion-button icon-only (click)='buscarProdutos()'>
+          <ion-icon name="md-checkmark-circle" color="primary"></ion-icon>
         </button>
       </ion-buttons>
-    </ion-toolbar>-->
-
-    <ion-item>
-      <button ion-button block (click)="buscarProdutos()">Buscar</button>
-    </ion-item>
-
+    </ion-toolbar>
+    <p>
 
     <ion-list>
       <ion-item *ngFor="let produto of produtos">

@@ -115,6 +115,10 @@ export class ProdutosPage {
     }
   }
 
+  limparProdutoDigitado() {
+    this.produtoDigitado = '';
+  }
+
   showLoader() {
     this.loading = this.loadingCtr.create({
       content: 'Buscando Produtos...'
