@@ -1,9 +1,58 @@
 page-lista {
-    .cardValores {
-        color: black;
-    }
+  .bar {
+    color: white;
+    background-color: #7fd1ff;
+    position: absolute;
+    top: 0;
+    height: 50px;
+    left: 1px;
+    width: 100%;
+  }
 
-    .bar {
-        background-color: #8EECFF;
-    }
+  .carrinhoIcon {
+    float: left;
+    font-size: 2.7em;
+    margin-top: -4px;
+  }
+
+  .calculadora {
+    float: left;
+    font-size: 2.7em;
+    margin-top: -4px;
+  }
+
+  .valorGastar {
+    float: right;
+    padding: 12px 22px;
+    width: 43%;
+  }
+
+  .valorTotal {
+    float: left;
+    padding: 12px 0 0 10px;
+  }
+
+  .valorTotalTexto {
+    position: absolute;
+    top: 13px;
+    left: 3.2em;
+  }
+
+  .valorGastarTexto {
+    position: absolute;
+    top: 13px;
+    right: 1.6em;
+  }
+
+  .total {
+    position: absolute;
+    top: -4px;
+    right: 4.2em;
+  }
+
+  .carrinho {
+    position: absolute;
+    top: -4px;
+    left: 3.2em;
+  }
 }

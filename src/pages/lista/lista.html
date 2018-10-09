@@ -13,12 +13,21 @@
 <ion-content padding>
 
   <div class="bar">
-    <h3 class="cardValores">
-      <ion-icon name="cart" item-start></ion-icon>
-      <strong> - R$ {{ valor_total.toFixed(2) }} </strong>
-      <ion-icon name="md-calculator" item-start></ion-icon>
-      <strong> - R$ {{ valor_gastar }}</strong>
-    </h3>
+    <div class="valorTotal">
+      <ion-icon name="cart" class="carrinhoIcon" item-start></ion-icon>
+      <div style="float: right">
+        <p class="carrinho">Carrinho</p>
+        <p class="valorTotalTexto">R$ {{ valor_total.toFixed(2) }}</p>
+      </div>
+    </div>
+    <div class="valorGastar">
+      <ion-icon name="md-calculator" class="calculadora" item-start></ion-icon>
+      <div style="float: right">
+        <p class="total">Total</p>
+        <p class="valorGastarTexto">R$ {{valor_gastar}}</p>
+      </div>
+    </div>
+
   </div>
 
 
@@ -55,7 +64,8 @@
       </ion-item>
 
       <ion-item-options side="right">
-        <button ion-button color="edit" (click)="editarProduto(produto.id, produto.descricao, produto.preco, produto.quantidade)">
+        <button ion-button color="edit"
+                (click)="editarProduto(produto.id, produto.descricao, produto.preco, produto.quantidade)">
           <ion-icon name="md-create"></ion-icon>
           Editar
         </button>
