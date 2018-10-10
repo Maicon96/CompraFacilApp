@@ -29,10 +29,13 @@ export class ProdutoProvider {
       'Accept': 'application/json',
       'Access-Control-Allow-Origin': '*'
     });
-    console.log(request);
-
+    
     const options = new RequestOptions({  headers : headers });
     
+    console.log("maicon - url : " + this.baseUrl + '/produtos');    
+    console.log("maicon - headers : " + headers);    
+    console.log("maicon - json : " + JSON.stringify(request));
+
     return this.http.post(this.baseUrl + '/produtos',  request)
     //.map(res => { res.json() })
     //.subscribe( data => console.log(data));
@@ -49,6 +52,11 @@ export class ProdutoProvider {
 
     const options = new RequestOptions({  headers : headers });
     
+    console.log("maicon - url : " + this.baseUrl + '/produtos/populares');    
+    console.log("maicon - headers : " + headers);    
+    console.log("maicon - json : " + JSON.stringify(request));
+    
+
     return this.http.post(this.baseUrl + '/produtos/populares',  request)
     //.map(res => { res.json() })
     //.subscribe( data => console.log(data));

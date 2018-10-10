@@ -168,7 +168,7 @@ export class ListaPage {
 
     const confirm = this.alertCtrl.create({
       title: 'Atenção!',
-      message: 'Deseja adicionar na lista o produto: ' + descricaoProduto + ' - preço: ' + preco,
+      message: 'Deseja adicionar o produto: ' + descricaoProduto + '?',      
       buttons: [
         {
           text: 'Não',

@@ -13,8 +13,8 @@
 
 
 <ion-content padding>
-  <form [formGroup]="cadastroItemManual" (ngSubmit)="salvarItem()">
-    <ion-card>
+  <form [formGroup]="cadastroItemManual" (ngSubmit)="incluirItem()">
+    
       <ion-item>
         <ion-label floating>Descrição do Produto</ion-label>
         <ion-input type="text" name="descricao" [(ngModel)]="descricao" formControlName="descricao"></ion-input>
@@ -28,8 +28,8 @@
         <ion-input type="number" name="quantidade" [(ngModel)]="quantidade" formControlName="quantidade"></ion-input>
       </ion-item>
       <p></p>
-      <button [disabled]="cadastroItemManual.invalid" ion-button full block color="primary">{{ descricaoBotao }}</button>
-    </ion-card>
+      <button [disabled]="cadastroItemManual.invalid" ion-button block large outline color="primary">{{ descricaoBotao }}</button>
+    
   </form>
 
 </ion-content>

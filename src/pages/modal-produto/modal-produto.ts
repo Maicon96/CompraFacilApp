@@ -51,7 +51,7 @@ export class ModalProdutoPage {
     this.viewCtrl.dismiss();
   }
 
-  salvarItem() {
+  incluirItem() {
     if (this.update) {
       this.produtoProvider.update(this.idProduto, this.idLista, this.cadastroItemManual.value.descricao, 
         this.cadastroItemManual.value.preco, this.cadastroItemManual.value.quantidade)

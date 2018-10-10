@@ -5,16 +5,16 @@
 </ion-header>
 
 <ion-content padding>
-    
-    <ion-toolbar color='light'>
-      <ion-searchbar [(ngModel)]="produtoDigitado"></ion-searchbar>
-      <ion-buttons end>
-        <button ion-button icon-only (click)='buscarProdutos()'>
-          <ion-icon name="md-checkmark-circle" color="primary"></ion-icon>
-        </button>
-      </ion-buttons>
-    </ion-toolbar>
-    <p>
+
+  <ion-toolbar color='light'>
+    <ion-searchbar placeholder="Digite o produto..." [(ngModel)]="produtoDigitado"></ion-searchbar>
+    <ion-buttons end>
+      <button ion-button icon-only (click)='buscarProdutos()'>
+        <ion-icon name="md-checkmark-circle" color="primary"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+  <p>
 
     <ion-list>
       <ion-item *ngFor="let produto of produtos">
@@ -25,95 +25,6 @@
         <p>R$ {{ produto.preco }} </p>
       </ion-item>
     </ion-list>
-
-    <!--
-    <ion-item>
-      <ion-thumbnail item-start>
-        <img src="assets/imgs/ofertas/coca.jpg" alt="">
-      </ion-thumbnail>
-      <h2>COCA COLA 2LT</h2>
-      <p>R$ 5,98</p>
-    </ion-item>
-    <ion-item>
-      <ion-thumbnail item-start>
-        <img src="assets/imgs/ofertas/doritos.jpg" alt="">
-      </ion-thumbnail>
-      <h2>DORITOS</h2>
-      <p>R$ 4,50</p>
-    </ion-item>
-    <ion-item>
-      <ion-thumbnail item-start>
-        <img src="assets/imgs/ofertas/brahma.jpg" alt="">
-      </ion-thumbnail>
-      <h2>CERVEJA BRAHMA LATA 350ML</h2>
-      <p>R$ 1,98</p>
-    </ion-item>
-    <ion-item>
-      <ion-thumbnail item-start>
-        <img src="assets/imgs/ofertas/colgate.jpg" alt="">
-      </ion-thumbnail>
-      <h2>CREME DENTAL COLGATE</h2>
-      <p>R$ 3,98</p>
-    </ion-item>
-
-    <ion-item>
-      <ion-thumbnail item-start>
-        <img src="assets/imgs/ofertas/coca.jpg" alt="">
-      </ion-thumbnail>
-      <h2>COCA COLA 2LT</h2>
-      <p>R$ 5,98</p>
-    </ion-item>
-    <ion-item>
-      <ion-thumbnail item-start>
-        <img src="assets/imgs/ofertas/doritos.jpg" alt="">
-      </ion-thumbnail>
-      <h2>DORITOS</h2>
-      <p>R$ 4,50</p>
-    </ion-item>
-    <ion-item>
-      <ion-thumbnail item-start>
-        <img src="assets/imgs/ofertas/brahma.jpg" alt="">
-      </ion-thumbnail>
-      <h2>CERVEJA BRAHMA LATA 350ML</h2>
-      <p>R$ 1,98</p>
-    </ion-item>
-    <ion-item>
-      <ion-thumbnail item-start>
-        <img src="assets/imgs/ofertas/colgate.jpg" alt="">
-      </ion-thumbnail>
-      <h2>CREME DENTAL COLGATE</h2>
-      <p>R$ 3,98</p>
-    </ion-item>
-
-    <ion-item>
-      <ion-thumbnail item-start>
-        <img src="assets/imgs/ofertas/coca.jpg" alt="">
-      </ion-thumbnail>
-      <h2>COCA COLA 2LT</h2>
-      <p>R$ 5,98</p>
-    </ion-item>
-    <ion-item>
-      <ion-thumbnail item-start>
-        <img src="assets/imgs/ofertas/doritos.jpg" alt="">
-      </ion-thumbnail>
-      <h2>DORITOS</h2>
-      <p>R$ 4,50</p>
-    </ion-item>
-    <ion-item>
-      <ion-thumbnail item-start>
-        <img src="assets/imgs/ofertas/brahma.jpg" alt="">
-      </ion-thumbnail>
-      <h2>CERVEJA BRAHMA LATA 350ML</h2>
-      <p>R$ 1,98</p>
-    </ion-item>
-    <ion-item>
-      <ion-thumbnail item-start>
-        <img src="assets/imgs/ofertas/colgate.jpg" alt="">
-      </ion-thumbnail>
-      <h2>CREME DENTAL COLGATE</h2>
-      <p>R$ 3,98</p>
-    </ion-item>
--->
 
   </p>
 

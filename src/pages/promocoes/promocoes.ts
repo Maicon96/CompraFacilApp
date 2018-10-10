@@ -65,8 +65,6 @@ export class PromocoesPage {
   public buscarProdutosPopulares() {
     const json = this.montarJsonEnvio();
 
-    console.log("maicon - json : " + JSON.stringify(json));
-
     this.showLoader();
 
     this.produtoProvider.buscarProdutosPopulares(json).subscribe(

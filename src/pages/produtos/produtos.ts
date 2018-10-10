@@ -21,32 +21,20 @@ export class ProdutosPage {
   descricao: string;
   descricaoReduzida: string;
   preco: Number;
-  imagem: any;  
+  imagem: any;
   produtos = new Array<any>();
   loading: any;
   conexao = true;
-  isSearchBarOpened = false;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public produtoProvider: ProdutoProvider, public filialProvider: SelecionaFilialProvider,
-    public configuracaoProvider: ConfiguracaoProvider, public loadingCtr: LoadingController, 
+    public configuracaoProvider: ConfiguracaoProvider, public loadingCtr: LoadingController,
     public toastCtrl: ToastController, private network: Network, public alertCtrl: AlertController) {
   }
 
-  ionViewDidLoad() {    
-    this.verificaConexao();
-
-    if (this.conexao) {
-      this.listarProdutos();
-    } else {      
-      const alert = this.alertCtrl.create({
-        title: 'Erro ao buscar Promoções!',
-        subTitle: 'Você não possui Internet',
-        buttons: ['OK']
-      });
-      alert.present();
-    }    
+  ionViewDidLoad() {
+    this.listarProdutos();
   }
 
   verificaConexao() {
@@ -56,62 +44,80 @@ export class ProdutosPage {
   }
 
   public listarProdutos() {
-    const json = this.montarJsonListar();
+    this.verificaConexao();
 
-    console.log("maicon - json : " + JSON.stringify(json));
+    if (this.conexao) {
+      const json = this.montarJsonListar();
+      this.showLoader();
 
-    this.showLoader();
-
-    this.produtoProvider.buscarProdutosPopulares(json).subscribe(
-      data => {
-        const res = (data as any);
-        console.log(res);
-        this.produtos = res.registros;
-        console.log(this.produtos);
-
-        this.loading.dismiss();
-        
-      }, error => {
-        this.loading.dismiss();
-        
-        const alert = this.alertCtrl.create({
-          title: 'Atenção!',
-          subTitle: 'Ocorreu um erro ao buscar os produtos, tente novamente.',
-          buttons: ['OK']
-        });
-        alert.present();
-
-        console.log("maicon - erro" + error);
-      })
-  }
-
-  public buscarProdutos() {
-    //debugger;
-
-    this.showLoader();
-    const json = this.montarJsonEnvio();
-    console.log("maicon - json : " + JSON.stringify(json));    
-
-    if (this.produtoDigitado != '' && this.produtoDigitado != null) {
-      this.produtoProvider.buscarProdutos(json).subscribe(
+      this.produtoProvider.buscarProdutosPopulares(json).subscribe(
         data => {
-          const response = (data as any);
-          this.produtos = response.registros;
-          this.loading.dismiss();
+          const res = (data as any);
+          console.log(res);
+          this.produtos = res.registros;
           console.log(this.produtos);
+
+          this.loading.dismiss();
+
         }, error => {
           this.loading.dismiss();
 
           const alert = this.alertCtrl.create({
             title: 'Atenção!',
-            subTitle: 'Ocorreu um erro ao buscar os produtos, tente novamente!',
+            subTitle: 'Ocorreu um erro ao buscar os produtos, tente novamente.',
             buttons: ['OK']
           });
-          alert.present();         
+          alert.present();
 
           console.log("maicon - erro" + error);
-
         })
+    } else {
+      const alert = this.alertCtrl.create({
+        title: 'Erro ao buscar Produtos!',
+        subTitle: 'Você não possui Internet',
+        buttons: ['OK']
+      });
+      alert.present();
+    }
+  }
+
+  public buscarProdutos() {
+
+    this.verificaConexao();
+
+    if (this.conexao) {
+      if (this.produtoDigitado != '' && this.produtoDigitado != null) {
+        this.showLoader();
+        const json = this.montarJsonEnvio();
+
+        this.produtoProvider.buscarProdutos(json).subscribe(
+          data => {
+            const response = (data as any);
+            this.produtos = response.registros;
+            this.loading.dismiss();
+            console.log(this.produtos);
+          }, error => {
+            this.loading.dismiss();
+
+            const alert = this.alertCtrl.create({
+              title: 'Atenção!',
+              subTitle: 'Ocorreu um erro ao buscar os produtos, tente novamente!',
+              buttons: ['OK']
+            });
+            alert.present();
+
+            console.log("maicon - erro" + error);
+          })
+      } else {
+        this.listarProdutos();
+      }
+    } else {
+      const alert = this.alertCtrl.create({
+        title: 'Erro ao buscar Produtos!',
+        subTitle: 'Você não possui Internet',
+        buttons: ['OK']
+      });
+      alert.present();
     }
   }
 
@@ -167,11 +173,11 @@ export class ProdutosPage {
   }
 
   public montarJsonListar() {
-    
-    var num = parseInt(this.configuracaoProvider.getConfigFilial()); 
+
+    var num = parseInt(this.configuracaoProvider.getConfigFilial());
 
     console.log("filial " + num);
-    
+
     return {
       "limit": 20,
       "idEmpresa": 1,
@@ -180,7 +186,7 @@ export class ProdutosPage {
     }
   }
 
-  
+
 
 }
 
