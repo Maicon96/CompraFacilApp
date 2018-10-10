@@ -67,4 +67,23 @@ export class MinhaListaPage {
     this.navCtrl.push(NovaListaPage);
   }
 
+  ngAfterViewInit() {
+    let tabs = document.querySelectorAll('.show-tabbar');
+    if (tabs !== null) {
+      Object.keys(tabs).map((key) => {
+        tabs[key].style.display = 'none';
+      });
+    }
+  }
+
+  ngOnDestroy(){
+    let tabs = document.querySelectorAll('.show-tabbar');
+    if (tabs !== null) {
+      Object.keys(tabs).map((key) => {
+        tabs[key].style.display = 'flex';
+      });
+    }
+  }
+
+
 }
