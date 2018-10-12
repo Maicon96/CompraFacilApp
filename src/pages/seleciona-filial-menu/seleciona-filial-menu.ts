@@ -52,9 +52,6 @@ export class SelecionaFilialMenuPage {
         this.filialProvider.insert(data, 'Palmitos')         
         .then(() => console.log('sucesso ao inserir'))
         .catch((e) => console.error("erro ao inserir: " + e));
-
-        console.log('config filial - ' + this.configuracaoProvider.getConfigFilial())
-
       }
     });
     alert.present();    

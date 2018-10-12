@@ -105,40 +105,43 @@ export class ListaPage {
     if (this.conexao) {
       this.barcodeScanner.scan().then(barcodeData => {
 
-        console.log('maicon - barcode = ' + barcodeData.text);
+        if (barcodeData.text != null && barcodeData.text != '') {
+          console.log('maicon - barcode = ' + barcodeData.text);
 
-        this.barras = barcodeData.text;
-        this.showLoader();
-        const json = this.montarJsonEnvioBarras();
+          this.barras = barcodeData.text;
+          this.showLoader();
+          const json = this.montarJsonEnvioBarras();
 
-        //console.log('maicon - barcode = ' + this.barras);
-        console.log("maicon - json : " + JSON.stringify(json));
+          //console.log('maicon - barcode = ' + this.barras);
+          console.log("maicon - json : " + JSON.stringify(json));
 
-        this.produtoProvider.buscarProdutos(json).subscribe(
-          data => {
-            const response = (data as any);
-            console.log(response);
+          this.produtoProvider.buscarProdutos(json).subscribe(
+            data => {
+              const response = (data as any);
+              console.log(response);
 
-            this.produtoAux = response.registros;
-            
-            this.loading.dismiss();
+              this.produtoAux = response.registros;
 
-            this.showConfirm();
+              this.loading.dismiss();
 
-            console.log(this.produtos);
-          }, error => {
-            this.loading.dismiss();
+              this.showConfirm();
 
-            const alert = this.alertCtrl.create({
-              title: 'Atenção!',
-              subTitle: 'Ocorreu um erro ao buscar o produto, tente novamente.',
-              buttons: ['OK']
-            });
-            alert.present();
+              console.log(this.produtos);
+            }, error => {
+              this.loading.dismiss();
 
-            console.log("maicon - erro" + error);
+              const alert = this.alertCtrl.create({
+                title: 'Atenção!',
+                subTitle: 'Ocorreu um erro ao buscar o produto, tente novamente.',
+                buttons: ['OK']
+              });
+              alert.present();
 
-          })
+              console.log("maicon - erro" + error);
+
+            })
+        }
+
       }).catch(e => {
         console.log('maicon - Error', e);
       });
@@ -168,7 +171,7 @@ export class ListaPage {
 
     const confirm = this.alertCtrl.create({
       title: 'Atenção!',
-      message: 'Deseja adicionar o produto: ' + descricaoProduto + '?',      
+      message: 'Deseja adicionar o produto: ' + descricaoProduto + '?',
       buttons: [
         {
           text: 'Não',
@@ -180,13 +183,13 @@ export class ListaPage {
           text: 'Sim',
           handler: () => {
 
-            this.produtoProvider.insert(this.idLista, 
+            this.produtoProvider.insert(this.idLista,
               descricaoProduto, preco, 1)
-              .then(() => {                      
-                console.log('maicon - sucesso ao inserir item ' + descricaoProduto);                
+              .then(() => {
+                console.log('maicon - sucesso ao inserir item ' + descricaoProduto);
                 this.listarProdutos(this.idLista);
               })
-              .catch((e) => console.error("maicon - erro ao inserir item: " + e));               
+              .catch((e) => console.error("maicon - erro ao inserir item: " + e));
           }
         }
       ]
@@ -241,8 +244,8 @@ export class ListaPage {
           field: "idEmpresa"
         },
         {
-          //value: this.configuracaoProvider.getConfigFilial(),
-          value: 1,
+          value: parseInt(this.configuracaoProvider.getConfigFilial()),
+          //value: 1,
           type: "int",
           comparison: "eq",
           connector: "AND",

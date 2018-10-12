@@ -77,7 +77,7 @@ export class NovaListaPage {
 
     } else {
       var dataAtual = new Date();
-      var idFilial = this.configuracaoProvider.getConfigFilial();
+      var idFilial = parseInt(this.configuracaoProvider.getConfigFilial());
 
       this.listaProvider.insert(idFilial, this.cadastroLista.value.nome, 0,
         this.cadastroLista.value.valor_gastar, dataAtual.toLocaleDateString())
@@ -94,31 +94,6 @@ export class NovaListaPage {
             .catch((e) => console.error("erro ao buscar ultima lista: " + e));
         })
         .catch((e) => console.error("erro ao inserir: " + e));
-
-
-      /*
-      this.filialProvider.getLasted()
-      .then((idFilial) => {
-        this.listaProvider.insert(idFilial, this.cadastroLista.value.nome, 0,
-          this.cadastroLista.value.valor_gastar, dataAtual.toLocaleDateString())
-          .then((data) => {
-            this.listaProvider.getLasted()
-              .then((idLista) => {                
-                this.navCtrl.push(ListaPage, { idLista: idLista,
-                  titulo: this.cadastroLista.value.nome,
-                  valor_gastar: this.cadastroLista.value.valor_gastar
-                });
-                console.log('sucesso ao inserir');
-              })
-              .catch((e) => console.error("erro ao buscar ultima lista: " + e));
-          })
-          .catch((e) => console.error("erro ao inserir: " + e));
-      })
-      .catch((e) => console.error("erro ao buscar ultima filial: " + e));  
-
-      */
     }
-
   }
-
 }

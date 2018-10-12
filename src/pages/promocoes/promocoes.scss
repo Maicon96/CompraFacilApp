@@ -1,21 +1,22 @@
 page-promocoes {   
     h2.promocao_title {
-        color: #002340;
+        color: black;
         font-weight: bold;
         text-align: center;
-        font-family: cursive;
+        font-family: Verdana, sans-serif;        
     }
+    
     h1.preco_title {        
         color: #FF2A00;
         font-weight: bold;
-        text-align: center;
-        font-style: italic;
-        font-family: cursive;
+        text-align: center;        
+        font-family: Verdana, sans-serif;
     }
 
     .promo_image img {
         width: 300px;
     }
+
     .img {
         text-align: center
     }
@@ -49,8 +50,4 @@ page-promocoes {
         min-width:40vw;
     }
     
-}
-
-.alert-md .alert-title {
-    color: white;    
 }

@@ -25,22 +25,12 @@ export class MinhaListaPage {
 
   public listarCompras() {
 
-    this.listaProvider.getAll(this.configuracaoProvider.getConfigFilial())
+    this.listaProvider.getAll(parseInt(this.configuracaoProvider.getConfigFilial()))
       .then((resultLista: any[]) => {
         this.listas = resultLista;
       })
       .catch((e) => console.error("erro ao buscar listas: " + e));
       
-    /*
-    this.filialProvider.getLasted()
-      .then((result: any) => {
-        this.listaProvider.getAll(result)
-          .then((resultLista: any[]) => {
-            this.listas = resultLista;
-          })
-          .catch((e) => console.error("erro ao buscar listas: " + e));
-      })
-      */
   }
 
   public editarListaCompra(id: number, descricao: string, valor_gastar: number) {
@@ -84,6 +74,5 @@ export class MinhaListaPage {
       });
     }
   }
-
 
 }

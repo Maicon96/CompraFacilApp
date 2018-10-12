@@ -154,8 +154,8 @@ export class ProdutosPage {
           "field": "idEmpresa"
         },
         {
-          //"value": this.configuracaoProvider.getConfigFilial(),
-          "value": 1,
+          "value": parseInt(this.configuracaoProvider.getConfigFilial()),
+          //"value": 1,
           "type": "int",
           "comparison": "eq",
           "connector": "AND",
@@ -173,15 +173,10 @@ export class ProdutosPage {
   }
 
   public montarJsonListar() {
-
-    var num = parseInt(this.configuracaoProvider.getConfigFilial());
-
-    console.log("filial " + num);
-
     return {
       "limit": 20,
       "idEmpresa": 1,
-      "idFilial": 1,
+      "idFilial": parseInt(this.configuracaoProvider.getConfigFilial()),
       "promocao": "1"
     }
   }

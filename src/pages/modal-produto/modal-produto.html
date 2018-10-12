@@ -5,7 +5,7 @@
     <ion-buttons end>
       <button ion-button (click)="fecharModalProduto()">
         <ion-icon name="md-close"></ion-icon>
-      </button>>
+      </button>
     </ion-buttons>
   </ion-toolbar>
 
@@ -28,7 +28,7 @@
         <ion-input type="number" name="quantidade" [(ngModel)]="quantidade" formControlName="quantidade"></ion-input>
       </ion-item>
       <p></p>
-      <button [disabled]="cadastroItemManual.invalid" ion-button block large outline color="primary">{{ descricaoBotao }}</button>
+      <button [disabled]="cadastroItemManual.invalid" ion-button block color="primary">{{ descricaoBotao }}</button>
     
   </form>
 

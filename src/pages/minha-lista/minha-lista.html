@@ -1,7 +1,11 @@
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title>Minhas Listas</ion-title>
+    <ion-title>Minhas Listas
+      <ion-fab right>
+        <ion-icon name="md-trash"></ion-icon>
+      </ion-fab>
+    </ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -24,8 +28,7 @@
       </ion-item-options>
       <button ion-item (click)="editarListaCompra(lista.id, lista.descricao, lista.valor_gastar)" item-start>
         <h1>{{ lista.descricao }}</h1>
-        <h2>{{ lista.data_cricao }}</h2>
-        <h2>{{ lista.id_filial }}</h2>
+        <h2>{{ lista.data_criacao }}</h2>
       </button>
     </ion-item-sliding>
   </ion-list>

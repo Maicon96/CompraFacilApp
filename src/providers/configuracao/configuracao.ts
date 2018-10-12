@@ -31,12 +31,15 @@ export class ConfiguracaoProvider {
     localStorage.setItem(config_key_name, JSON.stringify(config));
   }
 
-  getConfigFilial(): any {
-    return localStorage.getItem(filial_key_name);
+  getConfigFilial(): any {   
+    let obj = JSON.parse(localStorage.getItem(filial_key_name));    
+
+    console.log(obj.filial);
+    return obj.filial;
   }
 
   setConfigFilial(filial: number) {
-    localStorage.setItem(filial_key_name, JSON.stringify(filial));
+    localStorage.setItem(filial_key_name, JSON.stringify({filial: filial}));
   }
 
 }

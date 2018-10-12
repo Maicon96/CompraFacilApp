@@ -24,7 +24,7 @@ page-lista {
   .valorGastar {
     float: right;
     padding: 12px 22px;
-    width: 43%;
+    width: 39%;
   }
 
   .valorTotal {
@@ -41,13 +41,13 @@ page-lista {
   .valorGastarTexto {
     position: absolute;
     top: 13px;
-    right: 1.6em;
+    left: 75%;
   }
 
   .total {
     position: absolute;
     top: -4px;
-    right: 4.2em;
+    right: 0.4em;
   }
 
   .carrinho {
@@ -55,7 +55,12 @@ page-lista {
     top: -4px;
     left: 3.2em;
   }
-  .listaProdutos{
-    margin-bottom: 36px;
+  .listaProduto{
+    margin-top: 34px;
+    width: 100%;
   }
+}
+
+.alert-md .alert-title {
+  color: black;    
 }

@@ -99,11 +99,10 @@ export class PromocoesPage {
   }
 
   public montarJsonEnvio() {
-    return {
+        return {
       "limit": 20,
-      "idEmpresa": 1,
-      //"idFilial": this.configuracaoProvider.getConfigFilial(),
-      "idFilial": 1,
+      "idEmpresa": 1,           
+      "idFilial": parseInt(this.configuracaoProvider.getConfigFilial()),      
       "promocao": "2"
     }
   }
