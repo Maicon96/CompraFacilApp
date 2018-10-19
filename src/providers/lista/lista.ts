@@ -7,12 +7,23 @@ export class ListaProvider {
 
   constructor(private dbProvider: DatabaseProvider) { }
 
+  public formatDescricaoLista(str: string) {
+    str = str.toLowerCase().replace(/\b[a-z]/g, function(letter) {
+        return letter.toUpperCase();
+    });
+
+    return str;
+  }
+
   public insert(idFilial: number, descricao: string, valor_total: number, valor_gastar: number, 
     data_criacao: string) {
     return this.dbProvider.getBanco()
       .then((db: SQLiteObject) => {
         let sql = 'insert into listas (id_filial, descricao, valor_total, valor_gastar, data_cricao)' +
          ' values (?,?,?,?,?)';
+
+        descricao = this.formatDescricaoLista(descricao);
+
         let data = [idFilial, descricao, valor_total, valor_gastar, 
           data_criacao];
 
@@ -27,16 +38,22 @@ export class ListaProvider {
       .then((db: SQLiteObject) => {
         let sql = 'update listas set id_filial = ?, descricao = ?, valor_total = ?, valor_gastar = ?,'
         ' data_cricao = ? where id = ?';
-
-        console.log("lista - idFilial " + idFilial);
-        console.log("lista - descricao " + descricao);
-        console.log("lista - valor_total " + valor_total);
-        console.log("lista - valor_gastar " + valor_gastar);
-        console.log("lista - data_criacao " + data_criacao);
-        console.log("lista - idLista " + idLista);
-        console.log("lista - " + sql);
+        
+        descricao = this.formatDescricaoLista(descricao);
 
         let data = [idFilial, descricao, valor_total, valor_gastar, data_criacao, idLista];
+
+        return db.executeSql(sql, data);
+      })
+      .catch((e) => console.error("erro ao atualizar lista " + e));
+  }
+
+  public updateValorTotal(idLista: number, valor_total: number) {
+    return this.dbProvider.getBanco()
+      .then((db: SQLiteObject) => {
+        let sql = 'update listas set valor_total = ? where id = ?';
+        
+        let data = [valor_total, idLista];
 
         return db.executeSql(sql, data);
       })
@@ -72,10 +89,9 @@ export class ListaProvider {
                 lista.valor_total = data.rows.item(i).valor_total;
                 lista.valor_gastar = data.rows.item(i).valor_gastar;
                 lista.data_criacao = data.rows.item(i).data_cricao;
-                
-                console.log("maicon descricao - " + lista.descricao);
-                console.log("maicon data_criacao - " + lista.data_criacao);
 
+                console.log("maicon - valor  sql " + lista.valor_total);
+                
                 listas.push(lista);
               }
 
@@ -109,7 +125,36 @@ export class ListaProvider {
       .catch((e) => console.error("erro ao buscar ultima lista " + e));
   }
 
+  public existsLista(idFilial: number) {
+    return this.dbProvider.getBanco()
+      .then((db: SQLiteObject) => {
+        let sql = 'select id from listas where id_filial = ? limit 1';
+        
+        let data = [idFilial];
+
+        console.log(sql);
+        console.log(data);
+
+        return db.executeSql(sql, data)
+          .then((data: any) => {
+            console.log("maicon - aq");
+            console.log(data);
+            if (data.rows.length > 0) {
+              return true;    
+            } else {
+              console.log("aqo");
+              return false;
+            }
+  
+          })
+          .catch((e) => console.error("erro ao buscar lista " + e));
+      })
+      .catch((e) => console.error("erro ao buscar lista " + e));
+    }  
+
 }
+
+
 
 export class Lista {
   id: number;

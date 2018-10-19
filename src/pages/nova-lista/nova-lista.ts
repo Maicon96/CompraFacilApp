@@ -52,13 +52,6 @@ export class NovaListaPage {
 
   salvarLista() {
     if (this.update) {
-      console.log("maicon - lista: " + this.idLista);
-      console.log("maicon - filial: " + this.idFilial);
-      console.log("maicon - nome: " + this.cadastroLista.value.nome);
-      console.log("maicon - valor_total: " + this.valor_total);
-      console.log("maicon - valor_gastar: " + this.cadastroLista.value.valor_gastar);
-      console.log("maicon - data_criacao: " + this.data_criacao);
-
       this.listaProvider.update(this.idLista, this.idFilial, this.cadastroLista.value.nome,
         this.valor_total, this.cadastroLista.value.valor_gastar, this.data_criacao)
         .then((data) => {

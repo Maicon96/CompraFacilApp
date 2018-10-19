@@ -10,7 +10,8 @@
   <ion-header class="headerMenu">
     <ion-toolbar color="primary">
       <div class="menu">
-        <h2><img src="assets/imgs/icon.png" alt=""> Compra Fácil</h2>
+        <h2>
+          <img src="assets/imgs/icon.png" alt=""> Compra Fácil</h2>
         <!--<ion-title>Compra Fácil</ion-title>-->
       </div>
     </ion-toolbar>
@@ -31,5 +32,43 @@
     </div>
   </ion-content>
 </ion-menu>
+
+
+<button ion-item on-click="chamaMinhasListas()">
+</button>
+
+<ion-content>
+  <img *ngIf="showImg" src="{{'assets/imgs/' + title + '.png'}}">
+
+  <div *ngIf="showCards" class="title_valores">
+
+    <h1>
+      <ion-icon ios="ios-trending-up" md="md-trending-up"> Valores Gastos </ion-icon>
+    </h1>
+
+    <ion-row>
+      <ion-col col-3>
+        <ion-card class="card">
+          <ion-card-header>
+            Card Header
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col col-3>
+        <ion-card>
+          <ion-card-header>
+            Card Header
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+
+  </div>
+
+
+  <!--<div id="donut_single" style="width: 300px; height: 200px;"></div>-->
+
+</ion-content>
 
 <ion-nav id="nav" #content [root]="rootPage"></ion-nav>

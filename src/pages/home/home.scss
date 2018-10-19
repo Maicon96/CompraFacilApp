@@ -1,6 +1,6 @@
 page-home {
 
-    .custom {
+      .custom {
         background-color: white !important; /* This sets the background color*/
        }
        
@@ -22,5 +22,14 @@ page-home {
         display: flex!important;
         align-content: center!important;
         align-items: center!important;
+      }
+
+      .title_valores {        
+        text-align: center;  
+        color: #00A4FF;
+      }
+
+      .card {
+        
       }
 }

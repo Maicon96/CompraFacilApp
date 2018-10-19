@@ -1,5 +1,6 @@
 import { ListaPage } from './../lista/lista';
 import { ProdutoProvider } from './../../providers/produto/produto';
+import { ListaProvider } from './../../providers/lista/lista';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Validators, FormBuilder } from '@angular/forms';
@@ -15,15 +16,20 @@ export class ModalProdutoPage {
   cadastroItemManual: any = {};
   idLista: number;
   idProduto: number;
+  nome: number;
+  valorTotal: number;
+  valorGastar: number;
+  dataCriacao: number;
   descricao: number;
   preco: number;
-  quantidade: number;  
+  quantidade: number;
   update: boolean = false;
   descricaoBotao: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
-    public formBuilder: FormBuilder, public produtoProvider: ProdutoProvider) {
+    public formBuilder: FormBuilder, public produtoProvider: ProdutoProvider, public listaProvider: ListaProvider) {
     this.idLista = this.navParams.get("idLista");
+    this.valorTotal = this.navParams.get("valorTotal");
     this.idProduto = this.navParams.get("idProduto");
     this.descricao = this.navParams.get("descricao");
     this.preco = this.navParams.get("preco");
@@ -31,9 +37,9 @@ export class ModalProdutoPage {
     this.update = this.navParams.get("update");
 
     console.log("maicon - lista " + this.idLista);
-    
+
     if (this.update) {
-      this.descricaoBotao = "Atualizar";      
+      this.descricaoBotao = "Atualizar";
     } else {
       this.descricaoBotao = "Adicionar";
     }
@@ -53,23 +59,42 @@ export class ModalProdutoPage {
 
   incluirItem() {
     if (this.update) {
-      this.produtoProvider.update(this.idProduto, this.idLista, this.cadastroItemManual.value.descricao, 
+      this.produtoProvider.update(this.idProduto, this.idLista, this.cadastroItemManual.value.descricao,
         this.cadastroItemManual.value.preco, this.cadastroItemManual.value.quantidade)
-        .then(() => {                      
+        .then(() => {
+
+          let valor =  this.valorTotal + (this.cadastroItemManual.value.preco
+            * this.cadastroItemManual.value.quantidade) - (this.preco * this.quantidade);
+
+          this.listaProvider.updateValorTotal(this.idLista, valor)
+            .then((data) => {
+              console.log('sucesso ao atualizar valor da lista');
+            })
+            .catch((e) => console.error("erro ao buscar ultima lista: " + e));
+
           console.log('sucesso ao atualizar item');
           this.fecharModalProduto();
         })
-        .catch((e) => console.error("erro ao atualizar item: " + e));   
+        .catch((e) => console.error("erro ao atualizar item: " + e));
     } else {
-      this.produtoProvider.insert(this.idLista, this.cadastroItemManual.value.descricao, 
+      this.produtoProvider.insert(this.idLista, this.cadastroItemManual.value.descricao,
         this.cadastroItemManual.value.preco, this.cadastroItemManual.value.quantidade)
-        .then(() => {                      
-          console.log('sucesso ao inserir item');
-          this.fecharModalProduto();
+        .then(() => {
+
+          let valor = this.valorTotal + (this.cadastroItemManual.value.preco
+            * this.cadastroItemManual.value.quantidade);
+
+          this.listaProvider.updateValorTotal(this.idLista, valor)
+            .then((data) => {
+              console.log('sucesso ao atualizar valor da lista');
+            })
+            .catch((e) => console.error("erro ao buscar ultima lista: " + e));
         })
-        .catch((e) => console.error("erro ao inserir item: " + e));   
+        .catch((e) => console.error("erro ao inserir: " + e));
+
+      console.log('sucesso ao inserir item');
+      this.fecharModalProduto();
     }
-    
   }
 
 }

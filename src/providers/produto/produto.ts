@@ -63,6 +63,13 @@ export class ProdutoProvider {
 
   }
 
+  public formatDescricaoProdutos(str: string) {
+    str = str.toLowerCase().replace(/\b[a-z]/g, function(letter) {
+        return letter.toUpperCase();
+    });
+
+    return str;
+  }
 
   //funçoes do banco de dados
   public insert(idLista: number, descricao: string, preco: number, quantidade: number) {
@@ -70,6 +77,9 @@ export class ProdutoProvider {
       .then((db: SQLiteObject) => {
         let sql = 'insert into produtos (id_lista, descricao, preco, quantidade)' +
           ' values (?,?,?,?)';
+
+        descricao = this.formatDescricaoProdutos(descricao);
+
         let data = [idLista, descricao, preco, quantidade];
 
         return db.executeSql(sql, data);
@@ -82,6 +92,9 @@ export class ProdutoProvider {
       .then((db: SQLiteObject) => {
         let sql = 'update produtos set id_lista = ?, descricao = ?, preco = ?, quantidade = ? ' +
           'where id = ?';
+
+        descricao = this.formatDescricaoProdutos(descricao);
+
         let data = [idLista, descricao, preco, quantidade, idProduto];
 
         return db.executeSql(sql, data);

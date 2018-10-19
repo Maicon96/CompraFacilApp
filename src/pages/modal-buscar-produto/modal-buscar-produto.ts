@@ -1,4 +1,5 @@
 import { ProdutoProvider } from './../../providers/produto/produto';
+import { ListaProvider } from './../../providers/lista/lista';
 import { Component } from '@angular/core';
 import { ConfiguracaoProvider } from './../../providers/configuracao/configuracao';
 import { IonicPage, NavController, NavParams, ViewController, AlertController, LoadingController } from 'ionic-angular';
@@ -17,13 +18,16 @@ export class ModalBuscarProdutoPage {
   loading: any;
   conexao = true;
   idLista: number;
+  valorTotal: number;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public viewCtrl: ViewController, public produtoProvider: ProdutoProvider,
     public alertCtrl: AlertController, public loadingCtr: LoadingController,
-    private network: Network, public configuracaoProvider: ConfiguracaoProvider) {
+    private network: Network, public configuracaoProvider: ConfiguracaoProvider,
+    public listaProvider: ListaProvider) {
     this.idLista = this.navParams.get("idLista");
+    this.valorTotal = this.navParams.get("valorTotal");
   }
 
   ionViewDidLoad() {
@@ -139,6 +143,15 @@ export class ModalBuscarProdutoPage {
 
             this.produtoProvider.insert(this.idLista, descricao, preco, 1)
               .then(() => {
+
+                let valor = this.valorTotal + preco;
+      
+                this.listaProvider.updateValorTotal(this.idLista, valor)
+                  .then((data) => {
+                    console.log('sucesso ao atualizar valor da lista');
+                  })
+                  .catch((e) => console.error("erro ao buscar ultima lista: " + e));
+
                 console.log('maicon - sucesso ao inserir item');
                 //this.fecharModalProduto();
               })

@@ -1,4 +1,5 @@
 import { ProdutoProvider } from './../../providers/produto/produto';
+import { ListaProvider } from './../../providers/lista/lista';
 import { ConfiguracaoProvider } from './../../providers/configuracao/configuracao';
 import { ModalProdutoPage } from './../modal-produto/modal-produto';
 import { ModalBuscarProdutoPage } from './../modal-buscar-produto/modal-buscar-produto';
@@ -33,7 +34,8 @@ export class ListaPage {
     public navParams: NavParams, private produtoProvider: ProdutoProvider,
     public configuracaoProvider: ConfiguracaoProvider, private modalCtrl: ModalController,
     private barcodeScanner: BarcodeScanner, private toast: ToastController,
-    public loadingCtr: LoadingController, private network: Network) {
+    public loadingCtr: LoadingController, private network: Network,
+    public listaProvider: ListaProvider) {
     this.idLista = this.navParams.get("idLista");
     this.titulo = this.navParams.get("titulo");
 
@@ -90,13 +92,18 @@ export class ListaPage {
   }
 
   abrirModalProduto() {
-    let produtoModal = this.modalCtrl.create(ModalProdutoPage, { idLista: this.idLista });
+    let produtoModal = this.modalCtrl.create(ModalProdutoPage, {
+      idLista: this.idLista,
+      valorTotal: this.valor_total
+    });
+
     produtoModal.onDidDismiss(data => this.listarProdutos(this.idLista));
     produtoModal.present()
   }
 
   abrirModalBuscarProduto() {
-    this.modalCtrl.create(ModalBuscarProdutoPage, { idLista: this.idLista }).present();
+    this.modalCtrl.create(ModalBuscarProdutoPage, { idLista: this.idLista, 
+      valorTotal: this.valor_total }).present();
   }
 
   lerBarcode() {
@@ -186,8 +193,18 @@ export class ListaPage {
             this.produtoProvider.insert(this.idLista,
               descricaoProduto, preco, 1)
               .then(() => {
+
                 console.log('maicon - sucesso ao inserir item ' + descricaoProduto);
                 this.listarProdutos(this.idLista);
+
+                let valor = this.valor_total + preco;
+      
+                this.listaProvider.updateValorTotal(this.idLista, valor)
+                  .then((data) => {
+                    console.log('sucesso ao atualizar valor da lista');
+                  })
+                  .catch((e) => console.error("erro ao buscar ultima lista: " + e));
+
               })
               .catch((e) => console.error("maicon - erro ao inserir item: " + e));
           }
