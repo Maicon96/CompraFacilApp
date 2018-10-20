@@ -33,11 +33,11 @@
   </ion-content>
 </ion-menu>
 
-
 <button ion-item on-click="chamaMinhasListas()">
 </button>
 
 <ion-content>
+
   <img *ngIf="showImg" src="{{'assets/imgs/' + title + '.png'}}">
 
   <div *ngIf="showCards" class="title_valores">
@@ -46,6 +46,22 @@
       <ion-icon ios="ios-trending-up" md="md-trending-up"> Valores Gastos </ion-icon>
     </h1>
 
+    <ion-card *ngFor="let card of cards">
+      <ion-item>
+        <ion-card-content>
+
+          <ion-card-title>
+            <h2>              
+              <strong> {{ card.mes }} </strong>
+              <strong> {{ card.valor.toFixed(2) }} </strong>
+            </h2>
+          </ion-card-title>
+
+        </ion-card-content>
+      </ion-item>
+    </ion-card>
+
+    <!--
     <ion-row>
       <ion-col col-3>
         <ion-card class="card">
@@ -62,7 +78,7 @@
         </ion-card>
       </ion-col>
     </ion-row>
-
+-->
 
   </div>
 

@@ -20,7 +20,8 @@ export class HomePage {
   showImg = false;
   showCards = false;
   listas: any[] = [];
-  cards: any[] = [];
+  cards = new Array<Card>();
+  testes: any[] = [];
 
   constructor(public navCtrl: NavController, private listaProvider: ListaProvider,
     public configuracaoProvider: ConfiguracaoProvider) {
@@ -44,17 +45,19 @@ export class HomePage {
     //this.listaProvider.existsLista(parseInt(this.configuracaoProvider.getConfigFilial()))
     this.listaProvider.existsLista(1)
       .then((result: any) => {
-        if (result == true) {
-          //this.showChart();
-          //this.title = "comece2";   
+        if (result == true) {;   
           this.showCards = true;
           this.showImg = false;
           this.buscarValores();
 
         } else {
-          this.showCards = false;
+          this.showCards = true;
+          this.showImg = false;
+          this.buscarValores();
+
+          /*this.showCards = false;
           this.showImg = true;
-          this.title = "comece2";
+          this.title = "comece2";*/
         }
       })
       .catch((e) => console.error("erro ao buscar listas: " + e));
@@ -67,47 +70,161 @@ export class HomePage {
 
         this.listas = result;
 
-        var valJaneiro: number;
-        var valFevereiro: number;
-        var valMarco: number;
-        var valAbril: number;
+        let valJaneiro = 0;
+        let valFevereiro = 0;
+        let valMarco = 0;
+        let valAbril = 0;
+        let valMaio = 0;
+        let valJunho = 0;
+        let valJulho = 0;
+        let valAgosto = 0;
+        let valSetembro = 0;
+        let valOutubro = 0;
+        let valNovembro = 0;
+        let valDezembro = 0;
 
         for (var i = 0; i < result.length; i++) {
-
+          
           var data = result[i].data_criacao;
-          var valor = result[i].valor_total;
-
-          console.log("maicon - data " + data);
-          console.log("maicon - valor " + valor);
-
+          var valor = result[i].valor_total;          
           let newDate = new Date(data);
+          var mes = newDate.getMonth();          
 
-          console.log("maicon - nova data " + newDate);
-          console.log("maicon - mes " + newDate.getMonth());
-
-          var mes: string;
-          /*
-          if (mes == "1") {
-            valJaneiro += valor;
-          }
-          if (mes == "2") {
-            valFevereiro += valor;
-          }
-          if (mes == "3") {
-            valMarco += valor;
-          }
-          if (mes == "4") {
-            valAbril += valor;
-          }*/
-
+          if (valor > 0) {
+            if (mes == 1) {              
+              valJaneiro += valor;            
+            }
+            if (mes == 2) {
+              valFevereiro += valor;
+            }
+            if (mes == 3) {
+              valMarco += valor;
+            }
+            if (mes == 4) {
+              valAbril += valor;
+            }
+            if (mes == 5) {
+              valMaio += valor;
+            }
+            if (mes == 6) {
+              valJunho += valor;
+            }
+            if (mes == 7) {
+              valJulho += valor;
+            }
+            if (mes == 8) {
+              valAgosto += valor;
+            }
+            if (mes == 9) {              
+              valSetembro += valor;              
+            }
+            if (mes == 10) {
+              valOutubro += valor;
+            }
+            if (mes == 11) {
+              valNovembro += valor;
+            }
+            if (mes == 12) {
+              valDezembro += valor;
+            }
+          }          
         }
 
+        console.log("maicon - valJaneiro " + valJaneiro);
+        console.log("maicon - valSetembro " + valSetembro);        
+
+        if (valJaneiro > 0) {
+          let card = new Card();
+          card.mes = "Janeiro";
+          card.valor = valJaneiro;
+          this.cards.push(card);
+        }
+
+        if (valFevereiro > 0) {
+          let card = new Card();
+          card.mes = "Fevereiro";
+          card.valor = valFevereiro;
+          this.cards.push(card);          
+        }
+        if (valMarco > 0) {
+          let card = new Card();
+          card.mes = "Março";
+          card.valor = valMarco;
+          this.cards.push(card);          
+        }
+        if (valAbril > 0) {
+          let card = new Card();
+          card.mes = "Abril";
+          card.valor = valAbril;
+          this.cards.push(card);                    
+        }
+        if (valMaio > 0) {
+          let card = new Card();
+          card.mes = "Maio";
+          card.valor = valMaio;
+          this.cards.push(card);                    
+        }
+        if (valJunho > 0) {
+          let card = new Card();
+          card.mes = "Junho";
+          card.valor = valJunho;
+          this.cards.push(card);                    
+        }
+        if (valJulho > 0) {
+          let card = new Card();
+          card.mes = "Julho";
+          card.valor = valJulho;
+          this.cards.push(card);                    
+        }
+        if (valAgosto > 0) {
+          let card = new Card();
+          card.mes = "Agosto";
+          card.valor = valAgosto;
+          this.cards.push(card);                    
+        }
+        if (valSetembro > 0) {
+          let card = new Card();
+          card.mes = "Setembro";
+          card.valor = valSetembro;
+          this.cards.push(card);                    
+        }
+        if (valOutubro > 0) {
+          let card = new Card();
+          card.mes = "Outubro";
+          card.valor = valOutubro;
+          this.cards.push(card);                    
+        }
+        if (valNovembro > 0) {
+          let card = new Card();
+          card.mes = "Novembro";
+          card.valor = valNovembro;
+          this.cards.push(card);                    
+        }
+        if (valDezembro > 0) {
+          let card = new Card();
+          card.mes = "Dezembro";
+          card.valor = valDezembro;
+          this.cards.push(card);                    
+        }
 
       })
       .catch((e) => console.error("erro ao buscar listas: " + e));
 
+
+      
+      let card = new Card();
+      card.mes = "Janeiro";
+      card.valor = 250.85;
+      this.cards.push(card);
+      
+      let card2 = new Card();
+      card2.mes = "Feveireiro";
+      card2.valor = 350.20;
+      this.cards.push(card2);
   }
+}
 
-
-
+export class Card {
+  mes: string;
+  valor: number;
 }
