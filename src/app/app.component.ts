@@ -28,12 +28,12 @@ export class MyApp {
 
       let config = configuracaoProvider.getConfigData();   
 
-      //if (config == null) {
-      //  this.rootPage = IntroducaoPage;
-      //  configuracaoProvider.setConfigData(false);
-      //} else {
-      //  this.rootPage = TabsPage;
-      //}
+      if (config == null) {
+        this.rootPage = IntroducaoPage;
+        configuracaoProvider.setConfigData(false);
+      } else {
+        this.rootPage = TabsPage;
+      }
 
       statusBar.styleDefault();
       //splashScreen.hide();
@@ -63,7 +63,7 @@ export class MyApp {
   private abrirTabsPage(splashScreen: SplashScreen) {
     //splashScreen.hide();
     //this.rootPage = IntroducaoPage;  
-    this.rootPage = TabsPage;    
+    //this.rootPage = TabsPage;    
     //timer(3000).subscribe(() => this.showSplash = false)
     timer(5000).subscribe()
   }

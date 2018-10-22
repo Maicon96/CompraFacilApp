@@ -69,7 +69,8 @@ export class NovaListaPage {
         .catch((e) => console.error("erro ao inserir: " + e));
 
     } else {
-      var dataAtual = new Date();
+      var dataAtual = new Date();     
+
       var idFilial = parseInt(this.configuracaoProvider.getConfigFilial());
 
       this.listaProvider.insert(idFilial, this.cadastroLista.value.nome, 0,
