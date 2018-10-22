@@ -47,13 +47,13 @@
     </h1>
 
     <ion-card *ngFor="let card of cards">
-      <ion-item>
+      <ion-item class="gasto-mensal">
         <ion-card-content>
-
           <ion-card-title>
-            <h2>              
+            <img class="chart-img" src="../../assets/imgs/chart.png">
+            <h2>
               <strong> {{ card.mes }} </strong>
-              <strong> {{ card.valor.toFixed(2) }} </strong>
+              <strong> R$ {{ card.valor.toFixed(2) }} </strong>
             </h2>
           </ion-card-title>
 

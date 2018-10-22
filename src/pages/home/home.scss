@@ -1,35 +1,45 @@
 page-home {
 
-      .custom {
-        background-color: white !important; /* This sets the background color*/
-       }
-       
-       
-      /*Set the background to transparent for ion-item*/
-      .custom .item {
-        background-color: transparent;
-        border:none;   /*Removes all borders*/        
-        color: #008AFF;    /*Text color for each item*/
-      } 
+  .custom {
+    background-color: white !important; /* This sets the background color*/
+  }
 
+  /*Set the background to transparent for ion-item*/
+  .custom .item {
+    background-color: transparent;
+    border: none; /*Removes all borders*/
+    color: #008AFF; /*Text color for each item*/
+  }
 
-      .menu img {
-        width: 70px;
-      }
+  .menu img {
+    width: 70px;
+  }
 
-      .menu h2 {
-        color: white;        
-        display: flex!important;
-        align-content: center!important;
-        align-items: center!important;
-      }
+  .menu h2 {
+    color: white;
+    display: flex !important;
+    align-content: center !important;
+    align-items: center !important;
+  }
 
-      .title_valores {        
-        text-align: center;  
-        color: #00A4FF;
-      }
+  .title_valores {
+    text-align: center;
+    color: #00A4FF;
+  }
 
-      .card {
-        
-      }
+  .card {
+
+  }
+
+  .gasto-mensal {
+    border-left: #73C7E3 solid 3px;
+    background-color: #eef9ff;
+    color: white;
+  }
+  .chart-img {
+    width: 16vw;
+    height: 7vh;
+    float: left;
+    margin: -6px 0px 0px -29px;
+  }
 }
