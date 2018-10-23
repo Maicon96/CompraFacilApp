@@ -10,23 +10,27 @@
   <ion-header class="headerMenu">
     <ion-toolbar color="primary">
       <div class="menu">
-        <h2>
-          <img src="assets/imgs/icon.png" alt=""> Compra Fácil</h2>
+        <h3>
+          Compra Fácil</h3>
+        <img src="assets/imgs/icon-menu.png" alt="">
         <!--<ion-title>Compra Fácil</ion-title>-->
       </div>
     </ion-toolbar>
   </ion-header>
   <ion-content class="custom">
-    <div style="color : #3DBCC0; width:100%; height : 100%">
+    <div style="color : #3DBCC0; width:100%; height : 100%;margin-top: 22px;">
       <ion-list>
         <button ion-item on-click="chamaMinhasListas()">
-          <ion-icon name="md-cart" item-left></ion-icon>Minhas Listas
+          <ion-icon name="md-cart" item-left></ion-icon>
+          Minhas Listas
         </button>
         <button ion-item on-click="chamaProdutos()">
-          <ion-icon name="md-basket" item-left></ion-icon>Produtos
+          <ion-icon name="md-basket" item-left></ion-icon>
+          Produtos
         </button>
         <button ion-item on-click="chamaSobre()">
-          <ion-icon name="ios-phone-portrait" item-left></ion-icon>Sobre
+          <ion-icon name="ios-phone-portrait" item-left></ion-icon>
+          Sobre
         </button>
       </ion-list>
     </div>
@@ -44,22 +48,20 @@
 
     <h1>
       <!--<img class="chart-img-title" src="../../assets/imgs/analisis.png">Valores Gastos-->
-      <ion-icon ios="ios-trending-up" md="md-trending-up"> Valores Gastos </ion-icon>
+      <ion-icon ios="ios-trending-up" md="md-trending-up"> Valores Gastos</ion-icon>
     </h1>
 
-    <ion-card *ngFor="let card of cards">
+    <ion-card class="gastos" *ngFor="let card of cards">
       <ion-item class="gasto-mensal">
         <ion-card-content>
           <ion-card-title>
             <img class="chart-img" src="../../assets/imgs/chart.png">
-            <h2>
             <!--<ion-icon ios="ios-trending-up" md="md-trending-up">-->
-           
-              <strong> {{ card.mes }} </strong>
-              <strong> R$ {{ card.valor.toFixed(2) }} </strong>
-            
-          <!--</ion-icon>-->
-        </h2>
+
+            {{ card.mes }}
+            R$ {{ card.valor.toFixed(2) }}
+
+            <!--</ion-icon>-->
           </ion-card-title>
 
         </ion-card-content>

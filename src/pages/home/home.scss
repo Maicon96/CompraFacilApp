@@ -13,13 +13,16 @@ page-home {
 
   .menu img {
     width: 70px;
+    margin: 1px 0 0 0;
   }
 
-  .menu h2 {
+  .menu h3 {
     color: white;
-    display: flex !important;
-    align-content: center !important;
-    align-items: center !important;
+    //display: flex !important;
+    //align-content: center !important;
+    //align-items: center !important;
+    text-align: center;
+    margin-top: 10px;
   }
 
   .title_valores {
@@ -30,18 +33,29 @@ page-home {
   .card {
 
   }
-
+  .gastos {
+    height: 64px;
+  }
   .gasto-mensal {
-    border-left: #73C7E3 solid 3px;
-    background-color: #eef9ff;
-    color: white;
-    text-align: center;
+    height: 100%;
+    border-left: #00A4FF solid 3px;
+    background-color: #ddf3ff;
+    ion-card-title {
+      font-size: 19px;
+      color: #005888;
+      //text-align: left;
+      //padding-left: 20px;
+      font-family: "Ionicons";
+      //text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+      //font-size: 10px;
+    }
+
   }
   .chart-img {
     width: 16vw;
     height: 7vh;
     float: left;
-    margin: -6px 0px 0px -29px;
+    margin: -4px 19px 0 -27px;
   }
 
   .chart-img-title {
@@ -49,5 +63,13 @@ page-home {
     height: 7vh;
     margin: -6px 0px 0px -29px;
   }
-
+  .headerMenu {
+    text-align: center;
+    h2{
+      text-align: center;
+    }
+  }
+  .toolbar-content.toolbar-content-md{
+    height: 100%;
+  }
 }
