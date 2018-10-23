@@ -28,7 +28,7 @@ export class ListaPage {
   showAlert: boolean;
   loading: any;
   conexao = true;
-
+  delProdutos: any[];
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController,
     public navParams: NavParams, private produtoProvider: ProdutoProvider,

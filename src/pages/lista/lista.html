@@ -33,6 +33,7 @@
   <ion-list class="listaProduto">
     <ion-item-sliding #slidingItem *ngFor="let produto of produtos">
       <ion-item class="listaProdutos" #item (click)="openSliding(slidingItem, item)">
+        <ion-checkbox [(ngModel)]="delProduto"></ion-checkbox>
         <ion-thumbnail item-start>
           <img src="assets/imgs/no-image.png">
           <!--  <img src="assets/imgs/ofertas/coca.jpg" alt="">-->
