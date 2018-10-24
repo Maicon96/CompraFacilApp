@@ -1,13 +1,13 @@
 page-promocoes {   
     h2.promocao_title {
-        color: black;
+        color: #005888;
         font-weight: bold;
         text-align: center;
         font-family: Verdana, sans-serif;        
     }
     
     h1.preco_title {        
-        color: #FF2A00;
+        color: black;
         font-weight: bold;
         text-align: center;        
         font-family: Verdana, sans-serif;
@@ -22,6 +22,11 @@ page-promocoes {
     }
 
     .cardProd {
+      ion-item{
+        background-color: #ddf3ff;
+        border-top: #00A4FF solid 7px;
+        color: #005888;
+      }
         background-color: #008AFF;        
     }
 
