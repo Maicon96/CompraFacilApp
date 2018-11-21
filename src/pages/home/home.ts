@@ -214,13 +214,23 @@ export class HomePage {
 
       let card = new Card();
       card.mes = "Janeiro";
-      card.valor = 250.85;
+      card.valor = 620.85;
       this.cards.push(card);
 
       let card2 = new Card();
       card2.mes = "Fevereiro";
       card2.valor = 350.20;
       this.cards.push(card2);
+
+      let card3 = new Card();
+      card3.mes = "Setembro";
+      card3.valor = 1420.51;
+      this.cards.push(card3);
+
+      let card4 = new Card();
+      card4.mes = "Outubro";
+      card4.valor = 2140.56;
+      this.cards.push(card4);
   }
 }
 
