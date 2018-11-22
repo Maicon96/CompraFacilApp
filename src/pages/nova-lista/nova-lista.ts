@@ -6,7 +6,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ListaPage } from './../lista/lista';
 import { Validators, FormBuilder } from '@angular/forms';
 
-
 @IonicPage()
 @Component({
   selector: 'page-nova-lista',
@@ -69,12 +68,13 @@ export class NovaListaPage {
         .catch((e) => console.error("erro ao inserir: " + e));
 
     } else {
-      var dataAtual = new Date();     
+      var data = new Date();          
+      var dataAtual = ( data.getDate() + "/" + ((data.getMonth() + 1)) + "/" + data.getFullYear());
 
       var idFilial = parseInt(this.configuracaoProvider.getConfigFilial());
 
       this.listaProvider.insert(idFilial, this.cadastroLista.value.nome, 0,
-        this.cadastroLista.value.valor_gastar, dataAtual.toLocaleDateString())
+        this.cadastroLista.value.valor_gastar, dataAtual.toString())
         .then((data) => {
           this.listaProvider.getLasted()
             .then((idLista) => {
