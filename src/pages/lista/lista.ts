@@ -1,6 +1,7 @@
 import { ProdutoProvider } from './../../providers/produto/produto';
 import { ListaProvider } from './../../providers/lista/lista';
 import { ConfiguracaoProvider } from './../../providers/configuracao/configuracao';
+import { UtilsProvider } from './../../providers/utils/utils';
 import { ModalProdutoPage } from './../modal-produto/modal-produto';
 import { ModalBuscarProdutoPage } from './../modal-buscar-produto/modal-buscar-produto';
 import { Component } from '@angular/core';
@@ -32,8 +33,8 @@ export class ListaPage {
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController,
     public navParams: NavParams, private produtoProvider: ProdutoProvider,
-    public configuracaoProvider: ConfiguracaoProvider, private modalCtrl: ModalController,
-    private barcodeScanner: BarcodeScanner, private toast: ToastController,
+    public configuracaoProvider: ConfiguracaoProvider, public utilsProvider: UtilsProvider,
+    private modalCtrl: ModalController, private barcodeScanner: BarcodeScanner, private toast: ToastController,
     public loadingCtr: LoadingController, private network: Network,
     public listaProvider: ListaProvider) {
     this.idLista = this.navParams.get("idLista");
@@ -107,7 +108,8 @@ export class ListaPage {
   }
 
   lerBarcode() {
-    this.verificaConexao();
+
+    this.utilsProvider.verificaConexao(this.conexao);
 
     if (this.conexao) {
       this.barcodeScanner.scan().then(barcodeData => {
@@ -163,12 +165,6 @@ export class ListaPage {
 
   }
 
-  verificaConexao() {
-    if (this.network.type === 'none') {
-      this.conexao = false;
-    }
-  }
-
   showConfirm() {
     let descricaoProduto = this.produtoAux[0].descricaoReduzida;
     let preco = this.produtoAux[0].preco;
@@ -178,7 +174,7 @@ export class ListaPage {
 
     const confirm = this.alertCtrl.create({
       title: 'Atenção!',
-      message: 'Deseja adicionar o produto: ' + descricaoProduto + '?',
+      message: 'Deseja adicionar o produto: ' + this.formatDescricaoProdutos(descricaoProduto) + '?',
       buttons: [
         {
           text: 'Não',
@@ -190,11 +186,10 @@ export class ListaPage {
           text: 'Sim',
           handler: () => {
 
-            this.produtoProvider.insert(this.idLista,
-              descricaoProduto, preco, 1)
+            this.produtoProvider.insert(this.idLista, descricaoProduto, preco, 1)
               .then(() => {
 
-                console.log('maicon - sucesso ao inserir item ' + descricaoProduto);
+                console.log('maicon - sucesso ao inserir item ' + this.formatDescricaoProdutos(descricaoProduto));
                 this.listarProdutos(this.idLista);
 
                 let valor = this.valor_total + preco;
@@ -204,7 +199,6 @@ export class ListaPage {
                     console.log('sucesso ao atualizar valor da lista');
                   })
                   .catch((e) => console.error("erro ao buscar ultima lista: " + e));
-
               })
               .catch((e) => console.error("maicon - erro ao inserir item: " + e));
           }
@@ -238,6 +232,10 @@ export class ListaPage {
     itemSlide.setElementClass("active-slide", true);
     itemSlide.setElementClass("active-options-right", true);
     item.setElementStyle("transform", "translate3d(-140px, 0px, 0px)");
+  }
+
+  public formatDescricaoProdutos(str: string) {    
+    this.utilsProvider.formatDescricao(str);
   }
 
   public montarJsonEnvioBarras() {

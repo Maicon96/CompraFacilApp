@@ -19,8 +19,9 @@ export class DatabaseProvider {
   public createBanco() {
     return this.getBanco()
       .then((db: SQLiteObject) => {
-        this.createTabelas(db)
-        //this.inserirItensDefault(db)
+        this.createTabelas(db)   
+        
+        //this.inserirItensDefault(db);
       })
       .catch(e => console.error(e));
   }
@@ -53,7 +54,7 @@ export class DatabaseProvider {
       .catch(e => console.error('Erro ao criar tabelas do banco', e));
   }
 
-  /*private inserirItensDefault(db: SQLiteObject) {
+  private inserirItensDefault(db: SQLiteObject) {
     db.executeSql('select COUNT(id) as qtd from categories')
       .then((data: any) => {
         //se não existe registro
@@ -63,13 +64,13 @@ export class DatabaseProvider {
           db.sqlBatch([
             ['insert into filiais (codigo, descricao) values (?)', ['1,Palmitos']]
           ])
-          .then(() => console.log('Dados padrões inseridos'))
-          .catch(e => console.error('Erro ao incluir dados padroes', e));
+          .then(() => console.log('maicon - Dados padrões inseridos'))
+          .catch(e => console.error('maicon - Erro ao incluir dados padroes', e));
 
         }
       })
-      .catch(e => console.error('Erro ao consultar a qtd de categorias', e));      
-  }*/
+      .catch(e => console.error('maicon - Erro ao consultar a qtd de categorias', e));      
+  }
 
 
 

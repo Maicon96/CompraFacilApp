@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { SQLiteObject } from '@ionic-native/sqlite';
 import { HttpClient } from '@angular/common/http';
 import { DatabaseProvider } from './../../providers/database/database';
+import { UtilsProvider } from './../../providers/utils/utils';
 import { RequestOptions, Request, RequestMethod, Headers } from '@angular/http';
 
 
@@ -10,11 +11,12 @@ import { RequestOptions, Request, RequestMethod, Headers } from '@angular/http';
 export class ProdutoProvider {
 
   public basePath = "/cooperapi";
-  public baseUrl = "http://www.coopera1.com.br:48080/g3ws-comprafacil/pdv/consulta/load";
+  //public baseUrl = "http://www.coopera1.com.br:48080/g3ws-comprafacil/pdv/consulta/load";
+  public baseUrl = "http://10.0.20.5:18080/g3ws-comprafacil/pdv/consulta/load";
+                            
 
-
-  constructor(private dbProvider: DatabaseProvider, public http: HttpClient, 
-    private plataform: Platform) { 
+  constructor(private dbProvider: DatabaseProvider, private utilsProvider: UtilsProvider, 
+    public http: HttpClient, private plataform: Platform) { 
       if (this.plataform.is("cordova")) {
         this.basePath = "http://www.coopera1.com.br";
       }
@@ -63,14 +65,6 @@ export class ProdutoProvider {
 
   }
 
-  public formatDescricaoProdutos(str: string) {
-    str = str.toLowerCase().replace(/\b[a-z]/g, function(letter) {
-        return letter.toUpperCase();
-    });
-
-    return str;
-  }
-
   //funçoes do banco de dados
   public insert(idLista: number, descricao: string, preco: number, quantidade: number) {
     return this.dbProvider.getBanco()
@@ -78,7 +72,7 @@ export class ProdutoProvider {
         let sql = 'insert into produtos (id_lista, descricao, preco, quantidade)' +
           ' values (?,?,?,?)';
 
-        descricao = this.formatDescricaoProdutos(descricao);
+        descricao = this.utilsProvider.formatDescricao(descricao);
 
         let data = [idLista, descricao, preco, quantidade];
 
@@ -93,7 +87,7 @@ export class ProdutoProvider {
         let sql = 'update produtos set id_lista = ?, descricao = ?, preco = ?, quantidade = ? ' +
           'where id = ?';
 
-        descricao = this.formatDescricaoProdutos(descricao);
+        descricao = this.utilsProvider.formatDescricao(descricao);
 
         let data = [idLista, descricao, preco, quantidade, idProduto];
 

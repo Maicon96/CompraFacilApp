@@ -29,7 +29,7 @@
           <img src="assets/imgs/no-image.png" alt="">
         </ion-thumbnail>
         <div>
-          <h2> {{ produto.descricaoReduzida }} </h2>
+          <h2> {{ formatDescricaoProdutos(produto.descricaoReduzida) }} </h2>
         </div>
         <p>
           <div>R$ {{ produto.preco.toFixed(2) }}</div>

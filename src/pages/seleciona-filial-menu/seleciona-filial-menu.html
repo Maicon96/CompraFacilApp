@@ -1,24 +1,105 @@
-<!--
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title>Selecionar Filial</ion-title>
+    </ion-toolbar>
+</ion-header>
+
 <ion-content padding>
-<ion-list radio-group [(ngModel)]="filial">
-    <ion-list-header>
-        Selecionar Filial 
-    </ion-list-header>
 
-    <ion-item>
-        <ion-label>Palmitos - SC</ion-label>
-        <ion-radio checked="true" value="1"></ion-radio>
-    </ion-item>
+    <ion-list radio-group [(ngModel)]="filial">
 
-    <ion-item>
-        <ion-label>Caibi - SC</ion-label>
-        <ion-radio value="2"></ion-radio>
-    </ion-item>
+        <ion-item>
+            <ion-label>Palmitos - SC</ion-label>
+            <ion-radio checked="true" value="1"></ion-radio>
+        </ion-item>
 
-    <ion-item>
-        <ion-label>Mondai - SC</ion-label>
-        <ion-radio value="3"></ion-radio>
-    </ion-item>
-</ion-list>
+        <ion-item>
+            <ion-label>Alpestre - RS</ion-label>
+            <ion-radio value="38"></ion-radio>
+        </ion-item>
 
-</ion-content>-->
+        <ion-item>
+            <ion-label>Caibi - SC</ion-label>
+            <ion-radio value="4"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Belmonte - SC</ion-label>
+            <ion-radio value="18"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Descanso - SC</ion-label>
+            <ion-radio value="3"></ion-radio>
+        </ion-item>
+
+
+        <ion-item>
+            <ion-label>Erval Seco - RS</ion-label>
+            <ion-radio value="46"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Iporâ do Oeste - SC</ion-label>
+            <ion-radio value="5"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Itapiranga - SC</ion-label>
+            <ion-radio value="28"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Mondai - SC</ion-label>
+            <ion-radio value="2"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Novo Tiradentes - RS</ion-label>
+            <ion-radio value="44"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Vista Gaúcha - RS</ion-label>
+            <ion-radio value="55"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Riqueza - SC</ion-label>
+            <ion-radio value="6"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Rodeio Bonito - RS</ion-label>
+            <ion-radio value="41"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Pinhal - RS</ion-label>
+            <ion-radio value="43"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Santa Helena - SC</ion-label>
+            <ion-radio value="17"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>São João do Oeste - SC</ion-label>
+            <ion-radio value="10"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Tunápolis - SC</ion-label>
+            <ion-radio value="35"></ion-radio>
+        </ion-item>
+
+        <p>
+            <button ion-button round block (click)='selecionarFilial()'>
+                Confirmar
+            </button>
+        </p>
+
+    </ion-list>
+
+</ion-content>

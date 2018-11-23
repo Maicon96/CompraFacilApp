@@ -1,14 +1,13 @@
 {
   "name": "myList",
-  "app_id": "",
-  "type": "ionic-angular",
   "integrations": {
-    "cordova": {}    
+    "cordova": {}
   },
-  "proxies": [  
+  "type": "ionic-angular",
+  "proxies": [
     {
-      "path": "/cooperapi", 
-      "proxyUrl": "http://www.coopera1.com.br" 
+      "path": "/cooperapi",
+      "proxyUrl": "http://www.coopera1.com.br"
     }
   ]
 }

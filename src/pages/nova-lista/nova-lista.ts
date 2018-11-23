@@ -26,8 +26,7 @@ export class NovaListaPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder,
     public listaProvider: ListaProvider, public filialProvider: SelecionaFilialProvider,
     public configuracaoProvider: ConfiguracaoProvider) {
-    this.idLista = this.navParams.get("idLista");
-    this.idFilial = this.navParams.get("idFilial");
+    this.idLista = this.navParams.get("idLista");    
     this.nome = this.navParams.get("nome");
     this.valor_total = this.navParams.get("valor_total");
     this.valor_gastar = this.navParams.get("valor_gastar");
@@ -50,8 +49,11 @@ export class NovaListaPage {
   }
 
   salvarLista() {
+    var idFilial = parseInt(this.configuracaoProvider.getConfigFilial());
+
     if (this.update) {
-      this.listaProvider.update(this.idLista, this.idFilial, this.cadastroLista.value.nome,
+    
+      this.listaProvider.update(this.idLista, idFilial, this.cadastroLista.value.nome,
         this.valor_total, this.cadastroLista.value.valor_gastar, this.data_criacao)
         .then((data) => {
           this.listaProvider.getLasted()
@@ -70,8 +72,6 @@ export class NovaListaPage {
     } else {
       var data = new Date();          
       var dataAtual = ( data.getDate() + "/" + ((data.getMonth() + 1)) + "/" + data.getFullYear());
-
-      var idFilial = parseInt(this.configuracaoProvider.getConfigFilial());
 
       this.listaProvider.insert(idFilial, this.cadastroLista.value.nome, 0,
         this.cadastroLista.value.valor_gastar, dataAtual.toString())

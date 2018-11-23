@@ -19,7 +19,7 @@ export class ListaProvider {
     data_criacao: string) {
     return this.dbProvider.getBanco()
       .then((db: SQLiteObject) => {
-        let sql = 'insert into listas (id_filial, descricao, valor_total, valor_gastar, data_cricao)' +
+        let sql = 'insert into listas (id_filial, descricao, valor_total, valor_gastar, data_criacao)' +
          ' values (?,?,?,?,?)';
 
         descricao = this.formatDescricaoLista(descricao);
@@ -34,14 +34,16 @@ export class ListaProvider {
 
   public update(idLista: number, idFilial: number, descricao: string, valor_total: number, valor_gastar: number, 
     data_criacao: string) {
+          
     return this.dbProvider.getBanco()
       .then((db: SQLiteObject) => {
-        let sql = 'update listas set id_filial = ?, descricao = ?, valor_total = ?, valor_gastar = ?,'
-        ' data_cricao = ? where id = ?';
+        let sql = 'update listas set id_filial = ?, descricao = ?, valor_total = ?, valor_gastar = ?, data_criacao = ? where id = ?';
         
         descricao = this.formatDescricaoLista(descricao);
 
         let data = [idFilial, descricao, valor_total, valor_gastar, data_criacao, idLista];
+        
+        console.log("maicon - sql: " + sql);    
 
         return db.executeSql(sql, data);
       })
@@ -88,7 +90,7 @@ export class ListaProvider {
                 lista.descricao = data.rows.item(i).descricao;
                 lista.valor_total = data.rows.item(i).valor_total;
                 lista.valor_gastar = data.rows.item(i).valor_gastar;
-                lista.data_criacao = data.rows.item(i).data_cricao;
+                lista.data_criacao = data.rows.item(i).data_criacao;
 
                 console.log("maicon - valor  sql " + lista.valor_total);
                 

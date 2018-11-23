@@ -19,7 +19,7 @@ export class SelecionaFilialMenuPage {
     public filialProvider: SelecionaFilialProvider, public configuracaoProvider: ConfiguracaoProvider) { }
 
   ionViewWillEnter() {
-    
+    /*
     let alert = this.alertCtrl.create();
     alert.setTitle('Filial do Supermercado');
 
@@ -49,12 +49,18 @@ export class SelecionaFilialMenuPage {
 
         this.configuracaoProvider.setConfigFilial(data);
 
+        console.log('maicon - ' + data);
+        console.log('maicon - ' + this.configuracaoProvider.getConfigData());
+
+
         this.filialProvider.insert(data, 'Palmitos')         
         .then(() => console.log('sucesso ao inserir'))
         .catch((e) => console.error("erro ao inserir: " + e));
       }
     });
-    alert.present();    
+    alert.present();   
+    
+    */
   }
 
   addInputRadio(alert, label: string, value: string, checked: boolean) {
@@ -65,6 +71,29 @@ export class SelecionaFilialMenuPage {
       checked: checked
     });
   }  
+
+  selecionarFilial() {
+    
+    console.log("maicon - " + this.filial);    
+    
+    if (this.filial) {
+      this.configuracaoProvider.setConfigFilial(this.filial);      
+    
+      const alert = this.alertCtrl.create({
+        title: 'Sucesso ao definir filial!',      
+        buttons: ['OK']
+      });
+      alert.present();
+    } else {
+      const alert = this.alertCtrl.create({
+        title: 'Selecione uma filial!',      
+        buttons: ['OK']
+      });
+      alert.present();
+    }  
+
+  }  
+  
 
 }
 

@@ -29,6 +29,7 @@ import { DatabaseProvider } from '../providers/database/database';
 import { SelecionaFilialProvider } from '../providers/seleciona-filial/seleciona-filial';
 import { ListaProvider } from '../providers/lista/lista';
 import { ProdutoProvider } from '../providers/produto/produto';
+import { UtilsProvider } from '../providers/utils/utils';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { Network } from '@ionic-native/network';
@@ -75,8 +76,10 @@ import { Network } from '@ionic-native/network';
     SelecionaFilialProvider,
     ListaProvider,
     ProdutoProvider,
+    UtilsProvider,
     BarcodeScanner,
-    Network
+    Network,
+    UtilsProvider    
   ]
 })
 export class AppModule {}

@@ -51,17 +51,13 @@
       <ion-icon ios="ios-trending-up" md="md-trending-up"> Valores Gastos</ion-icon>
     </h1>
 
-    <ion-card class="gastos" *ngFor="let card of cards">
+    <ion-card class="gastos" *ngFor="let card of cards">    
       <ion-item class="gasto-mensal">
         <ion-card-content>
           <ion-card-title>
             <img class="chart-img" src="../../assets/imgs/chart.png">
-            <!--<ion-icon ios="ios-trending-up" md="md-trending-up">-->
-
             {{ card.mes }}
             R$ {{ card.valor.toFixed(2) }}
-
-            <!--</ion-icon>-->
           </ion-card-title>
 
         </ion-card-content>

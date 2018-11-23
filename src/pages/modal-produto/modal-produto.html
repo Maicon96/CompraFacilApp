@@ -1,16 +1,13 @@
 <ion-header>
-
   <ion-toolbar color="primary">
-    <ion-title>Inserir Item Manualmente</ion-title>
+    <ion-title> {{ descricaoBotao }} Item Manualmente</ion-title>
     <ion-buttons end>
       <button ion-button (click)="fecharModalProduto()">
         <ion-icon name="md-close"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>
-
 </ion-header>
-
 
 <ion-content padding>
   <form [formGroup]="cadastroItemManual" (ngSubmit)="incluirItem()">
@@ -28,7 +25,7 @@
         <ion-input type="number" name="quantidade" [(ngModel)]="quantidade" formControlName="quantidade"></ion-input>
       </ion-item>
       <p></p>
-      <button [disabled]="cadastroItemManual.invalid" ion-button block color="primary">{{ descricaoBotao }}</button>
+      <button [disabled]="cadastroItemManual.invalid" ion-button round block color="primary">{{ descricaoBotao }}</button>
     
   </form>
 

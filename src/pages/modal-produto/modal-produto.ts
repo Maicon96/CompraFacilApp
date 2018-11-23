@@ -36,8 +36,6 @@ export class ModalProdutoPage {
     this.quantidade = this.navParams.get("quantidade");
     this.update = this.navParams.get("update");
 
-    console.log("maicon - lista " + this.idLista);
-
     if (this.update) {
       this.descricaoBotao = "Atualizar";
     } else {

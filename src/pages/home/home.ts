@@ -6,6 +6,7 @@ import { MinhaListaPage } from './../minha-lista/minha-lista';
 import { ProdutosPage } from './../produtos/produtos';
 import { ListaProvider } from './../../providers/lista/lista';
 import { ConfiguracaoProvider } from './../../providers/configuracao/configuracao';
+import { IfObservable } from 'rxjs/observable/IfObservable';
 
 
 @Component({
@@ -42,10 +43,10 @@ export class HomePage {
 
   public verificarLista() {
 
-    //this.listaProvider.existsLista(parseInt(this.configuracaoProvider.getConfigFilial()))
-    this.listaProvider.existsLista(1)
+    this.listaProvider.existsLista(parseInt(this.configuracaoProvider.getConfigFilial()))
+    //this.listaProvider.existsLista(1)
       .then((result: any) => {
-        if (result == true) {;
+        if (result == true) {
           this.showCards = true;
           this.showImg = false;
           this.buscarValores();
@@ -85,53 +86,56 @@ export class HomePage {
 
         for (var i = 0; i < result.length; i++) {
 
-          var data = result[i].data_criacao;
+          var dataCriacao = result[i].data_criacao;
           var valor = result[i].valor_total;
-          let newDate = new Date(data);
-          var mes = newDate.getMonth();
+          
+          var mes = dataCriacao.substring(3,5);          
+          var ano = dataCriacao.substring(6);          
 
-          if (valor > 0) {
-            if (mes == 1) {
-              valJaneiro += valor;
-            }
-            if (mes == 2) {
-              valFevereiro += valor;
-            }
-            if (mes == 3) {
-              valMarco += valor;
-            }
-            if (mes == 4) {
-              valAbril += valor;
-            }
-            if (mes == 5) {
-              valMaio += valor;
-            }
-            if (mes == 6) {
-              valJunho += valor;
-            }
-            if (mes == 7) {
-              valJulho += valor;
-            }
-            if (mes == 8) {
-              valAgosto += valor;
-            }
-            if (mes == 9) {
-              valSetembro += valor;
-            }
-            if (mes == 10) {
-              valOutubro += valor;
-            }
-            if (mes == 11) {
-              valNovembro += valor;
-            }
-            if (mes == 12) {
-              valDezembro += valor;
+          var data = new Date();          
+          var anoAtual = data.getFullYear();
+
+          if (ano == anoAtual) {
+            if (valor > 0) {
+              if (mes == 1) {
+                valJaneiro += valor;
+              }
+              if (mes == 2) {
+                valFevereiro += valor;
+              }
+              if (mes == 3) {
+                valMarco += valor;
+              }
+              if (mes == 4) {
+                valAbril += valor;
+              }
+              if (mes == 5) {
+                valMaio += valor;
+              }
+              if (mes == 6) {
+                valJunho += valor;
+              }
+              if (mes == 7) {
+                valJulho += valor;
+              }
+              if (mes == 8) {
+                valAgosto += valor;
+              }
+              if (mes == 9) {
+                valSetembro += valor;
+              }
+              if (mes == 10) {
+                valOutubro += valor;
+              }
+              if (mes == 11) {
+                valNovembro += valor;
+              }
+              if (mes == 12) {
+                valDezembro += valor;
+              }
             }
           }
         }
-
-        console.log("maicon - valJaneiro " + valJaneiro);
-        console.log("maicon - valSetembro " + valSetembro);
 
         if (valJaneiro > 0) {
           let card = new Card();
@@ -139,7 +143,6 @@ export class HomePage {
           card.valor = valJaneiro;
           this.cards.push(card);
         }
-
         if (valFevereiro > 0) {
           let card = new Card();
           card.mes = "Fevereiro";
@@ -231,6 +234,7 @@ export class HomePage {
       card4.mes = "Outubro";
       card4.valor = 2140.56;
       this.cards.push(card4);
+
   }
 }
 

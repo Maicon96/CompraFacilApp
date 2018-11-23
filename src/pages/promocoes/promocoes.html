@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Ofertas</ion-title>
+    <ion-title>Produtos em Ofertas</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -10,13 +10,11 @@
     <ion-item>
       <ion-card-content>
 
-
         <ion-card-title>
           <h2 class="promocao_title">
-            <strong> {{ produto.descricaoReduzida }} </strong>
+            <strong> {{ formatDescricaoProdutos(produto.descricaoReduzida) }} </strong>
           </h2>
         </ion-card-title>
-
 
         <img src="assets/imgs/no-image.png" alt="">
 
@@ -27,22 +25,6 @@
             {{ produto.medida }}
           </h5>
         </h1>
-
-        <!--
-        <div class="container">
-
-          <div class="descricao">
-            <h2 class="promocao_title">
-              <strong> {{ produto.descricaoReduzida }} </strong>
-            </h2>
-          </div>
-
-          <div class="preco">
-            <h1 class="preco_title">R$ {{ produto.preco.toFixed(2) }} </h1>
-          </div>
-
-        </div>
-        -->
 
       </ion-card-content>
     </ion-item>

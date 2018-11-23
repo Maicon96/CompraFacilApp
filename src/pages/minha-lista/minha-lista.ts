@@ -14,6 +14,7 @@ import { ListaPage } from './../lista/lista';
 export class MinhaListaPage {
 
   listas: any[] = [];
+  modelo: any[] = [];
 
   constructor(public navCtrl: NavController, private toast: ToastController, private listaProvider: ListaProvider,
     private filialProvider: SelecionaFilialProvider, public configuracaoProvider: ConfiguracaoProvider) {
@@ -45,10 +46,8 @@ export class MinhaListaPage {
   public editarDadosLista(id: number, idFilial: number, nome: string, valor_total: number,
     valor_gastar: number, data_criacao: string) {
 
-    console.log("maicon - minha - " + idFilial);
-
     this.navCtrl.push(NovaListaPage, {
-      idLista: id, idFilial: idFilial, nome: nome, valor_total: valor_total,
+      idLista: id, nome: nome, valor_total: valor_total,
       valor_gastar: valor_gastar, data_criacao: data_criacao, update: true
     });
   }
@@ -74,5 +73,10 @@ export class MinhaListaPage {
       });
     }
   }
+
+    
+  
+
+
 
 }

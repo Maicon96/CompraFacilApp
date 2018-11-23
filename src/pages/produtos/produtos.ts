@@ -1,6 +1,7 @@
 import { SelecionaFilialProvider } from './../../providers/seleciona-filial/seleciona-filial';
 import { ProdutoProvider } from './../../providers/produto/produto';
 import { ConfiguracaoProvider } from './../../providers/configuracao/configuracao';
+import { UtilsProvider } from './../../providers/utils/utils';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController, AlertController } from 'ionic-angular';
 import { Network } from '@ionic-native/network';
@@ -29,22 +30,18 @@ export class ProdutosPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public produtoProvider: ProdutoProvider, public filialProvider: SelecionaFilialProvider,
-    public configuracaoProvider: ConfiguracaoProvider, public loadingCtr: LoadingController,
-    public toastCtrl: ToastController, private network: Network, public alertCtrl: AlertController) {
+    public configuracaoProvider: ConfiguracaoProvider, public utilsProvider: UtilsProvider,
+    public loadingCtr: LoadingController, public toastCtrl: ToastController, private network: Network,
+    public alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
     this.listarProdutos();
   }
 
-  verificaConexao() {
-    if (this.network.type === 'none') {
-      this.conexao = false;
-    }
-  }
-
   public listarProdutos() {
-    this.verificaConexao();
+
+    this.utilsProvider.verificaConexao(this.conexao);
 
     if (this.conexao) {
       const json = this.montarJsonListar();
@@ -56,9 +53,7 @@ export class ProdutosPage {
           console.log(res);
           this.produtos = res.registros;
           console.log(this.produtos);
-
           this.loading.dismiss();
-
         }, error => {
           this.loading.dismiss();
 
@@ -73,8 +68,8 @@ export class ProdutosPage {
         })
     } else {
       const alert = this.alertCtrl.create({
-        title: 'Erro ao buscar Produtos!',
-        subTitle: 'Você não possui Internet',
+        title: 'Você não possui Internet!',
+        subTitle: 'Conecte-se em alguma rede e tente novamente.',
         buttons: ['OK']
       });
       alert.present();
@@ -83,7 +78,7 @@ export class ProdutosPage {
 
   public buscarProdutos() {
 
-    this.verificaConexao();
+    this.utilsProvider.verificaConexao(this.conexao);
 
     if (this.conexao) {
       if (this.produtoDigitado != '' && this.produtoDigitado != null) {
@@ -133,6 +128,10 @@ export class ProdutosPage {
     this.loading.present();
   }
 
+  public formatDescricaoProdutos(str: string) {    
+    this.utilsProvider.formatDescricao(str);
+  }
+
   public montarJsonEnvio() {
 
     return {
@@ -155,7 +154,6 @@ export class ProdutosPage {
         },
         {
           "value": parseInt(this.configuracaoProvider.getConfigFilial()),
-          //"value": 1,
           "type": "int",
           "comparison": "eq",
           "connector": "AND",
@@ -180,6 +178,8 @@ export class ProdutosPage {
       "promocao": "1"
     }
   }
+
+
 
 
 

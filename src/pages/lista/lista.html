@@ -29,7 +29,7 @@
     </div>
 
   </div>
-     
+
   <ion-list class="listaProduto">
     <ion-item-sliding #slidingItem *ngFor="let produto of produtos">
       <ion-item class="listaProdutos" #item (click)="openSliding(slidingItem, item)">
@@ -49,13 +49,12 @@
         <div>
           <h3>Preço: R$ {{produto.preco.toFixed(2)}}</h3>
           <h3>Quantidade: {{ produto.quantidade.toFixed(2)}}</h3>
-          <h3 class="totalItem">Total: R$ {{(produto.preco * produto.quantidade).toFixed(2)}}</h3>
+          <h3 class="totalItem"><strong>Total: R$ {{(produto.preco * produto.quantidade).toFixed(2)}}</strong></h3>
         </div>
       </ion-item>
 
       <ion-item-options side="right">
-        <button ion-button color="edit"
-                (click)="editarProduto(produto.id, produto.descricao, produto.preco, produto.quantidade)">
+        <button ion-button color="edit" (click)="editarProduto(produto.id, produto.descricao, produto.preco, produto.quantidade)">
           <ion-icon name="md-create"></ion-icon>
           Editar
         </button>
@@ -89,7 +88,7 @@
     </ion-item-sliding>
   </ion-list>
 
-
+  <!--
   <ion-fab right bottom>
     <button ion-fab color="primary" (click)="lerBarcode()">
       <ion-icon name="md-barcode"></ion-icon>
@@ -107,5 +106,31 @@
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>
+  -->
+
+  <ion-fab bottom right>
+    <button ion-fab>
+      <ion-icon name="add"></ion-icon>
+    </button>
+    <ion-fab-list side="top">
+
+      <button ion-fab (click)="abrirModalProduto()">
+        <ion-icon name="add"></ion-icon>
+        <div class="label">Inserir Manualmente</div>
+      </button>
+
+      <button ion-fab (click)="abrirModalBuscarProduto()">
+        <ion-icon name="md-search"></ion-icon>
+        <div class="label" dir="rtl">Buscar Item</div>
+      </button>
+
+      <button ion-fab (click)="lerBarcode()">
+        <ion-icon name="md-barcode"></ion-icon>
+        <div class="label" dir="rtl">Ler Código de Barras</div>
+      </button>
+
+    </ion-fab-list>
+  </ion-fab>
+
 
 </ion-content>

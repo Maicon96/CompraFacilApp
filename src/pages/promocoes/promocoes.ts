@@ -1,5 +1,6 @@
 import { ProdutoProvider } from './../../providers/produto/produto';
 import { ConfiguracaoProvider } from './../../providers/configuracao/configuracao';
+import { UtilsProvider } from './../../providers/utils/utils';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController, AlertController, Platform } from 'ionic-angular';
 import { Network } from '@ionic-native/network';
@@ -20,46 +21,25 @@ export class PromocoesPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public loadingCtr: LoadingController, public produtoProvider: ProdutoProvider,
-    public configuracaoProvider: ConfiguracaoProvider,
+    public configuracaoProvider: ConfiguracaoProvider, public utilsProvider: UtilsProvider,
     public toastCtrl: ToastController, private network: Network, private platform: Platform,
     public alertCtrl: AlertController) {
   }
 
 
-  ionViewDidLoad() {
-    this.verificaConexao();
+  ionViewDidLoad() {    
+    this.utilsProvider.verificaConexao(this.conexao);
 
     if (this.conexao) {
       this.buscarProdutosPopulares();
     } else {
       const alert = this.alertCtrl.create({
-        title: 'Não foi possível buscar as promoções!',
-        subTitle: 'Você não possui Internet',
+        title: 'Você não possui Internet!',
+        subTitle: 'Conecte-se em alguma rede e tente novamente.',
         buttons: ['OK']
       });
       alert.present();
     }
-  }
-
-  verificaConexao() {
-
-    if (this.network.type === 'none') {
-      this.conexao = false;
-    }
-    /*
-    this.network.onConnect().subscribe(() => {
-      console.log('maicon - network connected!');
-
-      this.conexao = true;
-
-      setTimeout(() => {
-        if (this.network.type == 'wifi') {
-          console.log('maicon - we got a wifi connection, woohoo!');
-          this.conexao = true;
-        }
-      }, 3000);
-
-    });*/
   }
 
   public buscarProdutosPopulares() {
@@ -96,6 +76,10 @@ export class PromocoesPage {
     })
 
     this.loading.present();
+  }
+
+  public formatDescricaoProdutos(str: string) {    
+    this.utilsProvider.formatDescricao(str);
   }
 
   public montarJsonEnvio() {

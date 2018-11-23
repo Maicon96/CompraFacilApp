@@ -2,6 +2,7 @@ import { ProdutoProvider } from './../../providers/produto/produto';
 import { ListaProvider } from './../../providers/lista/lista';
 import { Component } from '@angular/core';
 import { ConfiguracaoProvider } from './../../providers/configuracao/configuracao';
+import { UtilsProvider } from './../../providers/utils/utils';
 import { IonicPage, NavController, NavParams, ViewController, AlertController, LoadingController } from 'ionic-angular';
 import { Network } from '@ionic-native/network';
 
@@ -24,33 +25,21 @@ export class ModalBuscarProdutoPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public viewCtrl: ViewController, public produtoProvider: ProdutoProvider,
     public alertCtrl: AlertController, public loadingCtr: LoadingController,
-    private network: Network, public configuracaoProvider: ConfiguracaoProvider,
-    public listaProvider: ListaProvider) {
+    private network: Network, private configuracaoProvider: ConfiguracaoProvider,
+    private utilsProvider: UtilsProvider, private listaProvider: ListaProvider) {
     this.idLista = this.navParams.get("idLista");
     this.valorTotal = this.navParams.get("valorTotal");
   }
 
-  ionViewDidLoad() {
-    //this.verificaConexao();
-
-    /*if (this.conexao) {
-      this.listarProdutos();
-    } else {
-      const alert = this.alertCtrl.create({
-        title: 'Erro ao buscar Produtos!',
-        subTitle: 'Você não possui Internet',
-        buttons: ['OK']
-      });
-      alert.present();
-    }*/
+  ionViewDidLoad() {    
   }
 
   fecharModalProduto() {
     this.viewCtrl.dismiss();
   }
 
-  public listarProdutos() {
-    this.verificaConexao();
+  public listarProdutos() {    
+    this.utilsProvider.verificaConexao(this.conexao);
 
     if (this.conexao) {
       const json = this.montarJsonListar();
@@ -79,8 +68,8 @@ export class ModalBuscarProdutoPage {
         })
     } else {
       const alert = this.alertCtrl.create({
-        title: 'Erro ao buscar Produtos!',
-        subTitle: 'Você não possui Internet',
+        title: 'Você não possui Internet!',
+        subTitle: 'Conecte-se em alguma rede e tente novamente.',
         buttons: ['OK']
       });
       alert.present();
@@ -88,7 +77,7 @@ export class ModalBuscarProdutoPage {
   }
 
   public buscarProdutos() {
-    this.verificaConexao();    
+    this.utilsProvider.verificaConexao(this.conexao);    
     
     if (this.conexao) {
       if (this.produtoDigitado != '' && this.produtoDigitado != null) {
@@ -143,9 +132,7 @@ export class ModalBuscarProdutoPage {
 
             this.produtoProvider.insert(this.idLista, descricao, preco, 1)
               .then(() => {
-
-                let valor = this.valorTotal + preco;
-      
+                let valor = this.valorTotal + preco;      
                 this.listaProvider.updateValorTotal(this.idLista, valor)
                   .then((data) => {
                     console.log('sucesso ao atualizar valor da lista');
@@ -163,19 +150,16 @@ export class ModalBuscarProdutoPage {
     confirm.present();
   }
 
-
-  verificaConexao() {
-    if (this.network.type === 'none') {
-      this.conexao = false;
-    }
-  }
-
   showLoader() {
     this.loading = this.loadingCtr.create({
       content: 'Buscando Produtos...'
     })
 
     this.loading.present();
+  }
+
+  public formatDescricaoProdutos(str: string) {    
+    this.utilsProvider.formatDescricao(str);
   }
 
   public montarJsonEnvio() {
