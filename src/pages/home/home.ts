@@ -6,8 +6,6 @@ import { MinhaListaPage } from './../minha-lista/minha-lista';
 import { ProdutosPage } from './../produtos/produtos';
 import { ListaProvider } from './../../providers/lista/lista';
 import { ConfiguracaoProvider } from './../../providers/configuracao/configuracao';
-import { IfObservable } from 'rxjs/observable/IfObservable';
-
 
 @Component({
   selector: 'page-home',
@@ -20,11 +18,10 @@ export class HomePage {
   showImg = false;
   showCards = false;
   listas: any[] = [];
-  cards = new Array<Card>();
-  testes: any[] = [];
+  cards = new Array<Card>();  
 
   constructor(public navCtrl: NavController, private listaProvider: ListaProvider,
-    public configuracaoProvider: ConfiguracaoProvider) {
+    public configuracaoProvider: ConfiguracaoProvider) {    
     this.verificarLista();
   }
 
@@ -49,15 +46,22 @@ export class HomePage {
           this.showImg = false;
           this.buscarValores();
         } else {
-          this.showCards = false;
-          this.showImg = true;          
+          this.showCards = true;
+          this.showImg = false;
+          this.buscarValores();
+          //this.showCards = false;
+          //this.showImg = true;          
         }
       })
       .catch((e) => console.error("erro ao buscar listas: " + e));
   }
 
   doRefresh(refresher) { 
+    this.showImg = false;
+    this.showCards = false;    
+    this.cards = new Array<Card>();
     this.verificarLista();
+    
     setTimeout(() => {
       refresher.complete();
     }, 1000);
@@ -213,7 +217,7 @@ export class HomePage {
       .catch((e) => console.error("erro ao buscar listas: " + e));
 
 
-      /*
+      
       let card = new Card();
       card.mes = "Janeiro";
       card.valor = 620.85;
@@ -232,7 +236,7 @@ export class HomePage {
       let card4 = new Card();
       card4.mes = "Outubro";
       card4.valor = 2140.56;
-      this.cards.push(card4);*/
+      this.cards.push(card4);
   }
 }
 

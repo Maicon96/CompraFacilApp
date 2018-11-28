@@ -159,7 +159,7 @@ export class ModalBuscarProdutoPage {
   }
 
   public formatDescricaoProdutos(str: string) {    
-    this.utilsProvider.formatDescricao(str);
+    return this.utilsProvider.formatDescricao(str);
   }
 
   public montarJsonEnvio() {

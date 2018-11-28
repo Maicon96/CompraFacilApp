@@ -33,11 +33,11 @@ import { UtilsProvider } from '../providers/utils/utils';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { Network } from '@ionic-native/network';
+import { Vibration } from '@ionic-native/vibration'
 
 import { registerLocaleData } from '@angular/common';
 import ptBr from '@angular/common/locales/pt';
 registerLocaleData(ptBr)
-
 
 
 //import { CurrencyMaskModule } from "ng2-currency-mask";
@@ -66,7 +66,7 @@ registerLocaleData(ptBr)
     ModalProdutoPageModule,
     ModalBuscarProdutoPageModule,
     HttpModule,
-    HttpClientModule,      
+    HttpClientModule,          
     //IonMaskModule.forRoot()
     //InputMaskModule 
     //CurrencyMaskModule   
@@ -94,7 +94,8 @@ registerLocaleData(ptBr)
     UtilsProvider,
     BarcodeScanner,
     Network,
-    UtilsProvider
+    UtilsProvider,
+    Vibration
   ]
 })
 export class AppModule {}

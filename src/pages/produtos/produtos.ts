@@ -141,8 +141,8 @@ export class ProdutosPage {
     this.loading.present();
   }
 
-  public formatDescricaoProdutos(str: string) {    
-    this.utilsProvider.formatDescricao(str);
+  public formatDescricaoProdutos(str: string) {        
+    return this.utilsProvider.formatDescricao(str);    
   }
 
   public montarJsonEnvio() {

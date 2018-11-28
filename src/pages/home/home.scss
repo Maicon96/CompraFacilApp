@@ -27,7 +27,7 @@ page-home {
 
   .title_valores {
     text-align: center;
-    color: #00A4FF;
+    color: black;
   }
 
   .gastos {
@@ -38,7 +38,7 @@ page-home {
     right: 0px;
     padding-left: 0px;
     height: 100%;
-    border-left: #00A4FF solid 3px; 
+    border-left: #00a4ff solid 3px; 
     background-color: #ddf3ff;
     ion-card-title {
       font-size: 21px;
@@ -49,8 +49,25 @@ page-home {
       //text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
       //font-size: 10px;
     }
-
   }
+
+  .gasto-mensal2 {
+    right: 0px;
+    padding-left: 0px;
+    height: 100%;    
+    border-left: #00A4FF solid 3px;     
+    background-color: #eff5f7;
+    ion-card-title {
+      font-size: 21px;
+      color: #005888;
+      //text-align: left;
+      //padding-left: 20px;
+      font-family: "Ionicons";
+      //text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+      //font-size: 10px;
+    }
+  }
+
   .chart-img {
     width: 16vw;
     height: 7vh;
@@ -72,4 +89,9 @@ page-home {
   .toolbar-content.toolbar-content-md{
     height: 100%;
   }
+
+  .title-card {
+    color: #03021F;
+  }
+
 }

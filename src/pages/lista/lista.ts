@@ -11,6 +11,7 @@ import {
 } from 'ionic-angular';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Network } from '@ionic-native/network';
+import { Vibration } from '@ionic-native/vibration';
 
 @IonicPage()
 @Component({
@@ -36,7 +37,7 @@ export class ListaPage {
     public configuracaoProvider: ConfiguracaoProvider, public utilsProvider: UtilsProvider,
     private modalCtrl: ModalController, private barcodeScanner: BarcodeScanner, private toast: ToastController,
     public loadingCtr: LoadingController, private network: Network,
-    public listaProvider: ListaProvider) {
+    public listaProvider: ListaProvider, private vibration: Vibration) {     
     this.idLista = this.navParams.get("idLista");
     this.titulo = this.navParams.get("titulo");
 
@@ -226,6 +227,8 @@ export class ListaPage {
   }
 
   showAlertaValor() {
+    this.vibration.vibrate(1000);
+    
     this.showAlert = false;
 
     const alert = this.alertCtrl.create({
@@ -244,7 +247,7 @@ export class ListaPage {
   }
 
   public formatDescricaoProdutos(str: string) {
-    this.utilsProvider.formatDescricao(str);
+    return this.utilsProvider.formatDescricao(str);
   }
 
   public montarJsonEnvioBarras() {

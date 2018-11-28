@@ -22,12 +22,8 @@ export class NovaListaPage {
   data_criacao: string;
   update: boolean = false;
   descricaoBotao: string;
-  placeholder: any;
-  box_price_formatted: any;
-  box_price: any;
-  valor_gastar_formatted: any;
-  model: Teste;
-
+  
+  
   constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder,
     public listaProvider: ListaProvider, public filialProvider: SelecionaFilialProvider,
     public configuracaoProvider: ConfiguracaoProvider) {
