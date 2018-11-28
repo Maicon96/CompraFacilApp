@@ -9,8 +9,8 @@ import { Validators, FormBuilder } from '@angular/forms';
 @IonicPage()
 @Component({
   selector: 'page-nova-lista',
-  templateUrl: 'nova-lista.html',
-})
+  templateUrl: 'nova-lista.html'  
+  })
 export class NovaListaPage {
 
   cadastroLista: any = {};
@@ -22,16 +22,25 @@ export class NovaListaPage {
   data_criacao: string;
   update: boolean = false;
   descricaoBotao: string;
+  placeholder: any;
+  box_price_formatted: any;
+  box_price: any;
+  valor_gastar_formatted: any;
+  model: Teste;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder,
     public listaProvider: ListaProvider, public filialProvider: SelecionaFilialProvider,
     public configuracaoProvider: ConfiguracaoProvider) {
-    this.idLista = this.navParams.get("idLista");    
+    this.idLista = this.navParams.get("idLista");
     this.nome = this.navParams.get("nome");
     this.valor_total = this.navParams.get("valor_total");
     this.valor_gastar = this.navParams.get("valor_gastar");
     this.data_criacao = this.navParams.get("data_criacao");
     this.update = this.navParams.get("update");
+
+
+    console.log("maicon - ant: " + this.valor_total);
+    //console.log("maicon - new: " + this.getCurrency(this.valor_total));
 
     if (this.update) {
       this.descricaoBotao = "Atualizar";
@@ -52,7 +61,7 @@ export class NovaListaPage {
     var idFilial = parseInt(this.configuracaoProvider.getConfigFilial());
 
     if (this.update) {
-    
+
       this.listaProvider.update(this.idLista, idFilial, this.cadastroLista.value.nome,
         this.valor_total, this.cadastroLista.value.valor_gastar, this.data_criacao)
         .then((data) => {
@@ -70,8 +79,8 @@ export class NovaListaPage {
         .catch((e) => console.error("erro ao inserir: " + e));
 
     } else {
-      var data = new Date();          
-      var dataAtual = ( data.getDate() + "/" + ((data.getMonth() + 1)) + "/" + data.getFullYear());
+      var data = new Date();
+      var dataAtual = (data.getDate() + "/" + ((data.getMonth() + 1)) + "/" + data.getFullYear());
 
       this.listaProvider.insert(idFilial, this.cadastroLista.value.nome, 0,
         this.cadastroLista.value.valor_gastar, dataAtual.toString())
@@ -90,4 +99,17 @@ export class NovaListaPage {
         .catch((e) => console.error("erro ao inserir: " + e));
     }
   }
+
+  /*
+  getCurrency(amount: number) {
+    return this.currencyPipe.transform(amount, 'EUR', true, '1.2-2');
+  }*/
+
+}
+
+
+
+
+export class Teste {
+    telefone: string;
 }

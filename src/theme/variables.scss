@@ -89,3 +89,24 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+
+
+ion-icon {
+  &[class*="custom-"] {
+    mask-size: contain;
+    mask-position: 50% 50%;
+    mask-repeat: no-repeat;
+    background: currentColor;
+    width: 1em;
+    height: 1em;
+  }
+  &[class*="custom-products"] {
+    mask-image: url(../assets/imgs/icon_produtos2.png);
+  }
+  &[class*="custom-promocao"] {
+    mask-image: url(../assets/imgs/icon_promocao.png);
+  }  
+  &[class*="custom-cesta"] {
+    mask-image: url(../assets/imgs/icon_cesta.png);
+  }  
+}

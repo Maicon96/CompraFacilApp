@@ -6,6 +6,15 @@
 
 <ion-content padding>
 
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content 
+      pullingIcon="arrow-dropdown" 
+      pullingText="Puxar para atualizar" 
+      refreshingSpinner="circles"
+      refreshingText="Atualizando...">
+    </ion-refresher-content>
+  </ion-refresher>
+
   <ion-toolbar color='light'>
     <ion-searchbar placeholder="Digite o produto..." [(ngModel)]="produtoDigitado"></ion-searchbar>
     <ion-buttons end>
@@ -14,19 +23,17 @@
       </button>
     </ion-buttons>
   </ion-toolbar>
-  <p>
 
+  <p>
     <ion-list>
       <ion-item *ngFor="let produto of produtos">
         <ion-thumbnail item-start>
           <img src="assets/imgs/no-image.png" alt="">
         </ion-thumbnail>
         <h2> {{ formatDescricaoProdutos(produto.descricaoReduzida) }}</h2>
-        <p>R$ {{ produto.preco }} </p>
+        <p>{{ produto.preco | currency:'BRL':true }} </p>
       </ion-item>
     </ion-list>
-
   </p>
-
 
 </ion-content>

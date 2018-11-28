@@ -34,6 +34,16 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { Network } from '@ionic-native/network';
 
+import { registerLocaleData } from '@angular/common';
+import ptBr from '@angular/common/locales/pt';
+registerLocaleData(ptBr)
+
+
+
+//import { CurrencyMaskModule } from "ng2-currency-mask";
+//import { BrMaskerModule } from 'brmasker-ionic-3';
+//import { BrMaskModel } from 'brmasker-ionic-3';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -56,7 +66,10 @@ import { Network } from '@ionic-native/network';
     ModalProdutoPageModule,
     ModalBuscarProdutoPageModule,
     HttpModule,
-    HttpClientModule    
+    HttpClientModule,      
+    //IonMaskModule.forRoot()
+    //InputMaskModule 
+    //CurrencyMaskModule   
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -68,7 +81,9 @@ import { Network } from '@ionic-native/network';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: LOCALE_ID, useValue: 'pt-BR'},//defino isso para os formatos dos valores serem brasileiros como os numericos por exe
+    {
+      provide: LOCALE_ID, useValue: 'pt-BR'
+    },
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ConfiguracaoProvider,
     SQLite,
@@ -79,7 +94,7 @@ import { Network } from '@ionic-native/network';
     UtilsProvider,
     BarcodeScanner,
     Network,
-    UtilsProvider    
+    UtilsProvider
   ]
 })
 export class AppModule {}

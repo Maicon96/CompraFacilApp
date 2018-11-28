@@ -27,7 +27,7 @@ export class MyApp {
     platform.ready().then(() => {
 
       let config = configuracaoProvider.getConfigData();   
-
+      
       if (config == null) {
         this.rootPage = IntroducaoPage;
         configuracaoProvider.setConfigData(false);

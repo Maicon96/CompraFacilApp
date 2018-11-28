@@ -8,16 +8,27 @@
 
 
 <ion-content padding>
-  <form [formGroup]="cadastroLista" (ngSubmit)="salvarLista()">    
-      <ion-item>
-        <ion-label floating>Nome da Lista</ion-label>
-        <ion-input type="text" name="nome" [(ngModel)]="nome" formControlName="nome"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>Valor total que deseja gastar</ion-label>
-        <ion-input type="number" name="valor_gastar" [(ngModel)]="valor_gastar" formControlName="valor_gastar"></ion-input>
-      </ion-item>
-      <p></p>
-      <button [disabled]="cadastroLista.invalid" ion-button round block color="primary" >{{ descricaoBotao }}</button>    
+  <form [formGroup]="cadastroLista" (ngSubmit)="salvarLista()">
+
+    <!--
+    <ion-item>
+      <ion-input type="text" name="cpf" placeholder="CPF" [brmasker]="{mask:'000.000.000-00', len:14}"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="text" name="money" placeholder="(R$) Real" [brmasker]="{money: true}"></ion-input>
+    </ion-item>
+    -->
+
+    <ion-item>
+      <ion-label floating>Nome da Lista</ion-label>
+      <ion-input type="text" name="nome" [(ngModel)]="nome" formControlName="nome"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Valor total que deseja gastar</ion-label>      
+      <ion-input type="text" name="valor_gastar" [(ngModel)]="valor_gastar" formControlName="valor_gastar"></ion-input>
+    </ion-item>
+    <p></p>
+    <button [disabled]="cadastroLista.invalid" ion-button round block color="primary">{{ descricaoBotao }}</button>
   </form>
 </ion-content>

@@ -32,7 +32,7 @@
           <h2> {{ formatDescricaoProdutos(produto.descricaoReduzida) }} </h2>
         </div>
         <p>
-          <div>R$ {{ produto.preco.toFixed(2) }}</div>
+          <div>{{ produto.preco | currency:'BRL':true }}</div>
 
           <ion-buttons end>
             <button ion-button icon-only (click)='incluirItem(produto.descricaoReduzida, produto.preco)'>

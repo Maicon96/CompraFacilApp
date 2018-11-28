@@ -13,22 +13,18 @@
 
 <ion-content padding>
 
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content 
+      pullingIcon="arrow-dropdown" 
+      pullingText="Puxar para atualizar" 
+      refreshingSpinner="circles"
+      refreshingText="Atualizando...">
+    </ion-refresher-content>
+  </ion-refresher>
+
   <ion-list>
 
-    <!--
-    <ion-item class="listas" *ngFor="let lista of listas">
-      <button ion-item (click)="editarListaCompra(lista.id, lista.descricao, lista.valor_gastar)" item-start>
-        <h1>{{ lista.descricao }}</h1>
-        <h2>{{ lista.data_criacao }}</h2>
-      </button>
-
-      <ion-checkbox color="dark" checked="true"></ion-checkbox>
-    </ion-item>
-    -->
-
-    
     <ion-item-sliding class="listas" *ngFor="let lista of listas">
-
       <ion-item-options side="right">
         <button ion-button color="edit" (click)="editarDadosLista(lista.id, lista.id_filial, 
         lista.descricao, lista.valor_total, lista.valor_gastar, lista.data_criacao)">
@@ -40,15 +36,42 @@
           Excluir
         </button>
       </ion-item-options>
+
+
+      <button ion-item (click)="editarListaCompra(lista.id, lista.descricao, lista.valor_gastar)" item-start>
+        <ion-icon name="md-clipboard" item-start></ion-icon>
+        <h1>{{ lista.descricao }}</h1>
+        <h2>{{ lista.data_criacao }}</h2>
+      </button>
+    </ion-item-sliding>
+
+  </ion-list>
+
+
+  <!--
+  <ion-list>
+        
+    <ion-item-sliding *ngFor="let lista of listas">
+      <ion-item>        
+        <ion-checkbox *ngIf="showCheck" color="primary" [(ngModel)]="modelo[lista.id]" value="lista.id" name="modelo" type="checkbox" ng-checked="true"></ion-checkbox>
+
+        <h1> {{ lista.descricao }}</h1>
+        <h2> {{ lista.data_criacao }}</h2>
+
+      </ion-item>
+    </ion-item-sliding>    
+    
+    <ion-item *ngFor="let lista of listas">
+      <ion-checkbox *ngIf="showCheck" color="primary"></ion-checkbox>
       <button ion-item (click)="editarListaCompra(lista.id, lista.descricao, lista.valor_gastar)" item-start>
         <h1>{{ lista.descricao }}</h1>
         <h2>{{ lista.data_criacao }}</h2>
       </button>
-
-    </ion-item-sliding>
-    
+    </ion-item>      
 
   </ion-list>
+-->
+
 
   <ion-fab right bottom>
     <button ion-fab on-click="chamaNovaLista()">

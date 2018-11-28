@@ -21,11 +21,12 @@
     <div style="color : #3DBCC0; width:100%; height : 100%;margin-top: 22px;">
       <ion-list>
         <button ion-item on-click="chamaMinhasListas()">
-          <ion-icon name="md-cart" item-left></ion-icon>
+          <ion-icon name="custom-cesta" item-left></ion-icon>
           Minhas Listas
         </button>
         <button ion-item on-click="chamaProdutos()">
-          <ion-icon name="md-basket" item-left></ion-icon>
+          <!--<ion-icon name="basket" item-left></ion-icon>-->
+          <ion-icon name="custom-products" item-left></ion-icon>          
           Produtos
         </button>
         <button ion-item on-click="chamaSobre()">
@@ -42,7 +43,16 @@
 
 <ion-content>
 
-  <img *ngIf="showImg" src="{{'assets/imgs/' + title + '.png'}}">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content 
+      pullingIcon="arrow-dropdown" 
+      pullingText="Puxar para atualizar" 
+      refreshingSpinner="circles"
+      refreshingText="Atualizando...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <img *ngIf="showImg" src="{{'assets/imgs/comece2.png'}}">
 
   <div *ngIf="showCards" class="title_valores">
 
@@ -57,9 +67,8 @@
           <ion-card-title>
             <img class="chart-img" src="../../assets/imgs/chart.png">
             {{ card.mes }}
-            R$ {{ card.valor.toFixed(2) }}
+            {{ card.valor | currency:'BRL':true }}
           </ion-card-title>
-
         </ion-card-content>
       </ion-item>
     </ion-card>

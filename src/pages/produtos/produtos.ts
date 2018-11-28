@@ -116,6 +116,19 @@ export class ProdutosPage {
     }
   }
 
+  doRefresh(refresher) { 
+    
+    if (this.produtoDigitado != '' && this.produtoDigitado != null) {
+      this.buscarProdutos();
+    } else {
+      this.listarProdutos();
+    }
+
+    setTimeout(() => {
+      refresher.complete();
+    }, 1000);
+  }
+
   limparProdutoDigitado() {
     this.produtoDigitado = '';
   }

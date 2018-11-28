@@ -7,7 +7,6 @@
 <ion-content padding>
 
     <ion-list radio-group [(ngModel)]="filial">
-
         <ion-item>
             <ion-label>Palmitos - SC</ion-label>
             <ion-radio checked="true" value="1"></ion-radio>
@@ -94,12 +93,15 @@
             <ion-radio value="35"></ion-radio>
         </ion-item>
 
-        <p>
-            <button ion-button round block (click)='selecionarFilial()'>
-                Confirmar
-            </button>
-        </p>
+        <ion-item>
+        </ion-item>
 
     </ion-list>
+
+    <ion-fab right bottom>
+        <button ion-fab color="secondary" (click)='selecionarFilial()'>
+            <ion-icon name="md-thumbs-up"></ion-icon>
+        </button>
+    </ion-fab>
 
 </ion-content>

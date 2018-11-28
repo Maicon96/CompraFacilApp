@@ -16,8 +16,7 @@ import { IfObservable } from 'rxjs/observable/IfObservable';
 export class HomePage {
 
   rootPage = PerfilPage;
-  charts = false;
-  title: string;
+  charts = false;  
   showImg = false;
   showCards = false;
   listas: any[] = [];
@@ -43,25 +42,25 @@ export class HomePage {
 
   public verificarLista() {
 
-    this.listaProvider.existsLista(parseInt(this.configuracaoProvider.getConfigFilial()))
-    //this.listaProvider.existsLista(1)
+    this.listaProvider.existsLista(parseInt(this.configuracaoProvider.getConfigFilial()))    
       .then((result: any) => {
         if (result == true) {
           this.showCards = true;
           this.showImg = false;
           this.buscarValores();
-
         } else {
-          this.showCards = true;
-          this.showImg = false;
-          this.buscarValores();
-
-          /*this.showCards = false;
-          this.showImg = true;
-          this.title = "comece2";*/
+          this.showCards = false;
+          this.showImg = true;          
         }
       })
       .catch((e) => console.error("erro ao buscar listas: " + e));
+  }
+
+  doRefresh(refresher) { 
+    this.verificarLista();
+    setTimeout(() => {
+      refresher.complete();
+    }, 1000);
   }
 
   public buscarValores() {
@@ -214,7 +213,7 @@ export class HomePage {
       .catch((e) => console.error("erro ao buscar listas: " + e));
 
 
-
+      /*
       let card = new Card();
       card.mes = "Janeiro";
       card.valor = 620.85;
@@ -233,8 +232,7 @@ export class HomePage {
       let card4 = new Card();
       card4.mes = "Outubro";
       card4.valor = 2140.56;
-      this.cards.push(card4);
-
+      this.cards.push(card4);*/
   }
 }
 

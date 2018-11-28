@@ -27,11 +27,37 @@ export class PromocoesPage {
   }
 
 
-  ionViewDidLoad() {    
+  ionViewDidLoad() {
+    this.buscarProdutosPopulares();
+  }
+
+  public buscarProdutosPopulares() {
+
     this.utilsProvider.verificaConexao(this.conexao);
 
     if (this.conexao) {
-      this.buscarProdutosPopulares();
+      const json = this.montarJsonEnvio();
+
+      this.showLoader();
+
+      this.produtoProvider.buscarProdutosPopulares(json).subscribe(
+        data => {
+          const res = (data as any);
+          console.log(res);
+          this.produtos = res.registros;
+          console.log(this.produtos);
+          this.loading.dismiss();
+        }, error => {
+          this.loading.dismiss();
+
+          const alert = this.alertCtrl.create({
+            title: 'Atenção!',
+            subTitle: 'Ocorreu um erro ao buscar as promoções, tente novamente.',
+            buttons: ['OK']
+          });
+          alert.present();
+        })
+
     } else {
       const alert = this.alertCtrl.create({
         title: 'Você não possui Internet!',
@@ -42,34 +68,6 @@ export class PromocoesPage {
     }
   }
 
-  public buscarProdutosPopulares() {
-    const json = this.montarJsonEnvio();
-
-    this.showLoader();
-
-    this.produtoProvider.buscarProdutosPopulares(json).subscribe(
-      data => {
-        const res = (data as any);
-        console.log(res);
-        this.produtos = res.registros;
-        console.log(this.produtos);
-
-        this.loading.dismiss();
-
-      }, error => {
-        this.loading.dismiss();
-
-        const alert = this.alertCtrl.create({
-          title: 'Atenção!',
-          subTitle: 'Ocorreu um erro ao buscar as promoções, tente novamente.',
-          buttons: ['OK']
-        });
-        alert.present();
-
-        console.log("maicon - erro" + error);
-      })
-  }
-
   showLoader() {
     this.loading = this.loadingCtr.create({
       content: 'Buscando Promoções...'
@@ -78,7 +76,7 @@ export class PromocoesPage {
     this.loading.present();
   }
 
-  public formatDescricaoProdutos(str: string) {    
+  public formatDescricaoProdutos(str: string) {
     this.utilsProvider.formatDescricao(str);
   }
 
@@ -89,6 +87,13 @@ export class PromocoesPage {
       "idFilial": parseInt(this.configuracaoProvider.getConfigFilial()),
       "promocao": "2"
     }
+  }
+
+  doRefresh(refresher) {    
+    this.buscarProdutosPopulares();    
+    setTimeout(() => {
+      refresher.complete();
+    }, 1000);
   }
 
 }

@@ -41,13 +41,13 @@ page-lista {
   .valorGastarTexto {
     position: absolute;
     top: 13px;
-    left: 75%;
+    left: 73%;
   }
 
   .total {
     position: absolute;
     top: -4px;
-    right: 0.4em;
+    left: 73%;
   }
 
   .carrinho {
@@ -55,7 +55,7 @@ page-lista {
     top: -4px;
     left: 3.2em;
   }
-  .listaProduto{
+  .listaProduto {
     margin-top: 34px;
     width: 100%;
   }
@@ -72,7 +72,7 @@ page-lista {
 
   .fab {
     contain: initial;
-    box-shadow: 0px 3px 2px 2px #999999;
+    box-shadow: 0px 2px 1px 1px #999999;
   }
 
   ion-fab {

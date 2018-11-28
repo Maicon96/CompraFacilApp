@@ -77,6 +77,13 @@ export class ListaPage {
       .catch((e) => console.error("erro ao buscar produtos: " + e));
   }
 
+  doRefresh(refresher) {
+    setTimeout(() => {
+      this.listarProdutos(this.idLista);
+      refresher.complete();
+    }, 1000);
+  }
+
   excluirProduto(id: number) {
     this.produtoProvider.remove(id)
       .then(() => {
@@ -93,9 +100,9 @@ export class ListaPage {
   }
 
   abrirModalProduto() {
-    let produtoModal = this.modalCtrl.create(ModalProdutoPage, {
-      idLista: this.idLista,
-      valorTotal: this.valor_total
+    let produtoModal = this.modalCtrl.create(ModalProdutoPage, { 
+        idLista: this.idLista,
+        valorTotal: this.valor_total
     });
 
     produtoModal.onDidDismiss(data => this.listarProdutos(this.idLista));
@@ -103,8 +110,10 @@ export class ListaPage {
   }
 
   abrirModalBuscarProduto() {
-    this.modalCtrl.create(ModalBuscarProdutoPage, { idLista: this.idLista, 
-      valorTotal: this.valor_total }).present();
+    this.modalCtrl.create(ModalBuscarProdutoPage, {
+      idLista: this.idLista,
+      valorTotal: this.valor_total
+    }).present();
   }
 
   lerBarcode() {
@@ -193,7 +202,7 @@ export class ListaPage {
                 this.listarProdutos(this.idLista);
 
                 let valor = this.valor_total + preco;
-      
+
                 this.listaProvider.updateValorTotal(this.idLista, valor)
                   .then((data) => {
                     console.log('sucesso ao atualizar valor da lista');
@@ -234,7 +243,7 @@ export class ListaPage {
     item.setElementStyle("transform", "translate3d(-140px, 0px, 0px)");
   }
 
-  public formatDescricaoProdutos(str: string) {    
+  public formatDescricaoProdutos(str: string) {
     this.utilsProvider.formatDescricao(str);
   }
 
