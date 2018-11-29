@@ -64,7 +64,7 @@
     </h1>
     
 
-    <ion-card class="gastos" *ngFor="let card of cards">
+    <ion-card class="gastos" *ngFor="let card of cards; let chave = index">
       <!--
       <ion-item class="gasto-mensal">
         <ion-card-content>
@@ -77,7 +77,7 @@
       </ion-item>
       -->
 
-      <ion-item class="gasto-mensal2">
+      <ion-item class="gasto-mensal2" >
 
 
 

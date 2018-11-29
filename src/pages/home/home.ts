@@ -21,6 +21,15 @@ export class HomePage {
   listas: any[] = [];
   cards = new Array<Card>();
   showCheckbox = false;
+  coresDegrade = [
+    'style="backgorund-color: #a1d3e7;"',
+    'style="backgorund-color: #a1d3e7;"',
+    'style="backgorund-color: #a1d3e7;"',
+    'style="backgorund-color: #a1d3e7;"',
+    'style="backgorund-color: #a1d3e7;"',
+    'style="backgorund-color: #a1d3e7;"',
+    'style="backgorund-color: #a1d3e7;"',
+  ];
 
   constructor(public navCtrl: NavController, private listaProvider: ListaProvider,
     public configuracaoProvider: ConfiguracaoProvider) {    
