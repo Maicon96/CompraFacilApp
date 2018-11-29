@@ -6,6 +6,7 @@ import { MinhaListaPage } from './../minha-lista/minha-lista';
 import { ProdutosPage } from './../produtos/produtos';
 import { ListaProvider } from './../../providers/lista/lista';
 import { ConfiguracaoProvider } from './../../providers/configuracao/configuracao';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'page-home',
@@ -18,7 +19,8 @@ export class HomePage {
   showImg = false;
   showCards = false;
   listas: any[] = [];
-  cards = new Array<Card>();  
+  cards = new Array<Card>();
+  showCheckbox = false;
 
   constructor(public navCtrl: NavController, private listaProvider: ListaProvider,
     public configuracaoProvider: ConfiguracaoProvider) {    
@@ -66,7 +68,6 @@ export class HomePage {
       refresher.complete();
     }, 1000);
   }
-
   public buscarValores() {
 
     this.listaProvider.getAll(parseInt(this.configuracaoProvider.getConfigFilial()))
@@ -221,26 +222,58 @@ export class HomePage {
       let card = new Card();
       card.mes = "Janeiro";
       card.valor = 620.85;
+      card.id = 1;
       this.cards.push(card);
 
       let card2 = new Card();
       card2.mes = "Fevereiro";
       card2.valor = 350.20;
+      card2.id = 2;
       this.cards.push(card2);
 
       let card3 = new Card();
       card3.mes = "Setembro";
       card3.valor = 1420.51;
+      card3.id = 3;
       this.cards.push(card3);
 
       let card4 = new Card();
       card4.mes = "Outubro";
       card4.valor = 2140.56;
-      this.cards.push(card4);
+      card4.id = 4;
+    this.cards.push(card4);
   }
+
+  public deletarRegistros(){
+    if(!this.showCheckbox){
+      this.showCheckbox = true;
+      return true;
+    }
+    let id;
+    let checkbox = $('ion-checkbox div.checkbox-checked');
+    if(checkbox.length > 0){
+      if(confirm('Realmente deseja deletar os caraio?')){
+        $.each(checkbox, function (key, value) {
+          id = $(value).parent().attr('id');
+          console.log(id);
+          //faz aqui a deleção com o id de cima
+        });
+        alert('deleta');
+      }else{
+        $.each(checkbox, function (key, value) {
+          $(value).click();
+        });
+        alert('não deleta');
+      }
+    }
+    // this.showCheckbox = false;
+    //descomenta essa linha e usa quando quiser esconder as checkbox
+  }
+
 }
 
 export class Card {
   mes: string;
   valor: number;
+  id: number;
 }
