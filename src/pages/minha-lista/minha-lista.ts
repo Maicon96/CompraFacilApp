@@ -3,9 +3,10 @@ import { SelecionaFilialProvider } from './../../providers/seleciona-filial/sele
 import { ListaProvider } from './../../providers/lista/lista';
 import { ConfiguracaoProvider } from './../../providers/configuracao/configuracao';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController, AlertController } from 'ionic-angular';
 import { NovaListaPage } from './../nova-lista/nova-lista';
 import { ListaPage } from './../lista/lista';
+import * as $ from 'jquery';
 
 @IonicPage()
 @Component({
@@ -15,12 +16,11 @@ import { ListaPage } from './../lista/lista';
 export class MinhaListaPage {
 
   listas: any[] = [];
-  modelo: any[] = [];
-  showCheck = false;
-  cont = 1;
+  showCheckbox = false;
 
   constructor(public navCtrl: NavController, private toast: ToastController, private listaProvider: ListaProvider,
-    private filialProvider: SelecionaFilialProvider, public configuracaoProvider: ConfiguracaoProvider) {
+    private filialProvider: SelecionaFilialProvider, public configuracaoProvider: ConfiguracaoProvider,
+    public alertCtrl: AlertController) {
   }
 
   ionViewDidEnter() {
@@ -36,15 +36,18 @@ export class MinhaListaPage {
       .catch((e) => console.error("erro ao buscar listas: " + e));
   }
 
-  doRefresh(refresher) {    
-    setTimeout(() => {      
+  doRefresh(refresher) {
+    setTimeout(() => {
       this.listarCompras();
       refresher.complete();
     }, 1000);
   }
 
   public editarListaCompra(id: number, descricao: string, valor_gastar: number) {
-    this.navCtrl.push(ListaPage, { idLista: id, titulo: descricao, valor_gastar: valor_gastar });
+    let val = valor_gastar.toString().replace('.', '');
+    val = val.replace(',', '.');
+
+    this.navCtrl.push(ListaPage, { idLista: id, titulo: descricao, valor_gastar: val });
   }
 
   public excluirListaCompra(id: number) {
@@ -52,35 +55,49 @@ export class MinhaListaPage {
     this.listarCompras();
   }
 
-  public excluir() {
-
-    var result = this.cont / 2;
-
-    if (result = 0) {      
-      this.showCheck = false;
+  public deletarRegistros() {
+    if (!this.showCheckbox) {
+      this.showCheckbox = true;
+      return true;
     }
 
-    if (result = 1) {            
-      this.showCheck = true;
+    let checkbox = $('ion-checkbox div.checkbox-checked');
+    let ids: any[] = [];
+
+    if (checkbox.length > 0) {
+      const confirm = this.alertCtrl.create({
+        title: 'Atenção!',
+        message: 'Realmente deseja excluir a(s) lista(s)?',
+        buttons: [
+          {
+            text: 'Não',
+            handler: () => {
+              $.each(checkbox, function (key, value) {
+                $(value).click();
+              });
+            }
+          },
+          {
+            text: 'Sim',
+            handler: () => {
+              $.each(checkbox, function (key, value) {
+                ids.push($(value).parent().attr('id'));
+              });
+
+              for (var i = 0; i < ids.length; i++) {
+                this.excluirListaCompra(ids[i]);
+              }
+
+              this.listarCompras();
+            }
+          }
+        ]
+      });
+      confirm.present();
+    } else {
+      this.showCheckbox = false;
     }
-
-    console.log("maicon - aq");
-
-    this.listas.forEach(function (lista) {
-
-      console.log("maicon - lista " + lista.id);
-      console.log("maicon - checked " + lista.checked);
-
-      if (lista.checked) {
-        this.modelo[lista.id] = lista.checked;
-
-        this.listaProvider.remove(lista.id);
-      }
-    })
-
-    this.cont++;
   }
-
 
   public editarDadosLista(id: number, idFilial: number, nome: string, valor_total: number,
     valor_gastar: number, data_criacao: string) {
@@ -95,7 +112,7 @@ export class MinhaListaPage {
     this.navCtrl.push(NovaListaPage);
   }
 
-  ngAfterViewInit() {
+  public ngAfterViewInit() {
     let tabs = document.querySelectorAll('.show-tabbar');
     if (tabs !== null) {
       Object.keys(tabs).map((key) => {
@@ -104,7 +121,7 @@ export class MinhaListaPage {
     }
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy() {
     let tabs = document.querySelectorAll('.show-tabbar');
     if (tabs !== null) {
       Object.keys(tabs).map((key) => {
@@ -112,18 +129,6 @@ export class MinhaListaPage {
       });
     }
   }
-  /*
-    deleteMultipel(student) {
-      let index = this.deleteSelected.indexOf(student);
-      if (index !== -1) {
-        this.deleteSelected.splice(index, 1);
-      }
-      else {
-        this.deleteSelected.push(student);
-      }
-    }  */
-
-
 
 
 }

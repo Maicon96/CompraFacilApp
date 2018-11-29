@@ -39,11 +39,6 @@ import { registerLocaleData } from '@angular/common';
 import ptBr from '@angular/common/locales/pt';
 registerLocaleData(ptBr)
 
-
-//import { CurrencyMaskModule } from "ng2-currency-mask";
-//import { BrMaskerModule } from 'brmasker-ionic-3';
-//import { BrMaskModel } from 'brmasker-ionic-3';
-
 @NgModule({
   declarations: [
     MyApp,

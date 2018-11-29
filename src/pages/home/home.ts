@@ -15,7 +15,7 @@ import * as $ from 'jquery';
 export class HomePage {
 
   rootPage = PerfilPage;
-  charts = false;  
+  charts = false;
   showImg = false;
   showCards = false;
   listas: any[] = [];
@@ -32,7 +32,7 @@ export class HomePage {
   ];
 
   constructor(public navCtrl: NavController, private listaProvider: ListaProvider,
-    public configuracaoProvider: ConfiguracaoProvider) {    
+    public configuracaoProvider: ConfiguracaoProvider) {
     this.verificarLista();
   }
 
@@ -50,7 +50,7 @@ export class HomePage {
 
   public verificarLista() {
 
-    this.listaProvider.existsLista(parseInt(this.configuracaoProvider.getConfigFilial()))    
+    this.listaProvider.existsLista(parseInt(this.configuracaoProvider.getConfigFilial()))
       .then((result: any) => {
         if (result == true) {
           this.showCards = true;
@@ -67,12 +67,12 @@ export class HomePage {
       .catch((e) => console.error("erro ao buscar listas: " + e));
   }
 
-  doRefresh(refresher) { 
+  doRefresh(refresher) {
     this.showImg = false;
-    this.showCards = false;    
+    this.showCards = false;
     this.cards = new Array<Card>();
     this.verificarLista();
-    
+
     setTimeout(() => {
       refresher.complete();
     }, 1000);
@@ -101,11 +101,11 @@ export class HomePage {
 
           var dataCriacao = result[i].data_criacao;
           var valor = result[i].valor_total;
-          
-          var mes = dataCriacao.substring(3,5);          
-          var ano = dataCriacao.substring(6);          
 
-          var data = new Date();          
+          var mes = dataCriacao.substring(3, 5);
+          var ano = dataCriacao.substring(6);
+
+          var data = new Date();
           var anoAtual = data.getFullYear();
 
           if (ano == anoAtual) {
@@ -227,48 +227,48 @@ export class HomePage {
       .catch((e) => console.error("erro ao buscar listas: " + e));
 
 
-      
-      let card = new Card();
-      card.mes = "Janeiro";
-      card.valor = 620.85;
-      card.id = 1;
-      this.cards.push(card);
 
-      let card2 = new Card();
-      card2.mes = "Fevereiro";
-      card2.valor = 350.20;
-      card2.id = 2;
-      this.cards.push(card2);
+    let card = new Card();
+    card.mes = "Janeiro";
+    card.valor = 620.85;
+    card.id = 1;
+    this.cards.push(card);
 
-      let card3 = new Card();
-      card3.mes = "Setembro";
-      card3.valor = 1420.51;
-      card3.id = 3;
-      this.cards.push(card3);
+    let card2 = new Card();
+    card2.mes = "Fevereiro";
+    card2.valor = 350.20;
+    card2.id = 2;
+    this.cards.push(card2);
 
-      let card4 = new Card();
-      card4.mes = "Outubro";
-      card4.valor = 2140.56;
-      card4.id = 4;
+    let card3 = new Card();
+    card3.mes = "Setembro";
+    card3.valor = 1420.51;
+    card3.id = 3;
+    this.cards.push(card3);
+
+    let card4 = new Card();
+    card4.mes = "Outubro";
+    card4.valor = 2140.56;
+    card4.id = 4;
     this.cards.push(card4);
   }
 
-  public deletarRegistros(){
-    if(!this.showCheckbox){
+  public deletarRegistros() {
+    if (!this.showCheckbox) {
       this.showCheckbox = true;
       return true;
     }
     let id;
     let checkbox = $('ion-checkbox div.checkbox-checked');
-    if(checkbox.length > 0){
-      if(confirm('Realmente deseja deletar os caraio?')){
+    if (checkbox.length > 0) {
+      if (confirm('Realmente deseja deletar os caraio?')) {
         $.each(checkbox, function (key, value) {
           id = $(value).parent().attr('id');
           console.log(id);
           //faz aqui a deleção com o id de cima
         });
         alert('deleta');
-      }else{
+      } else {
         $.each(checkbox, function (key, value) {
           $(value).click();
         });

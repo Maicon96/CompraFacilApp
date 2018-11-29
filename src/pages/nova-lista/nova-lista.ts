@@ -34,9 +34,7 @@ export class NovaListaPage {
     this.data_criacao = this.navParams.get("data_criacao");
     this.update = this.navParams.get("update");
 
-
     console.log("maicon - ant: " + this.valor_total);
-    //console.log("maicon - new: " + this.getCurrency(this.valor_total));
 
     if (this.update) {
       this.descricaoBotao = "Atualizar";
@@ -56,17 +54,22 @@ export class NovaListaPage {
   salvarLista() {
     var idFilial = parseInt(this.configuracaoProvider.getConfigFilial());
 
+    let valor_gastar = this.cadastroLista.value.valor_gastar.toString().replace('.','');
+    valor_gastar = valor_gastar.replace(',','.');
+
+    console.log("maicon - valor_gastar " + valor_gastar);
+
     if (this.update) {
 
       this.listaProvider.update(this.idLista, idFilial, this.cadastroLista.value.nome,
-        this.valor_total, this.cadastroLista.value.valor_gastar, this.data_criacao)
+        this.valor_total, valor_gastar, this.data_criacao)
         .then((data) => {
           this.listaProvider.getLasted()
             .then((idLista) => {
               this.navCtrl.push(ListaPage, {
                 idLista: idLista,
                 titulo: this.cadastroLista.value.nome,
-                valor_gastar: this.cadastroLista.value.valor_gastar
+                valor_gastar: valor_gastar
               });
               console.log('sucesso ao inserir');
             })
@@ -79,14 +82,14 @@ export class NovaListaPage {
       var dataAtual = (data.getDate() + "/" + ((data.getMonth() + 1)) + "/" + data.getFullYear());
 
       this.listaProvider.insert(idFilial, this.cadastroLista.value.nome, 0,
-        this.cadastroLista.value.valor_gastar, dataAtual.toString())
+        valor_gastar, dataAtual.toString())
         .then((data) => {
           this.listaProvider.getLasted()
             .then((idLista) => {
               this.navCtrl.push(ListaPage, {
                 idLista: idLista,
                 titulo: this.cadastroLista.value.nome,
-                valor_gastar: this.cadastroLista.value.valor_gastar
+                valor_gastar: valor_gastar
               });
               console.log('sucesso ao inserir');
             })
@@ -95,17 +98,4 @@ export class NovaListaPage {
         .catch((e) => console.error("erro ao inserir: " + e));
     }
   }
-
-  /*
-  getCurrency(amount: number) {
-    return this.currencyPipe.transform(amount, 'EUR', true, '1.2-2');
-  }*/
-
-}
-
-
-
-
-export class Teste {
-    telefone: string;
 }

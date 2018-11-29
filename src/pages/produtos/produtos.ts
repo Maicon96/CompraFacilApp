@@ -36,7 +36,7 @@ export class ProdutosPage {
   }
 
   ionViewDidLoad() {
-    this.listarProdutos();
+    //this.listarProdutos();
   }
 
   public listarProdutos() {
@@ -49,10 +49,8 @@ export class ProdutosPage {
 
       this.produtoProvider.buscarProdutosPopulares(json).subscribe(
         data => {
-          const res = (data as any);
-          console.log(res);
-          this.produtos = res.registros;
-          console.log(this.produtos);
+          const res = (data as any);          
+          this.produtos = res.registros;          
           this.loading.dismiss();
         }, error => {
           this.loading.dismiss();
@@ -89,8 +87,7 @@ export class ProdutosPage {
           data => {
             const response = (data as any);
             this.produtos = response.registros;
-            this.loading.dismiss();
-            console.log(this.produtos);
+            this.loading.dismiss();            
           }, error => {
             this.loading.dismiss();
 
@@ -116,8 +113,7 @@ export class ProdutosPage {
     }
   }
 
-  doRefresh(refresher) { 
-    
+  doRefresh(refresher) {     
     if (this.produtoDigitado != '' && this.produtoDigitado != null) {
       this.buscarProdutos();
     } else {

@@ -119,7 +119,7 @@ export class ModalBuscarProdutoPage {
 
     const confirm = this.alertCtrl.create({
       title: 'Atenção!',
-      message: 'Deseja adicionar o produto: ' + descricao + '?',      
+      message: 'Deseja adicionar o produto: ' + this.utilsProvider.formatDescricao(descricao) + '?',      
       buttons: [
         {
           text: 'Não',

@@ -56,13 +56,19 @@ export class ModalProdutoPage {
   }
 
   incluirItem() {
+
+    let preco = this.cadastroItemManual.value.preco.toString().replace('.','');
+    preco = preco.replace(',','.');
+
+    let quantidade = this.cadastroItemManual.value.quantidade.toString().replace('.','');
+    quantidade = quantidade.replace(',','.');
+
     if (this.update) {
       this.produtoProvider.update(this.idProduto, this.idLista, this.cadastroItemManual.value.descricao,
-        this.cadastroItemManual.value.preco, this.cadastroItemManual.value.quantidade)
+        preco, quantidade)
         .then(() => {
 
-          let valor =  this.valorTotal + (this.cadastroItemManual.value.preco
-            * this.cadastroItemManual.value.quantidade) - (this.preco * this.quantidade);
+          let valor =  this.valorTotal + (preco * quantidade) - (this.preco * this.quantidade);
 
           this.listaProvider.updateValorTotal(this.idLista, valor)
             .then((data) => {
@@ -76,11 +82,10 @@ export class ModalProdutoPage {
         .catch((e) => console.error("erro ao atualizar item: " + e));
     } else {
       this.produtoProvider.insert(this.idLista, this.cadastroItemManual.value.descricao,
-        this.cadastroItemManual.value.preco, this.cadastroItemManual.value.quantidade)
+        preco, quantidade)
         .then(() => {
 
-          let valor = this.valorTotal + (this.cadastroItemManual.value.preco
-            * this.cadastroItemManual.value.quantidade);
+          let valor = this.valorTotal + (preco * quantidade);
 
           this.listaProvider.updateValorTotal(this.idLista, valor)
             .then((data) => {

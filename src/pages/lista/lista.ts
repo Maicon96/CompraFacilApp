@@ -12,6 +12,7 @@ import {
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Network } from '@ionic-native/network';
 import { Vibration } from '@ionic-native/vibration';
+import * as $ from 'jquery';
 
 @IonicPage()
 @Component({
@@ -29,20 +30,22 @@ export class ListaPage {
   barras: any;
   showAlert: boolean;
   loading: any;
-  conexao = true;
-  delProdutos: any[];
+  conexao = true;  
+  showCheckbox = false;
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController,
     public navParams: NavParams, private produtoProvider: ProdutoProvider,
     public configuracaoProvider: ConfiguracaoProvider, public utilsProvider: UtilsProvider,
     private modalCtrl: ModalController, private barcodeScanner: BarcodeScanner, private toast: ToastController,
     public loadingCtr: LoadingController, private network: Network,
-    public listaProvider: ListaProvider, private vibration: Vibration) {     
+    public listaProvider: ListaProvider, private vibration: Vibration) {   
+    
     this.idLista = this.navParams.get("idLista");
     this.titulo = this.navParams.get("titulo");
 
     if (this.navParams.get("valor_gastar") != null) {
-      this.valor_gastar = this.navParams.get("valor_gastar");
+      console.log("maicon - valor_gastar " + this.navParams.get("valor_gastar"));  
+      this.valor_gastar = this.navParams.get("valor_gastar");      
 
       if (this.valor_gastar > 0) {
         this.showAlert = true;
@@ -91,6 +94,50 @@ export class ListaPage {
         this.listarProdutos(this.idLista);
       })
       .catch((e) => console.error("erro ao excluir produto: " + e));
+  }
+
+  public deletarProdutos() {       
+    if (!this.showCheckbox) {      
+      this.showCheckbox = true;
+      return true;
+    }    
+
+    let checkbox = $('ion-checkbox div.checkbox-checked');    
+    let ids: any[] = [];        
+
+    if (checkbox.length > 0) {
+      const confirm = this.alertCtrl.create({
+        title: 'Atenção!',
+        message: 'Realmente deseja excluir o(s) produto(s)?',
+        buttons: [
+          {
+            text: 'Não',
+            handler: () => {
+              $.each(checkbox, function (key, value) {
+                $(value).click();
+              });        
+            }
+          },
+          {
+            text: 'Sim',
+            handler: () => {
+              $.each(checkbox, function (key, value) {                 
+                ids.push($(value).parent().attr('id'));
+              });
+      
+              for (var i = 0; i < ids.length; i++) {        
+                this.excluirProduto(ids[i]);
+              } 
+              
+              this.listarProdutos(this.idLista); 
+            }
+          }
+        ]
+      });
+      confirm.present();
+    } else {      
+      this.showCheckbox = false;
+    }         
   }
 
   editarProduto(idProduto: number, descricao: string, preco: number, quantidade: number) {

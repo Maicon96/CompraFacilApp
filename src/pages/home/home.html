@@ -4,6 +4,7 @@
       <ion-icon name="menu"></ion-icon>
     </button>
   </ion-toolbar>
+
 </ion-header>
 
 <ion-menu [content]="content">
@@ -25,7 +26,6 @@
           Minhas Listas
         </button>
         <button ion-item on-click="chamaProdutos()">
-          <!--<ion-icon name="basket" item-left></ion-icon>-->
           <ion-icon name="custom-products" item-left></ion-icon>
           Produtos
         </button>
@@ -44,97 +44,45 @@
 <ion-content>
 
   <ion-refresher (ionRefresh)="doRefresh($event)">
-      <ion-refresher-content 
-        pullingIcon="arrow-dropdown" 
-        pullingText="Puxar para atualizar" 
-        refreshingSpinner="circles"
-        refreshingText="Atualizando...">
-      </ion-refresher-content>
-    </ion-refresher>
+    <ion-refresher-content 
+      pullingIcon="arrow-dropdown" 
+      pullingText="Puxar para atualizar" 
+      refreshingSpinner="circles"
+      refreshingText="Atualizando...">
+    </ion-refresher-content>
+  </ion-refresher>
 
   <img *ngIf="showImg" src="{{'assets/imgs/comece2.png'}}">
 
-  <div class="animated fadeInDown">    
+  <div class="animated fadeInDown">
 
-  <div *ngIf="showCards" class="title_valores"  >    
-    
-    <h1>        
-      <!--<img class="chart-img-title" src="../../assets/imgs/analisis.png">Valores Gastos-->
-      <ion-icon ios="ios-trending-up" md="md-trending-up"> Valores Gastos</ion-icon>
-    </h1>
-    
+    <div *ngIf="showCards" class="title_valores">
 
-    <ion-card class="gastos" *ngFor="let card of cards; let chave = index">
-      <!--
-      <ion-item class="gasto-mensal">
-        <ion-card-content>
-          <ion-card-title>
-            <img class="chart-img" src="../../assets/imgs/chart.png">
-            {{ card.mes }}
-            {{ card.valor | currency:'BRL':true }}
-          </ion-card-title>
-        </ion-card-content>
-      </ion-item>
-      -->
+      <h1>
+        <!--<img class="chart-img-title" src="../../assets/imgs/analisis.png">Valores Gastos-->
+        <ion-icon ios="ios-trending-up" md="md-trending-up"> Valores Gastos</ion-icon>
+      </h1>
 
-      <ion-item class="gasto-mensal2" >
+      <ion-card class="gastos" *ngFor="let card of cards; let chave = index">
 
-
-
-        <!--CHECKBOX PARA DELETAR OS COISO-->
-        <!--<ion-checkbox [hidden]="!showCheckbox" id="{{card.id}}"></ion-checkbox>-->
-
-
-
-
-        <ion-card-header>
-          <h2>
-            <strong>{{ card.mes }}</strong>
-            <ion-fab right style="color : #00A4FF;">
-              <ion-icon ios="ios-trending-up" md="md-trending-up" item></ion-icon>
-            </ion-fab>
-          </h2>
-
-        </ion-card-header>
-        <ion-card-content>
-          <h2 class="title-card">{{ card.valor | currency:'BRL':true }}</h2>
-        </ion-card-content>
-      </ion-item>
-
-    </ion-card>
-
-    <!--BOTÃO DELETAR OS COISO-->
-<!--<button on-click="deletarRegistros()">q</button>-->
-
-
-
-
-
-
-    <!--
-    <ion-row>
-      <ion-col col-3>
-        <ion-card class="card">
+        <ion-item class="gasto-mensal2">
           <ion-card-header>
-            Card Header
-          </ion-card-header>
-        </ion-card>
-      </ion-col>
-      <ion-col col-3>
-        <ion-card>
-          <ion-card-header>
-            Card Header
-          </ion-card-header>
-        </ion-card>
-      </ion-col>
-    </ion-row>
--->
+            <h2>
+              <strong>{{ card.mes }}</strong>
+              <ion-fab right style="color : #00A4FF;">
+                <ion-icon ios="ios-trending-up" md="md-trending-up" item></ion-icon>
+              </ion-fab>
+            </h2>
 
+          </ion-card-header>
+          <ion-card-content>
+            <h2 class="title-card">{{ card.valor | currency:'BRL':true }}</h2>
+          </ion-card-content>
+        </ion-item>
+
+      </ion-card>
+    </div>
   </div>
-</div>
-
-
-  <!--<div id="donut_single" style="width: 300px; height: 200px;"></div>-->
 
 </ion-content>
 
