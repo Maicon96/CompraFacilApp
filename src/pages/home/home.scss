@@ -32,13 +32,13 @@ page-home {
 
   .gastos {
     height: 85px;
-    
+
   }
   .gasto-mensal {
     right: 0px;
     padding-left: 0px;
     height: 100%;
-    border-left: #00a4ff solid 3px; 
+    border-left: #00a4ff solid 3px;
     background-color: #ddf3ff;
     ion-card-title {
       font-size: 21px;
@@ -52,11 +52,12 @@ page-home {
   }
 
   .gasto-mensal2 {
-    right: 0px;
-    padding-left: 0px;
-    height: 100%;    
-    border-left: #00A4FF solid 3px;     
-    background-color: #eff5f7;
+    right: 0;
+    padding-left: 0;
+    height: 100%;
+    //border-left: #00A4FF solid 3px;
+    //background-color: #eff5f7;
+    margin-bottom: -3px;
     ion-card-title {
       font-size: 21px;
       color: #005888;
@@ -92,6 +93,10 @@ page-home {
 
   .title-card {
     color: #03021F;
+  }
+
+  .card-md{
+    margin: 10px 10px -11px 10px !important;
   }
 
 }
