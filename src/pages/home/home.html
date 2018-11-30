@@ -44,9 +44,9 @@
 <ion-content>
 
   <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content 
-      pullingIcon="arrow-dropdown" 
-      pullingText="Puxar para atualizar" 
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Puxar para atualizar"
       refreshingSpinner="circles"
       refreshingText="Atualizando...">
     </ion-refresher-content>
@@ -65,12 +65,12 @@
 
       <ion-card class="gastos" *ngFor="let card of cards; let i = index">
 
-        
-        <ion-item class="gasto-mensal2">
+
+        <ion-item class="gasto-mensal2" [style.background-color]=coresDegrade[i]>
           <ion-card-header>
-            <h2>                                          
+            <h2>
               <strong>{{ card.mes }}</strong>
-              <ion-fab right style="color : #00A4FF;">              
+              <ion-fab right style="color : #00A4FF;">
                 <ion-icon ios="ios-trending-up" md="md-trending-up" item></ion-icon>
               </ion-fab>
             </h2>
