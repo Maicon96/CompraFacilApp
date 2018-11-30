@@ -152,6 +152,7 @@ export class ModalBuscarProdutoPage {
 
   showLoader() {
     this.loading = this.loadingCtr.create({
+      spinner: 'bubbles',
       content: 'Buscando Produtos...'
     })
 

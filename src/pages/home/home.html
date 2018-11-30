@@ -63,13 +63,14 @@
         <ion-icon ios="ios-trending-up" md="md-trending-up"> Valores Gastos</ion-icon>
       </h1>
 
-      <ion-card class="gastos" *ngFor="let card of cards; let chave = index">
+      <ion-card class="gastos" *ngFor="let card of cards; let i = index">
 
+        
         <ion-item class="gasto-mensal2">
           <ion-card-header>
-            <h2>
+            <h2>                                          
               <strong>{{ card.mes }}</strong>
-              <ion-fab right style="color : #00A4FF;">
+              <ion-fab right style="color : #00A4FF;">              
                 <ion-icon ios="ios-trending-up" md="md-trending-up" item></ion-icon>
               </ion-fab>
             </h2>

@@ -21,15 +21,17 @@ page-lista {
     margin-top: -4px;
   }
 
+  //icon carrinho
   .valorGastar {
     float: right;
-    padding: 12px 22px;
+    padding: 12px 22px;    
     width: 42%;
   }
 
+  //icon total
   .valorTotal {
     float: left;
-    padding: 12px 0 0 10px;
+    padding: 12px 0 0 10px;    
   }
 
   .valorTotalTexto {
@@ -40,8 +42,9 @@ page-lista {
 
   .valorGastarTexto {
     position: absolute;
-    top: 16px;
+    top: 13 px;
     left: 73%;
+    //left: 60%;
   }
 
   .total {

@@ -56,10 +56,12 @@ export class ListaPage {
   }
 
   ionViewDidLoad() {
+    console.log("entrou no ionViewDidLoad ss");
     this.listarProdutos(this.idLista);
   }
 
   ionViewDidEnter() {
+    console.log("entrou no ionViewDidEnter ss");
     this.listarProdutos(this.idLista);
   }
 
@@ -158,10 +160,13 @@ export class ListaPage {
   }
 
   abrirModalBuscarProduto() {
-    this.modalCtrl.create(ModalBuscarProdutoPage, {
+    let buscarProdutoModal = this.modalCtrl.create(ModalBuscarProdutoPage, {
       idLista: this.idLista,
       valorTotal: this.valor_total
-    }).present();
+    });
+
+    buscarProdutoModal.onDidDismiss(data => this.listarProdutos(this.idLista));
+    buscarProdutoModal.present()
   }
 
   lerBarcode() {
@@ -172,13 +177,11 @@ export class ListaPage {
       this.barcodeScanner.scan().then(barcodeData => {
 
         if (barcodeData.text != null && barcodeData.text != '') {
-          console.log('maicon - barcode = ' + barcodeData.text);
-
           this.barras = barcodeData.text;
           this.showLoader();
           const json = this.montarJsonEnvioBarras();
 
-          //console.log('maicon - barcode = ' + this.barras);
+          console.log('maicon - barcode = ' + this.barras);
           console.log("maicon - json : " + JSON.stringify(json));
 
           this.produtoProvider.buscarProdutos(json).subscribe(
@@ -267,6 +270,7 @@ export class ListaPage {
 
   showLoader() {
     this.loading = this.loadingCtr.create({
+      spinner: 'bubbles',
       content: 'Buscando Produto...'
     })
 

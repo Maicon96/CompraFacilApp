@@ -16,7 +16,7 @@
   <div class="bar">
     <div class="valorTotal">
       <ion-icon name="cart" class="carrinhoIcon" item-start></ion-icon>
-      <div style="float: right">
+      <div style="float: left">
         <p class="carrinho">Carrinho</p>
         <p class="valorTotalTexto">{{ valor_total | currency:'BRL':true }}</p>
       </div>
@@ -37,14 +37,13 @@
   </ion-refresher>
 
   <div>
-    <ion-list class="listaProduto">
+    <ion-list no-lines class="listaProduto">
 
       <ion-item-sliding #slidingItem *ngFor="let produto of produtos">
 
         <ion-item class="listaProdutos" #item (click)="openSliding(slidingItem, item)">
 
           <ion-checkbox [hidden]="!showCheckbox" id="{{produto.id}}"></ion-checkbox>
-
           
           <ion-thumbnail item-start>
             <img src="assets/imgs/no-image.png">

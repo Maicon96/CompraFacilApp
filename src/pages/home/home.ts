@@ -6,14 +6,13 @@ import { MinhaListaPage } from './../minha-lista/minha-lista';
 import { ProdutosPage } from './../produtos/produtos';
 import { ListaProvider } from './../../providers/lista/lista';
 import { ConfiguracaoProvider } from './../../providers/configuracao/configuracao';
-import * as $ from 'jquery';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-
+  
   rootPage = PerfilPage;
   charts = false;
   showImg = false;
@@ -22,17 +21,20 @@ export class HomePage {
   cards = new Array<Card>();
   showCheckbox = false;
   coresDegrade = [
-    'style="backgorund-color: #a1d3e7;"',
-    'style="backgorund-color: #a1d3e7;"',
-    'style="backgorund-color: #a1d3e7;"',
-    'style="backgorund-color: #a1d3e7;"',
-    'style="backgorund-color: #a1d3e7;"',
-    'style="backgorund-color: #a1d3e7;"',
-    'style="backgorund-color: #a1d3e7;"',
+    'style="background-color: #ccffff;"',
+    'style="background-color: #a1d3e7;"',
+    'style="background-color: #a1d3e7;"',
+    'style="background-color: #00ccff;"',
+    'style="background-color: #00ccff;"',
+    'style="background-color: #00ccff;"',
+    'style="background-color: #00ccff;"',
   ];
 
   constructor(public navCtrl: NavController, private listaProvider: ListaProvider,
     public configuracaoProvider: ConfiguracaoProvider) {
+  }
+
+  ionViewDidEnter() {
     this.verificarLista();
   }
 
@@ -49,7 +51,6 @@ export class HomePage {
   }
 
   public verificarLista() {
-
     this.listaProvider.existsLista(parseInt(this.configuracaoProvider.getConfigFilial()))
       .then((result: any) => {
         if (result == true) {
@@ -77,7 +78,9 @@ export class HomePage {
       refresher.complete();
     }, 1000);
   }
+
   public buscarValores() {
+    this.cards = new Array<Card>();
 
     this.listaProvider.getAll(parseInt(this.configuracaoProvider.getConfigFilial()))
       .then((result: any[]) => {
@@ -252,33 +255,6 @@ export class HomePage {
     card4.id = 4;
     this.cards.push(card4);
   }
-
-  public deletarRegistros() {
-    if (!this.showCheckbox) {
-      this.showCheckbox = true;
-      return true;
-    }
-    let id;
-    let checkbox = $('ion-checkbox div.checkbox-checked');
-    if (checkbox.length > 0) {
-      if (confirm('Realmente deseja deletar os caraio?')) {
-        $.each(checkbox, function (key, value) {
-          id = $(value).parent().attr('id');
-          console.log(id);
-          //faz aqui a deleção com o id de cima
-        });
-        alert('deleta');
-      } else {
-        $.each(checkbox, function (key, value) {
-          $(value).click();
-        });
-        alert('não deleta');
-      }
-    }
-    // this.showCheckbox = false;
-    //descomenta essa linha e usa quando quiser esconder as checkbox
-  }
-
 }
 
 export class Card {

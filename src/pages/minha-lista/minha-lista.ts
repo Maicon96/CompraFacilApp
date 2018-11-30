@@ -102,6 +102,8 @@ export class MinhaListaPage {
   public editarDadosLista(id: number, idFilial: number, nome: string, valor_total: number,
     valor_gastar: number, data_criacao: string) {
 
+    console.log("maicon - valor " + valor_gastar);
+      
     this.navCtrl.push(NovaListaPage, {
       idLista: id, nome: nome, valor_total: valor_total,
       valor_gastar: valor_gastar, data_criacao: data_criacao, update: true

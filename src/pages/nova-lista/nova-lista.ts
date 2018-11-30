@@ -33,14 +33,14 @@ export class NovaListaPage {
     this.valor_gastar = this.navParams.get("valor_gastar");
     this.data_criacao = this.navParams.get("data_criacao");
     this.update = this.navParams.get("update");
-
-    console.log("maicon - ant: " + this.valor_total);
-
+    
     if (this.update) {
       this.descricaoBotao = "Atualizar";
     } else {
       this.descricaoBotao = "Criar";
     }
+
+    console.log("maicon - valor_gastar: " + this.valor_gastar);
 
     this.cadastroLista.nome = this.nome;
     this.cadastroLista.valor_gastar = this.valor_gastar;

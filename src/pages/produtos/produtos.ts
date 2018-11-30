@@ -131,6 +131,7 @@ export class ProdutosPage {
 
   showLoader() {
     this.loading = this.loadingCtr.create({
+      spinner: 'bubbles',
       content: 'Buscando Produtos...'
     })
 

@@ -56,7 +56,6 @@ export class ModalProdutoPage {
   }
 
   incluirItem() {
-
     let preco = this.cadastroItemManual.value.preco.toString().replace('.','');
     preco = preco.replace(',','.');
 
@@ -67,7 +66,6 @@ export class ModalProdutoPage {
       this.produtoProvider.update(this.idProduto, this.idLista, this.cadastroItemManual.value.descricao,
         preco, quantidade)
         .then(() => {
-
           let valor =  this.valorTotal + (preco * quantidade) - (this.preco * this.quantidade);
 
           this.listaProvider.updateValorTotal(this.idLista, valor)
@@ -84,7 +82,6 @@ export class ModalProdutoPage {
       this.produtoProvider.insert(this.idLista, this.cadastroItemManual.value.descricao,
         preco, quantidade)
         .then(() => {
-
           let valor = this.valorTotal + (preco * quantidade);
 
           this.listaProvider.updateValorTotal(this.idLista, valor)

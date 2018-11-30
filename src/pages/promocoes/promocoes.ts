@@ -70,6 +70,7 @@ export class PromocoesPage {
 
   showLoader() {
     this.loading = this.loadingCtr.create({
+      spinner: 'bubbles',
       content: 'Buscando Promoções...'
     })
 

@@ -14,15 +14,15 @@
 <ion-content padding class="animated fadeInDown">
 
   <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Puxar para atualizar" refreshingSpinner="circles"
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Puxar para atualizar" refreshingSpinner="bubbles"
       refreshingText="Atualizando...">
     </ion-refresher-content>
   </ion-refresher>
 
   <div>
-    <ion-list>
-
+    <ion-list no-lines>
       <ion-item-sliding *ngFor="let lista of listas">
+
         <ion-item-options side="right">
           <button ion-button color="edit" (click)="editarDadosLista(lista.id, lista.id_filial, 
             lista.descricao, lista.valor_total, lista.valor_gastar, lista.data_criacao)">
@@ -30,7 +30,7 @@
             Editar
           </button>
         </ion-item-options>
-
+        
         <ion-item>
           <ion-checkbox [hidden]="!showCheckbox" id="{{lista.id}}"></ion-checkbox>
           <ion-icon name="md-clipboard" item-start></ion-icon>
@@ -39,8 +39,8 @@
             <h2>{{ lista.data_criacao }}</h2>
           </button>
         </ion-item>
-      </ion-item-sliding>
-
+        
+      </ion-item-sliding>    
     </ion-list>
   </div>
 
