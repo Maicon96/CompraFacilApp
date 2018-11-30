@@ -22,17 +22,22 @@ export class HomePage {
   cards = new Array<Card>();
   showCheckbox = false;
   coresDegrade = [
-    'style="backgorund-color: #a1d3e7;"',
-    'style="backgorund-color: #a1d3e7;"',
-    'style="backgorund-color: #a1d3e7;"',
-    'style="backgorund-color: #a1d3e7;"',
-    'style="backgorund-color: #a1d3e7;"',
-    'style="backgorund-color: #a1d3e7;"',
-    'style="backgorund-color: #a1d3e7;"',
+    '#00A4FF',
+    '#1af',
+    '#22b0ff',
+    '#33b6ff',
+    '#44bcff',
+    '#55c2ff',
+    '#66c8ff',
+    '#77ceff',
+    '#88d4ff',
+    '#99dbff',
+    '#aae1ff',
+    '#bbe7ff',
   ];
 
   constructor(public navCtrl: NavController, private listaProvider: ListaProvider,
-    public configuracaoProvider: ConfiguracaoProvider) {
+              public configuracaoProvider: ConfiguracaoProvider) {
     this.verificarLista();
   }
 
@@ -61,7 +66,7 @@ export class HomePage {
           this.showImg = false;
           this.buscarValores();
           //this.showCards = false;
-          //this.showImg = true;          
+          //this.showImg = true;
         }
       })
       .catch((e) => console.error("erro ao buscar listas: " + e));
@@ -102,7 +107,7 @@ export class HomePage {
           var dataCriacao = result[i].data_criacao;
           var valor = result[i].valor_total;
 
-          var mes = dataCriacao.substring(3, 5);
+          var mes = dataCriacao.substring(3,5);
           var ano = dataCriacao.substring(6);
 
           var data = new Date();
@@ -253,22 +258,22 @@ export class HomePage {
     this.cards.push(card4);
   }
 
-  public deletarRegistros() {
-    if (!this.showCheckbox) {
+  public deletarRegistros(){
+    if(!this.showCheckbox){
       this.showCheckbox = true;
       return true;
     }
     let id;
     let checkbox = $('ion-checkbox div.checkbox-checked');
-    if (checkbox.length > 0) {
-      if (confirm('Realmente deseja deletar os caraio?')) {
+    if(checkbox.length > 0){
+      if(confirm('Realmente deseja deletar os caraio?')){
         $.each(checkbox, function (key, value) {
           id = $(value).parent().attr('id');
           console.log(id);
           //faz aqui a deleção com o id de cima
         });
         alert('deleta');
-      } else {
+      }else{
         $.each(checkbox, function (key, value) {
           $(value).click();
         });
