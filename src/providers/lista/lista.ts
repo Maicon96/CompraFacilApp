@@ -83,7 +83,9 @@ export class ListaProvider {
             if (data.rows.length > 0) {
               let listas = new Array<Lista>();
 
-              for (var i = 0; i < data.rows.length; i++) {
+              console.log("maicon - data.rows.length " + data.rows.length);
+
+              for (var i = 0; i < data.rows.length; i++) {                
                 let lista = new Lista();
                 lista.id = data.rows.item(i).id;
                 lista.idFilial = data.rows.item(i).codigo;
@@ -92,6 +94,7 @@ export class ListaProvider {
                 lista.valor_gastar = data.rows.item(i).valor_gastar;
                 lista.data_criacao = data.rows.item(i).data_criacao;
 
+                console.log("maicon - lista.id " + lista.id);                
                 console.log("maicon - valor  sql " + lista.valor_total);
                 
                 listas.push(lista);

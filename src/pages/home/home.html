@@ -3,6 +3,11 @@
     <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
+
+    <div class="imagem">
+      <img src="assets/imgs/coopera1.png" alt="">  
+    </div>
+
   </ion-toolbar>
 
 </ion-header>
@@ -11,15 +16,13 @@
   <ion-header class="headerMenu">
     <ion-toolbar color="primary">
       <div class="menu">
-        <h3>
-          Compra Fácil</h3>
-        <img src="assets/imgs/icon-menu.png" alt="">
+        <img src="assets/imgs/coopera1.png" alt="">
         <!--<ion-title>Compra Fácil</ion-title>-->
       </div>
     </ion-toolbar>
   </ion-header>
   <ion-content class="custom">
-    <div style="color : #3DBCC0; width:100%; height : 100%;margin-top: 22px;">
+    <div style="color : #008039; width:100%; height : 100%;margin-top: 22px;">
       <ion-list>
         <button ion-item on-click="chamaMinhasListas()">
           <ion-icon name="custom-cesta" item-left></ion-icon>
@@ -38,11 +41,9 @@
   </ion-content>
 </ion-menu>
 
-<button ion-item on-click="chamaMinhasListas()">
-</button>
+  <ion-content>
 
-<ion-content>
-
+  <!--
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content
       pullingIcon="arrow-dropdown"
@@ -59,12 +60,10 @@
     <div *ngIf="showCards" class="title_valores">
 
       <h1>
-        <!--<img class="chart-img-title" src="../../assets/imgs/analisis.png">Valores Gastos-->
         <ion-icon ios="ios-trending-up" md="md-trending-up"> Valores Gastos</ion-icon>
       </h1>
 
-      <ion-card class="gastos" *ngFor="let card of cards; let i = index">
-
+      <ion-card no-padding class="gastos" *ngFor="let card of cards; let i = index">
 
         <ion-item class="gasto-mensal2" [style.background-color]=coresDegrade[i]>
           <ion-card-header>
@@ -84,7 +83,8 @@
       </ion-card>
     </div>
   </div>
+  -->
 
-</ion-content>
+  </ion-content>
 
 <ion-nav id="nav" #content [root]="rootPage"></ion-nav>

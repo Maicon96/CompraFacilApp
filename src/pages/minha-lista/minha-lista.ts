@@ -29,9 +29,14 @@ export class MinhaListaPage {
 
   public listarCompras() {
 
+    console.log("maicon buscar listas");
+
     this.listaProvider.getAll(parseInt(this.configuracaoProvider.getConfigFilial()))
       .then((resultLista: any[]) => {
         this.listas = resultLista;
+
+        console.log("maicon listas - " + resultLista.length);
+        console.log("maicon listas - " + resultLista);        
       })
       .catch((e) => console.error("erro ao buscar listas: " + e));
   }
@@ -118,7 +123,7 @@ export class MinhaListaPage {
     let tabs = document.querySelectorAll('.show-tabbar');
     if (tabs !== null) {
       Object.keys(tabs).map((key) => {
-        tabs[key].style.display = 'none';
+        //tabs[key].style.display = 'none';
       });
     }
   }
@@ -127,7 +132,7 @@ export class MinhaListaPage {
     let tabs = document.querySelectorAll('.show-tabbar');
     if (tabs !== null) {
       Object.keys(tabs).map((key) => {
-        tabs[key].style.display = 'flex';
+        //tabs[key].style.display = 'flex';
       });
     }
   }

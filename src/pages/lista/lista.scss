@@ -1,7 +1,7 @@
 page-lista {
   .bar {
     color: white;
-    background-color: #7fd1ff;
+    background-color: #3DCC7D;
     position: absolute;
     top: 0;
     height: 50px;
@@ -58,13 +58,36 @@ page-lista {
     top: -4px;
     left: 3.2em;
   }
+
   .listaProduto {
     margin-top: 34px;
     width: 100%;
+
+    .imagemProduto {
+      position: relative;
+      right: 35%;
+
+      height: 80px;
+      width: 80px;
+        
+    }
+
+    .buttonDescricoes {
+      height: 80px;
+      position: relative;
+      right: 15%;
+
+      .descricoes {
+        position: relative;
+        top: 0px;
+        height: 150px;
+      }
+    }
+    
   }
 
   .totalItem {    
-    color: #05871E;
+    color: #018DFF;
   }
 
   .teste {
@@ -85,7 +108,7 @@ page-lista {
       div.label {
         position: absolute;
         right: 48px;            
-        background: #00A4FF;
+        background: #3DCC7D;
         height: 24px;
         line-height: 16px;
         padding-left: 8px;

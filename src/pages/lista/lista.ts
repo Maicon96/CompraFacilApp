@@ -105,7 +105,7 @@ export class ListaPage {
     }    
 
     let checkbox = $('ion-checkbox div.checkbox-checked');    
-    let ids: any[] = [];        
+    let ids: any[] = [];
 
     if (checkbox.length > 0) {
       const confirm = this.alertCtrl.create({

@@ -1,5 +1,14 @@
 page-home {
 
+  .imagem {
+    text-align: center;
+
+    img {
+      height: 70px;
+      width: 120px;
+    }
+  }
+
   .custom {
     background-color: white !important; /* This sets the background color*/
   }
@@ -8,9 +17,9 @@ page-home {
   .custom .item {
     background-color: transparent;
     border: none; /*Removes all borders*/
-    color: #008AFF; /*Text color for each item*/
+    color: #008039; /*Text color for each item*/
   }
-
+/*
   .menu img {
     width: 70px;
     margin: 1px 0 0 0;
@@ -81,7 +90,10 @@ page-home {
     height: 7vh;
     margin: -6px 0px 0px -29px;
   }
+
   .headerMenu {
+    height: 60px;
+
     text-align: center;
     h2{
       text-align: center;
@@ -98,5 +110,5 @@ page-home {
   .card-md{
     margin: 10px 10px -11px 10px !important;
   }
-
+*/
 }

@@ -37,6 +37,8 @@ import { Vibration } from '@ionic-native/vibration'
 
 import { registerLocaleData } from '@angular/common';
 import ptBr from '@angular/common/locales/pt';
+import { AuthInterceptorProvider } from '../providers/auth/auth';
+
 registerLocaleData(ptBr)
 
 @NgModule({
@@ -90,7 +92,8 @@ registerLocaleData(ptBr)
     BarcodeScanner,
     Network,
     UtilsProvider,
-    Vibration
+    Vibration,
+    AuthInterceptorProvider
   ]
 })
 export class AppModule {}

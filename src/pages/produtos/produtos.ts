@@ -36,7 +36,7 @@ export class ProdutosPage {
   }
 
   ionViewDidLoad() {
-    //this.listarProdutos();
+    this.listarProdutos();
   }
 
   public listarProdutos() {

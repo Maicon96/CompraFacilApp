@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 let config_key_name = "config";
@@ -33,9 +32,16 @@ export class ConfiguracaoProvider {
 
   getConfigFilial(): any {   
     let obj = JSON.parse(localStorage.getItem(filial_key_name));    
-
-    console.log(obj.filial);
-    return obj.filial;
+    
+    if (obj) {
+      if (obj.filial) {
+        return obj.filial;
+      } else {
+        return;
+      }    
+    } else {
+      return;
+    }
   }
 
   setConfigFilial(filial: number) {

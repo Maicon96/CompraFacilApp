@@ -18,6 +18,7 @@ export class PromocoesPage {
   preco: any;
   loading: any;
   conexao = true;
+  filial: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public loadingCtr: LoadingController, public produtoProvider: ProdutoProvider,
@@ -27,11 +28,18 @@ export class PromocoesPage {
   }
 
 
-  ionViewDidLoad() {
+  /*ionViewDidLoad() {
+    this.filial = this.utilsProvider.getNomeFilial(this.configuracaoProvider.getConfigFilial());
+    this.buscarProdutosPopulares();
+  }*/
+
+  ionViewDidEnter() {    
+    this.filial = this.utilsProvider.getNomeFilial(this.configuracaoProvider.getConfigFilial());
     this.buscarProdutosPopulares();
   }
 
-  public buscarProdutosPopulares() {
+  public buscarProdutosPopulares() {    
+    this.filial = this.utilsProvider.getNomeFilial(this.configuracaoProvider.getConfigFilial());
 
     this.utilsProvider.verificaConexao(this.conexao);
 
@@ -49,6 +57,10 @@ export class PromocoesPage {
           this.loading.dismiss();
         }, error => {
           this.loading.dismiss();
+
+          const res = (error as any);
+          console.log("maicon erro " + res);
+          console.log("maicon erro " + JSON.stringify(res));
 
           const alert = this.alertCtrl.create({
             title: 'Atenção!',
@@ -82,6 +94,9 @@ export class PromocoesPage {
   }
 
   public montarJsonEnvio() {
+
+    console.log("maicon json filial " + parseInt(this.configuracaoProvider.getConfigFilial()));
+
     return {
       "limit": 20,
       "idEmpresa": 1,

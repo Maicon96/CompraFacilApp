@@ -21,18 +21,22 @@ export class HomePage {
   cards = new Array<Card>();
   showCheckbox = false;
   coresDegrade = [
-    '#00A4FF',
-    '#1af',
-    '#22b0ff',
-    '#33b6ff',
-    '#44bcff',
-    '#55c2ff',
-    '#66c8ff',
-    '#77ceff',
-    '#88d4ff',
-    '#99dbff',
-    '#aae1ff',
-    '#bbe7ff',
+    '#f6fcfe',    
+    '#e7f8fc',
+    '#d7f4fa',
+    '#c8eff9',
+    '#b9ebf7',
+    '#aae7f5',
+    '#9be2f3',
+    '#8bdef1',
+    '#7cdaf0',
+    '#6dd6ee',
+    '#5ed1ec',
+    '#4fcdea',
+    '#3fc9e8',
+    '#30c4e7',
+    '#21c0e5',
+    '#1ab7db'
   ];
 
   constructor(public navCtrl: NavController, private listaProvider: ListaProvider,
@@ -61,13 +65,13 @@ export class HomePage {
         if (result == true) {
           this.showCards = true;
           this.showImg = false;
-          this.buscarValores();
+          //this.buscarValores();
         } else {
           this.showCards = true;
           this.showImg = false;
-          this.buscarValores();
-          //this.showCards = false;
-          //this.showImg = true;          
+          //this.buscarValores();
+          /*this.showCards = false;
+          this.showImg = true;      */    
         }
       })
       .catch((e) => console.error("erro ao buscar listas: " + e));
@@ -105,7 +109,7 @@ export class HomePage {
         let valNovembro = 0;
         let valDezembro = 0;
 
-        for (var i = 0; i < result.length; i++) {
+        /*for (var i = 0; i < result.length; i++) {
 
           var dataCriacao = result[i].data_criacao;
           var valor = result[i].valor_total;
@@ -156,7 +160,7 @@ export class HomePage {
               }
             }
           }
-        }
+        }*/
 
         if (valJaneiro > 0) {
           let card = new Card();
@@ -249,17 +253,67 @@ export class HomePage {
     this.cards.push(card2);
 
     let card3 = new Card();
-    card3.mes = "Setembro";
+    card3.mes = "Março";
     card3.valor = 1420.51;
     card3.id = 3;
     this.cards.push(card3);
 
     let card4 = new Card();
-    card4.mes = "Outubro";
+    card4.mes = "Abril";
     card4.valor = 2140.56;
     card4.id = 4;
     this.cards.push(card4);
-  }
+
+    let card5 = new Card();
+    card5.mes = "Maio";
+    card5.valor = 120.00;
+    card5.id = 4;
+    this.cards.push(card5);
+
+    let card6 = new Card();
+    card6.mes = "Junho";
+    card6.valor = 3210.00;
+    card6.id = 4;
+    this.cards.push(card6);
+
+    let card7 = new Card();
+    card7.mes = "Julho";
+    card7.valor = 789.74;
+    card7.id = 4;
+    this.cards.push(card7);
+
+    let card8 = new Card();
+    card8.mes = "Agosto";
+    card8.valor = 2056.68;
+    card8.id = 4;
+    this.cards.push(card8);
+
+    let card9 = new Card();
+    card9.mes = "Setembro";
+    card9.valor = 1320.00;
+    card9.id = 4;
+    this.cards.push(card9);
+
+    let card10 = new Card();
+    card10.mes = "Outubro";
+    card10.valor = 4100.23;
+    card10.id = 4;
+    this.cards.push(card10);
+
+    let card11 = new Card();
+    card11.mes = "Novembro";
+    card11.valor = 2745.00;
+    card11.id = 4;
+    this.cards.push(card11);
+
+    let card12 = new Card();
+    card12.mes = "Dezembro";
+    card12.valor = 3600.47;
+    card12.id = 4;
+    this.cards.push(card12);
+    
+
+    }
 }
 
 export class Card {

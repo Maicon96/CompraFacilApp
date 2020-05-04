@@ -11,8 +11,8 @@ import { RequestOptions, Request, RequestMethod, Headers } from '@angular/http';
 export class ProdutoProvider {
 
   public basePath = "/cooperapi";
-  //public baseUrl = "http://www.coopera1.com.br:48080/g3ws-comprafacil/pdv/consulta/load";
-  public baseUrl = "http://10.0.20.5:18080/g3ws-comprafacil/pdv/consulta/load";
+  public baseUrl = "http://www.coopera1.com.br:48080/g3ws-comprafacil/pdv/consulta/load";
+  //public baseUrl = "http://10.0.20.5:18080/g3ws-comprafacil/pdv/consulta/load";
                             
 
   constructor(private dbProvider: DatabaseProvider, private utilsProvider: UtilsProvider, 
@@ -43,6 +43,8 @@ export class ProdutoProvider {
     //.subscribe( data => console.log(data));
 
   }
+
+  
 
   public buscarProdutosPopulares(request: any) {
 

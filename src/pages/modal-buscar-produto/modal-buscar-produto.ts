@@ -135,6 +135,15 @@ export class ModalBuscarProdutoPage {
                 let valor = this.valorTotal + preco;      
                 this.listaProvider.updateValorTotal(this.idLista, valor)
                   .then((data) => {
+                    const confirm = this.alertCtrl.create({
+                      title: 'Sucesso!',
+                      message: 'Produto: ' + this.utilsProvider.formatDescricao(descricao) + ' adicionado na lista.',      
+                      buttons: [
+                        {
+                          text: 'OK'
+                        }
+                      ]
+                    })
                     console.log('sucesso ao atualizar valor da lista');
                   })
                   .catch((e) => console.error("erro ao buscar ultima lista: " + e));

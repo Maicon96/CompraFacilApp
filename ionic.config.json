@@ -9,5 +9,6 @@
       "path": "/cooperapi",
       "proxyUrl": "http://www.coopera1.com.br"
     }
-  ]
+  ],
+  "app_id": ""
 }

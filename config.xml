@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Compra Fácil</name>
+    <name>Cooper A1</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.10.105:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -98,5 +98,7 @@
     <allow-navigation href="http://192.168.2.110:8100" />
     <allow-navigation href="http://192.168.0.19:8100" />
     <plugin name="cordova-plugin-vibration" spec="~3.1.0" />
-    <engine name="android" spec="7.0.0" />
+    <allow-navigation href="http://192.168.10.103:8101" />
+    <allow-navigation href="http://192.168.10.102:8101" />
+    <allow-navigation href="http://192.168.10.105:8101" />
 </widget>

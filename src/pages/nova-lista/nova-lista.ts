@@ -71,15 +71,22 @@ export class NovaListaPage {
                 titulo: this.cadastroLista.value.nome,
                 valor_gastar: valor_gastar
               });
-              console.log('sucesso ao inserir');
+              console.log('maicon - sucesso ao inserir');
             })
-            .catch((e) => console.error("erro ao buscar ultima lista: " + e));
+            .catch((e) => console.error("maicon - erro ao buscar ultima lista: " + e));
         })
-        .catch((e) => console.error("erro ao inserir: " + e));
+        .catch((e) => console.error("maicon - erro ao inserir: " + e));
 
     } else {
       var data = new Date();
-      var dataAtual = (data.getDate() + "/" + ((data.getMonth() + 1)) + "/" + data.getFullYear());
+      var dia;
+      
+      if (data.getDate() < 10) {
+        dia = "0" + data.getDate(); 
+      } else {
+        dia = data.getDate()
+      }
+      var dataAtual = (dia + "/" + ((data.getMonth() + 1)) + "/" + data.getFullYear());
 
       this.listaProvider.insert(idFilial, this.cadastroLista.value.nome, 0,
         valor_gastar, dataAtual.toString())
@@ -91,11 +98,11 @@ export class NovaListaPage {
                 titulo: this.cadastroLista.value.nome,
                 valor_gastar: valor_gastar
               });
-              console.log('sucesso ao inserir');
+              console.log('maicon - sucesso ao inserir');
             })
-            .catch((e) => console.error("erro ao buscar ultima lista: " + e));
+            .catch((e) => console.error("maicon - erro ao buscar ultima lista: " + e));
         })
-        .catch((e) => console.error("erro ao inserir: " + e));
+        .catch((e) => console.error("maicon - erro ao inserir: " + e));
     }
   }
 }
