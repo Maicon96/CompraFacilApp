@@ -10,24 +10,25 @@ page-promocoes {
     }
 
     ion-content {
-        background-color: #008039;
-        color: #008039;
+        //background-color: #008039;
+        //color: #008039;
     }    
 
     .masters {
-        background-color: #008039;
+        //background-color: #008039;
+        background-color: #C7C9C8;
       }
 
     .filial {
         align-items: center;
         text-align: center;
-        background-color: #008039;
+        //background-color: #008039;
         height: 40px;
-        color: white;
+        color: #008039;
     }
 
 
-    h2.promocao_title {
+    h3.promocao_title {
         color: black;
         font-weight: bold;
         text-align: center;
@@ -57,24 +58,60 @@ page-promocoes {
         display: flex; 
         height: 130px;
         border-radius: 10px;
-        text-align: center; 
-        align-items: center; 
-        justify-content: center;
 
-        img {           
-            position: absolute;
-            left: 15px;
-            height: 120px;
-            width: 120px;
-        }     
-        
-        .promocao_title {
+        img {
+            border-radius: 8%;
+            max-width: 120px;
+            max-height: 120px;
+            width: auto;
+            height: auto;
+            margin: 0 0 35px 0;
+        }
+
+        .texto {
             position: relative;
-            left: 30%;
+            top: 8%;
+            right: 2%;
+            font-size: 1.0em;            
             font-weight: bold;
-            text-align: center;
             font-family: Verdana, sans-serif;        
         }
+
+        .preco_title {
+            position: absolute;
+            top: 58%;
+            right: 2%;
+            //text-align: center;
+            margin-top: 14px;
+            color: black;
+            font-weight: bold;
+            font-size: 1.4em;
+            text-align: center;
+            font-family: Verdana, sans-serif;
+            margin-bottom: -8px;
+        }
+
+        .validade {
+            position: absolute;
+            top: 58%;
+            align-items: center;
+            text-align: center;
+
+            .validoAte {       
+                //color: #1CCE16;
+                height: 19px;
+                width: 110px;
+                font-size: 0.7em;
+                font-weight: bold;
+            }
+
+            .dataValidade {  
+                font-weight: bold;                  
+                font-size: 0.7em;                    
+            }
+        }
+      
+                        
     }
 
     /*

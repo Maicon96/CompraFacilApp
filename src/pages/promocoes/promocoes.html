@@ -16,18 +16,48 @@
     <ion-icon name="pin"></ion-icon> {{filial}}
   </h2> 
 
-  <ion-card class="cardProd" *ngFor="let produto of produtos">   
+  <ion-card class="cardProd" *ngFor="let produto of produtos"> 
+    <ion-thumbnail item-start>
+      <div *ngIf="produto.imagem">
+        <img width="50px" [src]="'data:image/jpg;base64,' + produto.imagem" />
+      </div>
+
+      <div *ngIf="!produto.imagem">
+        <img src="assets/imgs/ofertas/doritos.jpg" alt="">    
+      </div>
+    </ion-thumbnail>
+
+    <h2><strong>{{produto.nome}}</strong></h2>
+    <div class="texto">
+      <strong> {{ formatDescricaoProdutos(produto.descricao) }} - {{ produto.medida }}</strong>          
+
+      <div class="validade">
+        <h6 class="validoAte">Válido Até</h6>      
+        <h6 class="dataValidade"><strong> {{ '2020-05-22 00:00:00' | date: "dd/MM/yy" }}</strong></h6>
+      </div>
+
+      <h2 class="preco_title">
+        {{ produto.preco | currency:'BRL':true }}
+      </h2>
+      
+    </div>    
+
     
-      <img src="assets/imgs/ofertas/doritos.jpg" alt="">    
+
+    <!--
+      <div class="divImagem">
+        <img src="assets/imgs/ofertas/doritos.jpg" alt="">    
+      </div>
 
       <div class="descricoes">
-        <h2 class="promocao_title">
-          <strong> {{ formatDescricaoProdutos(produto.descricaoReduzida) }} - {{ produto.medida }}</strong>
-        </h2>
+        <h3 class="promocao_title">          
+          <strong> {{ formatDescricaoProdutos(produto.descricao) }} - {{ produto.medida }}</strong>          
+        </h3>
         <h1 class="preco_title">
           {{ produto.preco | currency:'BRL':true }}
         </h1>
       </div>
+      -->
   </ion-card>
 
   <!--<ion-card class="cardProd" *ngFor="let produto of produtos">

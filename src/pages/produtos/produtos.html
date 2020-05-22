@@ -15,14 +15,7 @@
     </ion-refresher-content>
   </ion-refresher>
 
-  <ion-toolbar color='light'>
-    <ion-searchbar placeholder="Digite o produto..." [(ngModel)]="produtoDigitado"></ion-searchbar>
-    <ion-buttons end>
-      <button ion-button icon-only (click)='buscarProdutos()'>
-        <ion-icon name="md-checkmark-circle" color="primary"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-toolbar>
+  <ion-searchbar #searchbar placeholder="Digite o Produto..." [debounce]="500" (ionInput)="buscarProdutos($event)"></ion-searchbar>  
 
   <p>
     <ion-list>

@@ -30,12 +30,13 @@ export class SelecionaFilialMenuPage {
   selecionarFilial() {        
     if (this.filial) {
       this.configuracaoProvider.setConfigFilial(this.filial);      
-    
-      const alert = this.alertCtrl.create({
+      this.navCtrl.parent.select(0);
+
+      /*const alert = this.alertCtrl.create({
         title: 'Sucesso ao definir filial!',      
         buttons: ['OK']
       });
-      alert.present();
+      alert.present();*/
     } else {
       const alert = this.alertCtrl.create({
         title: 'Selecione uma filial!',      

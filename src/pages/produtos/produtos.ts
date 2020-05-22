@@ -2,16 +2,22 @@ import { SelecionaFilialProvider } from './../../providers/seleciona-filial/sele
 import { ProdutoProvider } from './../../providers/produto/produto';
 import { ConfiguracaoProvider } from './../../providers/configuracao/configuracao';
 import { UtilsProvider } from './../../providers/utils/utils';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController, AlertController } from 'ionic-angular';
 import { Network } from '@ionic-native/network';
+import { Searchbar } from 'ionic-angular';
+
 
 @IonicPage()
 @Component({
   selector: 'page-produtos',
   templateUrl: 'produtos.html',
 })
-export class ProdutosPage {
+
+export class ProdutosPage {   
+  
+  @ViewChild('searchbar') searchbar: Searchbar;
+
 
   produtoDigitado: string;
   idEmpresa: number;
@@ -27,12 +33,12 @@ export class ProdutosPage {
   loading: any;
   conexao = true;
 
-
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public produtoProvider: ProdutoProvider, public filialProvider: SelecionaFilialProvider,
     public configuracaoProvider: ConfiguracaoProvider, public utilsProvider: UtilsProvider,
     public loadingCtr: LoadingController, public toastCtrl: ToastController, private network: Network,
     public alertCtrl: AlertController) {
+
   }
 
   ionViewDidLoad() {
@@ -41,37 +47,37 @@ export class ProdutosPage {
 
   public listarProdutos() {
 
-    this.utilsProvider.verificaConexao(this.conexao);
+      this.utilsProvider.verificaConexao(this.conexao);
 
-    if (this.conexao) {
-      const json = this.montarJsonListar();
-      this.showLoader();
+      if (this.conexao) {
+        this.showLoader();
 
-      this.produtoProvider.buscarProdutosPopulares(json).subscribe(
-        data => {
-          const res = (data as any);          
-          this.produtos = res.registros;          
-          this.loading.dismiss();
-        }, error => {
-          this.loading.dismiss();
+        const json = this.montarJsonListar();
+        this.produtoProvider.buscarProdutosPopulares(json).subscribe(
+          data => {
+            const res = (data as any);          
+            this.produtos = res.registros;          
+            this.loading.dismiss();
+          }, error => {
+            this.loading.dismiss();
+            const alert = this.alertCtrl.create({
+              title: 'Atenção!',
+              subTitle: 'Ocorreu um erro ao buscar os produtos, tente novamente.',
+              buttons: ['OK']
+            });
+            alert.present();
 
-          const alert = this.alertCtrl.create({
-            title: 'Atenção!',
-            subTitle: 'Ocorreu um erro ao buscar os produtos, tente novamente.',
-            buttons: ['OK']
-          });
-          alert.present();
-
-          console.log("maicon - erro" + error);
-        })
-    } else {
-      const alert = this.alertCtrl.create({
-        title: 'Você não possui Internet!',
-        subTitle: 'Conecte-se em alguma rede e tente novamente.',
-        buttons: ['OK']
-      });
-      alert.present();
-    }
+            console.log("maicon - erro" + error);
+          })
+      } else {
+        const alert = this.alertCtrl.create({
+          title: 'Você não possui Internet!',
+          subTitle: 'Conecte-se em alguma rede e tente novamente.',
+          buttons: ['OK']
+        });
+        alert.present();
+      }
+    //}, 3000);
   }
 
   public buscarProdutos() {
